@@ -1,20 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Bodoni_Moda, Jost } from "next/font/google";
+import { Jost } from "next/font/google";
 import { isIndexable, site } from "@/config/site";
 import "./globals.css";
 
 /**
- * The two typefaces of the corporate design, self-hosted by next/font at build time (no request to
- * Google from the visitor's browser): Bodoni Moda for titles, Jost for everything else. Bodoni Moda
- * keeps its optical-size axis, so large titles get the fine hairlines of the display cut.
+ * Jost, the text face of the corporate design, for all text and titles; self-hosted by next/font
+ * at build time (no request to Google from the visitor's browser). Bodoni Moda appears only inside
+ * the logo files, its hairlines are too fine for titles on screen.
  */
-const bodoni = Bodoni_Moda({
-  subsets: ["latin", "latin-ext"],
-  axes: ["opsz"],
-  variable: "--font-bodoni",
-  display: "swap",
-});
-
 const jost = Jost({
   subsets: ["latin", "latin-ext"],
   variable: "--font-jost",
@@ -54,7 +47,7 @@ export const viewport: Viewport = {
  */
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="de-CH" className={`${bodoni.variable} ${jost.variable} h-full antialiased`}>
+    <html lang="de-CH" className={`${jost.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
   );

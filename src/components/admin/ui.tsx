@@ -48,7 +48,7 @@ export function PageHeader({ eyebrow, title, children, actions }: { eyebrow?: st
     <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
         {eyebrow ? <p className="kicker">{eyebrow}</p> : null}
-        <h1 className={cn("font-serif text-[2rem] font-medium leading-tight text-ink", eyebrow && "mt-1.5")}>{hyphenate(title)}</h1>
+        <h1 className={cn("text-[2rem] font-semibold leading-tight tracking-[-0.018em] text-ink", eyebrow && "mt-1.5")}>{hyphenate(title)}</h1>
         {children ? <div className="mt-2 max-w-2xl text-[0.9375rem] leading-relaxed text-muted">{children}</div> : null}
       </div>
       {actions ? <div className="flex shrink-0 flex-wrap gap-2">{actions}</div> : null}

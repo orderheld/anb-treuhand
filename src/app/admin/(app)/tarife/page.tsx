@@ -33,7 +33,7 @@ export default async function TariffsPage() {
                 <span aria-hidden className="flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
                   <Icon name={c.icon} className="size-5" />
                 </span>
-                <span className="mt-5 font-serif text-[1.375rem] font-medium leading-tight text-ink">{hyphenate(tariffRegistry[c.slug].title)}</span>
+                <span className="mt-5 text-[1.25rem] font-semibold leading-tight tracking-[-0.01em] text-ink">{hyphenate(tariffRegistry[c.slug].title)}</span>
                 <span className="mt-1 text-sm text-muted">{tariffRegistry[c.slug].fields.length} Werte</span>
                 <span className="mt-4 text-sm text-ink">{at ? `Angepasst am ${formatDay(at)}` : "Standardwerte"}</span>
                 <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-accent">

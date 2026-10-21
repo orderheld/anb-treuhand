@@ -3,8 +3,7 @@
 /*
  * ANB Treuhand design tokens. Calm and clear: a lot of white, light grey surfaces for structure and
  * green only as an accent (kickers, icons, links, key figures, lines). Tannengrün from the corporate
- * design carries the buttons and the logo. Typefaces as in the CI manual: Bodoni Moda for titles,
- * Jost for everything else.
+ * design carries the buttons and the logo. One typeface, Jost from the CI, for text and titles.
  *
  * Contrast (WCAG 2.2 AA): accent 6.4:1 on white and 5.9:1 on mist, muted 5.1:1 on white and
  * 4.7:1 on mist, field borders 3.5:1 on white (WCAG 1.4.11).
@@ -38,18 +37,17 @@
   --color-danger-soft: #fcefee;
 
   --font-sans: var(--font-jost), "Jost", "Century Gothic", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-bodoni), "Bodoni Moda", "Bodoni 72", Didot, Georgia, serif;
 
-  /* One scale for the whole site. Titles (h1, h2) in Bodoni Moda 500, the rest in Jost. */
-  --text-display: clamp(2.5rem, 1.55rem + 3.6vw, 4rem); /* 40–64 px: home page */
-  --text-display--line-height: 1.05;
-  --text-display--letter-spacing: -0.014em;
-  --text-h1: clamp(2.25rem, 1.65rem + 2.4vw, 3.5rem); /* 36–56 px: page titles */
-  --text-h1--line-height: 1.08;
-  --text-h1--letter-spacing: -0.012em;
-  --text-h2: clamp(2rem, 1.6rem + 1.5vw, 2.75rem); /* 32–44 px: section titles */
-  --text-h2--line-height: 1.12;
-  --text-h2--letter-spacing: -0.01em;
+  /* One scale for the whole site. Titles in Jost 600 with slightly tighter spacing. */
+  --text-display: clamp(2.375rem, 1.6rem + 3.2vw, 3.625rem); /* 38–58 px: home page */
+  --text-display--line-height: 1.08;
+  --text-display--letter-spacing: -0.022em;
+  --text-h1: clamp(2.125rem, 1.6rem + 2.1vw, 3.25rem); /* 34–52 px: page titles */
+  --text-h1--line-height: 1.1;
+  --text-h1--letter-spacing: -0.02em;
+  --text-h2: clamp(1.875rem, 1.55rem + 1.3vw, 2.5rem); /* 30–40 px: section titles */
+  --text-h2--line-height: 1.15;
+  --text-h2--letter-spacing: -0.018em;
   --text-h3: 1.25rem; /* 20 px */
   --text-h3--line-height: 1.3;
   --text-h3--letter-spacing: -0.01em;
@@ -109,11 +107,6 @@
     color: var(--color-ink);
     overflow-wrap: break-word;
   }
-  /* Titles in Bodoni Moda 500 (CI manual: titles and subtitles from about 28 px, never below 20 px). */
-  .site :where(h1, h2) {
-    font-family: var(--font-serif);
-    font-weight: 500;
-  }
 
   ::selection {
     background: color-mix(in srgb, var(--color-accent) 22%, transparent);
@@ -157,8 +150,9 @@
   }
   .prose-anb h2 {
     margin-top: 1.8em;
-    font-size: 1.75rem;
+    font-size: 1.625rem;
     line-height: 1.2;
+    letter-spacing: -0.015em;
     color: var(--color-ink);
   }
   .prose-anb h3 {

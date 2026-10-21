@@ -15,7 +15,7 @@ export function StepHeader({ number, title, text, titleId }: { number: number; t
         {number}
       </span>
       <div className="min-w-0 pt-1">
-        <h2 id={titleId} className="font-sans text-h3 font-semibold">
+        <h2 id={titleId} className="text-h3">
           {title}
         </h2>
         {text ? <p className="mt-1 text-[0.9375rem] text-muted">{text}</p> : null}

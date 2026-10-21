@@ -141,7 +141,7 @@ export default function KontaktPage() {
                       .join("")}
                   </span>
                   <p className="leading-snug">
-                    <span className="block font-serif text-xl font-medium text-ink">{person}</span>
+                    <span className="block text-xl font-semibold tracking-[-0.01em] text-ink">{person}</span>
                     <span className="text-sm text-muted">{title}</span>
                   </p>
                 </div>

@@ -99,7 +99,7 @@ export default function UeberUnsPage() {
                 {initials(person)}
               </span>
               <div className="min-w-0">
-                <p className="font-serif text-[1.75rem] font-medium leading-tight text-ink">{person}</p>
+                <p className="text-[1.75rem] font-semibold leading-tight tracking-[-0.018em] text-ink">{person}</p>
                 <p className="mt-0.5 text-[0.9375rem] text-muted">{title}</p>
               </div>
             </div>

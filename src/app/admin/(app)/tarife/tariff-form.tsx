@@ -151,7 +151,7 @@ export function TariffForm({
         <ActionForm action={action} submitLabel="Tarife speichern" stickySubmit className="space-y-10">
           {groups.map((g) => (
             <fieldset key={g.group} id={groupId(g.group)} className="scroll-mt-24">
-              <legend className="font-serif text-[1.375rem] font-medium leading-tight text-ink">{g.group}</legend>
+              <legend className="text-[1.25rem] font-semibold leading-tight tracking-[-0.01em] text-ink">{g.group}</legend>
               <div className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2">
                 {g.fields.map((field) => {
                   const value = values[field.key] ?? field.default;

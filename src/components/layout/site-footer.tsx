@@ -11,7 +11,7 @@ import { serviceHref, services } from "@/content/services";
 function FooterList({ title, links }: { title: string; links: { href: string; label: string }[] }) {
   return (
     <div>
-      <h2 className="font-sans text-sm font-semibold text-ink">{title}</h2>
+      <h2 className="text-sm font-semibold text-ink">{title}</h2>
       <ul className="mt-3.5 grid gap-2.5">
         {links.map((link) => (
           <li key={link.href}>

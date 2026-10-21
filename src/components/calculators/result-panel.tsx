@@ -70,7 +70,7 @@ export function ResultPanel({
   return (
     <section id={id} aria-labelledby={`${id}-title`} tabIndex={-1} className="scroll-mt-28 focus:outline-none">
       <div className="rounded-panel bg-white p-6 sm:p-8">
-        <h2 id={`${id}-title`} className="kicker font-sans">
+        <h2 id={`${id}-title`} className="kicker">
           {eyebrow}
         </h2>
         <p className="mt-2 flex items-baseline gap-2">
@@ -101,7 +101,7 @@ export function ResultPanel({
                 <div key={group.title ?? gi}>
                   {group.title ? (
                     <div className="mt-5 flex items-baseline justify-between gap-4">
-                      <h3 className="min-w-0 font-sans text-sm font-semibold text-accent">{group.title}</h3>
+                      <h3 className="min-w-0 text-sm font-semibold text-accent">{group.title}</h3>
                       {group.subtotal ? <span className="shrink-0 whitespace-nowrap text-sm font-medium text-body tabular">{group.subtotal}</span> : null}
                     </div>
                   ) : null}

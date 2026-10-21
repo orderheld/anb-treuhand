@@ -19,7 +19,6 @@ const C = {
 };
 
 const SANS = "'Helvetica Neue',Helvetica,Arial,sans-serif";
-const SERIF = "'Bodoni 72',Didot,'Bodoni MT',Georgia,'Times New Roman',serif";
 
 export function escapeHtml(value: string): string {
   return value
@@ -36,7 +35,7 @@ export function escapeMultiline(value: string): string {
 }
 
 export function heading(text: string): string {
-  return `<h2 style="margin:32px 0 12px;font-family:${SERIF};font-size:21px;line-height:1.3;font-weight:normal;color:${C.ink}">${escapeHtml(text)}</h2>`;
+  return `<h2 style="margin:32px 0 12px;font-family:${SANS};font-size:19px;line-height:1.3;font-weight:600;color:${C.ink}">${escapeHtml(text)}</h2>`;
 }
 
 export function paragraph(html: string, muted = false): string {
@@ -96,10 +95,10 @@ export function layout({ title, preheader, content, footer }: { title: string; p
 <tr><td align="center" style="padding:32px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:${C.white};border-radius:16px;overflow:hidden">
 <tr><td style="padding:16px 24px 12px;border-bottom:1px solid ${C.line}">
-<img src="${escapeHtml(absoluteUrl("/email/E-Mail-Signatur_Logo@2x.png"))}" width="253" height="64" alt="ANB Treuhand" style="display:block;width:253px;height:64px;border:0;outline:none;text-decoration:none;font-family:${SERIF};font-size:22px;color:${C.forest}">
+<img src="${escapeHtml(absoluteUrl("/email/E-Mail-Signatur_Logo@2x.png"))}" width="253" height="64" alt="ANB Treuhand" style="display:block;width:253px;height:64px;border:0;outline:none;text-decoration:none;font-family:${SANS};font-size:20px;font-weight:600;color:${C.forest}">
 </td></tr>
 <tr><td style="padding:34px 36px 30px">
-<h1 style="margin:0 0 18px;font-family:${SERIF};font-size:27px;line-height:1.2;font-weight:normal;color:${C.ink}">${escapeHtml(title)}</h1>
+<h1 style="margin:0 0 18px;font-family:${SANS};font-size:24px;line-height:1.25;font-weight:600;color:${C.ink}">${escapeHtml(title)}</h1>
 ${content}
 </td></tr>
 <tr><td style="padding:22px 36px;background:${C.mist};border-top:1px solid ${C.line};font-family:${SANS};font-size:12px;line-height:1.6;color:${C.muted}">${footer}</td></tr>

@@ -52,7 +52,7 @@ export default async function SetupPage() {
       {configured ? (
         <>
           {/* Logged in and set up: only what can be changed. */}
-          <h1 className="mt-10 font-serif text-[2rem] font-medium leading-tight text-ink">Einrichtung</h1>
+          <h1 className="mt-10 text-[2rem] font-semibold leading-tight tracking-[-0.018em] text-ink">Einrichtung</h1>
           <p className="mt-2 text-muted">Der Admin-Bereich ist eingerichtet. Die Zugangsdaten stehen als Umgebungsvariablen bei Vercel, nicht im Code.</p>
           {statusList}
 
@@ -100,7 +100,7 @@ export default async function SetupPage() {
         </>
       ) : (
         <>
-          <h1 className="mt-10 font-serif text-[2rem] font-medium leading-tight text-ink">Admin-Bereich einrichten</h1>
+          <h1 className="mt-10 text-[2rem] font-semibold leading-tight tracking-[-0.018em] text-ink">Admin-Bereich einrichten</h1>
           <p className="mt-2 leading-relaxed text-muted">
             Hier passen Sie die Tarife der Preisrechner an und sehen die Anfragen. Es gibt einen gemeinsamen Zugang mit Passwort und dem Code aus einer
             Authenticator-App; registrieren kann sich niemand. Die Zugangsdaten stehen nicht im Code, sondern als Umgebungsvariablen bei Vercel.
