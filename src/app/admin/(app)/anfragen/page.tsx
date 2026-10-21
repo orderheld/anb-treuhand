@@ -46,11 +46,11 @@ export default async function RequestsPage({ searchParams }: PageProps<"/admin/a
               aria-current={active ? "page" : undefined}
               className={cn(
                 "inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-sm transition-colors",
-                active ? "border-forest bg-forest text-cream" : "border-line bg-white text-ink hover:border-forest/40",
+                active ? "border-accent bg-accent-soft font-semibold text-accent" : "border-line bg-white text-ink hover:border-line-strong",
               )}
             >
               {f.label}
-              <span className={cn("tabular text-xs", active ? "text-cream/70" : "text-muted")}>{f.count}</span>
+              <span className={cn("tabular text-xs", active ? "text-accent" : "text-muted")}>{f.count}</span>
             </Link>
           );
         })}
@@ -58,7 +58,7 @@ export default async function RequestsPage({ searchParams }: PageProps<"/admin/a
 
       {requests.length === 0 ? (
         <div className="flex flex-col items-center rounded-2xl border border-dashed border-line bg-white px-6 py-16 text-center">
-          <Inbox aria-hidden className="size-8 text-bronze" strokeWidth={1.5} />
+          <Inbox aria-hidden className="size-8 text-accent" strokeWidth={1.5} />
           <p className="mt-4 font-medium text-ink">{status ? `Keine Anfragen mit Status «${statusLabel(status)}».` : "Noch keine Anfragen."}</p>
           <p className="mt-1 text-sm text-muted">Neue Anfragen aus dem Kontaktformular und den Rechnern erscheinen hier.</p>
         </div>

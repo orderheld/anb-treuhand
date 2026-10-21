@@ -2,11 +2,11 @@
 
 import { useId, useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Minus, Plus } from "lucide-react";
+import { ChevronRight, Minus, Plus } from "lucide-react";
 import { AnimatedNumber } from "@/components/calculators/animated-number";
 import { legalForms, type LegalForm } from "@/lib/calculators/shared";
 import { activeTreuhandServices, calculateTreuhand, TREUHAND_START, type TreuhandTariffs } from "@/lib/calculators/treuhand";
-import { cn, formatNumber } from "@/lib/utils";
+import { formatNumber } from "@/lib/utils";
 
 const SLIDER_MAX = 300;
 const marks = [0, 100, 200, 300];
@@ -32,99 +32,93 @@ export function QuickCalculator({ tariffs }: { tariffs: TreuhandTariffs }) {
   const href = `/rechner/treuhand?rf=${rechtsform}&b=${buchungen}&m=${mitarbeitende}`;
   const fill = (Math.min(buchungen, SLIDER_MAX) / SLIDER_MAX) * 100;
   const stepButton =
-    "flex size-10 items-center justify-center rounded-full border border-cream/20 text-cream transition-colors hover:border-copper hover:bg-copper hover:text-forest-deep disabled:pointer-events-none disabled:opacity-35";
+    "flex size-10 items-center justify-center rounded-full bg-mist text-body transition-colors hover:bg-mist-deep hover:text-ink disabled:pointer-events-none disabled:opacity-40";
 
   return (
-    <section
-      aria-labelledby={`${id}-title`}
-      className="relative overflow-hidden rounded-[2rem] border border-cream/12 bg-forest-deep/70 p-6 shadow-float backdrop-blur-xl sm:p-8"
-    >
-      <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-copper/60 to-transparent" />
-      <p className="text-[0.6875rem] font-medium uppercase tracking-[0.24em] text-copper">Schnellrechner</p>
-      <h2 id={`${id}-title`} className="mt-3 font-serif text-[1.75rem] leading-tight">
-        Was kostet Ihre Buchhaltung?
-      </h2>
+    <section aria-labelledby={`${id}-title`} className="overflow-hidden rounded-panel bg-white shadow-lift ring-1 ring-black/[0.04]">
+      <div className="p-6 sm:p-8">
+        <p className="kicker">Schnellrechner</p>
+        <h2 id={`${id}-title`} className="mt-1 text-2xl leading-tight">
+          Was kostet Ihre Buchhaltung?
+        </h2>
 
-      <fieldset className="mt-7">
-        <legend className="text-sm text-cream/70">Rechtsform</legend>
-        <div className="mt-2.5 grid grid-cols-3 gap-2">
-          {legalForms.map((f) => (
-            <label
-              key={f.value}
-              className="flex min-h-11 cursor-pointer items-center justify-center rounded-full border border-cream/15 px-2 text-center text-sm text-cream/85 transition-colors hover:border-copper/60 has-checked:border-copper has-checked:bg-copper has-checked:font-medium has-checked:text-forest-deep has-focus-visible:outline-2 has-focus-visible:outline-offset-2 has-focus-visible:outline-copper"
-            >
-              <input type="radio" name={`${id}-rf`} value={f.value} checked={rechtsform === f.value} onChange={() => setRechtsform(f.value)} className="sr-only" />
-              {f.short}
+        <fieldset className="mt-6">
+          <legend className="text-[0.9375rem] font-medium">Rechtsform</legend>
+          <div className="mt-2 grid grid-cols-3 gap-0.5 rounded-xl bg-mist p-[3px]">
+            {legalForms.map((f) => (
+              <label
+                key={f.value}
+                className="flex h-9 cursor-pointer items-center justify-center rounded-[0.5625rem] px-1 text-center text-[0.9375rem] font-medium text-body transition-colors hover:text-ink has-checked:bg-white has-checked:font-semibold has-checked:text-ink has-checked:shadow-[0_0_0_0.5px_rgb(0_0_0/0.04),0_2px_6px_rgb(0_0_0/0.1)] has-focus-visible:outline-2 has-focus-visible:outline-offset-1 has-focus-visible:outline-accent"
+              >
+                <input type="radio" name={`${id}-rf`} value={f.value} checked={rechtsform === f.value} onChange={() => setRechtsform(f.value)} className="sr-only" />
+                {f.short}
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <div className="mt-6">
+          <div className="flex items-baseline justify-between gap-4">
+            <label htmlFor={`${id}-b`} className="text-[0.9375rem] font-medium">
+              Buchungen pro Monat
             </label>
-          ))}
+            <output htmlFor={`${id}-b`} className="text-xl font-[650] tabular">
+              {buchungen >= SLIDER_MAX ? `${SLIDER_MAX}+` : buchungen}
+            </output>
+          </div>
+          <input
+            id={`${id}-b`}
+            type="range"
+            min={0}
+            max={SLIDER_MAX}
+            step={5}
+            value={Math.min(buchungen, SLIDER_MAX)}
+            onChange={(e) => setBuchungen(Number(e.target.value))}
+            aria-valuetext={`${buchungen} Buchungen pro Monat`}
+            className="range mt-1.5"
+            style={{ "--range-fill": `${fill}%` } as React.CSSProperties}
+          />
+          <div aria-hidden className="flex justify-between text-[0.8125rem] text-muted tabular">
+            {marks.map((m) => (
+              <span key={m}>{m === SLIDER_MAX ? `${m}+` : m}</span>
+            ))}
+          </div>
         </div>
-      </fieldset>
 
-      <div className="mt-6">
-        <div className="flex items-baseline justify-between gap-4">
-          <label htmlFor={`${id}-b`} className="text-sm text-cream/70">
-            Buchungen pro Monat
-          </label>
-          <output htmlFor={`${id}-b`} className="font-serif text-2xl tabular">
-            {buchungen >= SLIDER_MAX ? `${SLIDER_MAX}+` : buchungen}
-          </output>
-        </div>
-        <input
-          id={`${id}-b`}
-          type="range"
-          min={0}
-          max={SLIDER_MAX}
-          step={5}
-          value={Math.min(buchungen, SLIDER_MAX)}
-          onChange={(e) => setBuchungen(Number(e.target.value))}
-          aria-valuetext={`${buchungen} Buchungen pro Monat`}
-          className="range range-dark mt-2"
-          style={{ "--range-fill": `${fill}%` } as React.CSSProperties}
-        />
-        <div aria-hidden className="mt-0.5 flex justify-between text-xs text-cream/45 tabular">
-          {marks.map((m) => (
-            <span key={m}>{m === SLIDER_MAX ? `${m}+` : m}</span>
-          ))}
+        <div className="mt-6 flex items-center justify-between gap-4">
+          <span id={`${id}-m-label`} className="text-[0.9375rem] font-medium">
+            Mitarbeitende mit Lohn
+          </span>
+          <div role="group" aria-labelledby={`${id}-m-label`} className="flex items-center gap-2">
+            <button type="button" className={stepButton} onClick={() => setMitarbeitende((n) => Math.max(0, n - 1))} disabled={mitarbeitende <= 0} aria-label="Eine Person weniger">
+              <Minus aria-hidden className="size-4" strokeWidth={2} />
+            </button>
+            <output aria-live="polite" className="w-8 text-center text-xl font-[650] tabular">
+              {mitarbeitende}
+            </output>
+            <button type="button" className={stepButton} onClick={() => setMitarbeitende((n) => Math.min(50, n + 1))} disabled={mitarbeitende >= 50} aria-label="Eine Person mehr">
+              <Plus aria-hidden className="size-4" strokeWidth={2} />
+            </button>
+          </div>
         </div>
       </div>
 
-      <div className="mt-6 flex items-center justify-between gap-4">
-        <span id={`${id}-m-label`} className="text-sm text-cream/70">
-          Mitarbeitende mit Lohn
-        </span>
-        <div role="group" aria-labelledby={`${id}-m-label`} className="flex items-center gap-3">
-          <button type="button" className={stepButton} onClick={() => setMitarbeitende((n) => Math.max(0, n - 1))} disabled={mitarbeitende <= 0} aria-label="Eine Person weniger">
-            <Minus aria-hidden className="size-4" strokeWidth={1.75} />
-          </button>
-          <output aria-live="polite" className="w-8 text-center font-serif text-2xl tabular">
-            {mitarbeitende}
-          </output>
-          <button type="button" className={stepButton} onClick={() => setMitarbeitende((n) => Math.min(50, n + 1))} disabled={mitarbeitende >= 50} aria-label="Eine Person mehr">
-            <Plus aria-hidden className="size-4" strokeWidth={1.75} />
-          </button>
-        </div>
-      </div>
-
-      <div className="mt-7 border-t border-cream/10 pt-6">
-        <p className="text-sm text-cream/70">Richtpreis</p>
-        <p className="mt-1 flex items-baseline gap-2.5">
-          <span className="text-sm font-medium tracking-[0.18em] text-copper">CHF</span>
-          <AnimatedNumber value={monthly} className="font-serif text-[3.25rem] leading-none" />
-          <span className="text-cream/70">pro Monat</span>
+      <div className="border-t border-line bg-mist p-6 sm:px-8 sm:pb-8">
+        <p className="text-[0.9375rem] font-medium text-muted">Richtpreis pro Monat</p>
+        <p className="mt-0.5 flex items-baseline gap-2">
+          <span className="text-xl font-semibold text-muted">CHF</span>
+          <AnimatedNumber value={monthly} className="text-figure font-[650] text-ink tabular" />
           <span className="sr-only">{`CHF ${formatNumber(monthly)} pro Monat`}</span>
         </p>
-        <p className="mt-2.5 text-[0.8125rem] leading-snug text-cream/55">
+        <p className="mt-2 text-[0.8125rem] text-muted">
           Mit Buchhaltung, MWST, {leistungen.includes("lohn") ? "Löhnen, " : ""}Jahresabschluss und Steuererklärung. Unverbindlich.
         </p>
         <Link
           href={href}
-          className={cn(
-            "group mt-6 flex min-h-13 items-center justify-center gap-2.5 rounded-full bg-copper px-6 py-3 font-medium text-forest-deep",
-            "shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_12px_30px_-14px_rgb(211_161_124/0.75)] transition-colors duration-300 hover:bg-copper-light",
-          )}
+          className="group mt-5 flex min-h-12 items-center justify-center gap-1.5 rounded-full bg-forest px-6 py-2.5 font-semibold text-white transition-colors hover:bg-forest-deep"
         >
           Genau berechnen
-          <ArrowRight aria-hidden className="size-4 shrink-0 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
+          <ChevronRight aria-hidden className="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
         </Link>
       </div>
     </section>

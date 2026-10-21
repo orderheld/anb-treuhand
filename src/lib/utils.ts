@@ -2,12 +2,16 @@ import { clsx, type ClassValue } from "clsx";
 import { extendTailwindMerge } from "tailwind-merge";
 
 /**
- * tailwind-merge has to know the custom font sizes from globals.css; otherwise it reads
- * `text-h1` as a colour and drops it next to `text-forest`.
+ * tailwind-merge has to know the custom sizes from globals.css; otherwise it reads `text-h1` as a
+ * colour and drops it next to `text-ink`.
  */
 const twMerge = extendTailwindMerge({
   extend: {
-    theme: { text: ["display", "h1", "h2", "h3", "lead", "statement", "numeral"] },
+    theme: {
+      text: ["display", "h1", "h2", "h3", "lead", "figure"],
+      radius: ["field", "card", "panel"],
+      shadow: ["hairline", "card", "lift", "float"],
+    },
   },
 });
 

@@ -52,7 +52,7 @@ export function TreuhandCalculator({ tariffs, initial, settings }: { tariffs: Tr
 
   if (services.length === 0) {
     return (
-      <p className="rounded-[1.75rem] border border-sand bg-white p-8 text-lead text-body">
+      <p className="rounded-panel bg-white p-8 text-lead text-body">
         Der Rechner wird gerade überarbeitet. Gerne berechnen wir Ihren Preis persönlich: {settings.fallbackEmail}
       </p>
     );

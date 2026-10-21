@@ -6,9 +6,9 @@ import { organizationJsonLd, websiteJsonLd } from "@/lib/seo";
 /** The whole public site is prerendered at build time; request-time rendering fails the build. */
 export const ensureStatic = "navigation";
 
-/** Browser UI in the deep green of the header (the root layout keeps white for the admin area). */
+/** Browser UI in the white of the header. */
 export const viewport: Viewport = {
-  themeColor: "#142a1f",
+  themeColor: "#ffffff",
 };
 
 /** Public website: header, footer and structured data around every page. */

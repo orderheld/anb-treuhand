@@ -2,23 +2,24 @@ import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { hyphenate } from "@/lib/hyphenate";
 
-/**
- * Section backgrounds of the public site: white and cream for content, forest (Tannengrün) for
- * dark bands. Forest sets `.on-dark` (copper focus rings and kickers) and cream text.
- */
-export type SectionTone = "white" | "cream" | "forest";
-export type SectionSpace = "tight" | "default" | "loose";
+/** Section backgrounds of the public site: white, and light grey (mist) to set sections apart. */
+export type SectionTone = "white" | "mist";
+export type SectionSpace = "tight" | "default";
 
 const tones: Record<SectionTone, string> = {
   white: "bg-white",
-  cream: "bg-cream",
-  forest: "on-dark grain relative overflow-hidden bg-forest text-cream",
+  mist: "bg-mist",
 };
 
 const spaces: Record<SectionSpace, string> = {
-  tight: "py-16 md:py-20",
-  default: "py-20 md:py-28",
-  loose: "py-24 md:py-36",
+  tight: "py-14 md:py-16",
+  default: "py-[clamp(4.5rem,8vw,7rem)]",
+};
+
+/** Bottom padding only, for a section that continues the page hero above it. */
+const bottomSpaces: Record<SectionSpace, string> = {
+  tight: "pb-14 md:pb-16",
+  default: "pb-[clamp(4.5rem,8vw,7rem)]",
 };
 
 export function Section({
@@ -28,6 +29,7 @@ export function Section({
   className,
   containerClassName,
   labelledBy,
+  flushTop = false,
   children,
 }: {
   id?: string;
@@ -36,18 +38,20 @@ export function Section({
   className?: string;
   containerClassName?: string;
   labelledBy?: string;
+  /** No top padding: the section continues the white page hero. */
+  flushTop?: boolean;
   children: React.ReactNode;
 }) {
   return (
-    <section id={id} aria-labelledby={labelledBy} className={cn(spaces[space], tones[tone], className)}>
-      <Container className={cn(tone === "forest" && "relative", containerClassName)}>{children}</Container>
+    <section id={id} aria-labelledby={labelledBy} className={cn(flushTop ? bottomSpaces[space] : spaces[space], tones[tone], className)}>
+      <Container className={containerClassName}>{children}</Container>
     </section>
   );
 }
 
 /**
- * Heading block of a section. `layout="split"` puts the text beside the heading on large screens;
- * `align="center"` centres a short heading with the double-rule kicker.
+ * Heading block of a section: kicker in green, title, optional lead. `align="center"` centres a
+ * short heading above a grid; `layout="split"` puts the lead beside the title on large screens.
  */
 export function SectionHeader({
   id,
@@ -73,27 +77,27 @@ export function SectionHeader({
   const centered = align === "center";
   const heading = (
     <>
-      {eyebrow ? <p className={cn("eyebrow", centered && "eyebrow-center")}>{eyebrow}</p> : null}
-      <Heading id={id} className={cn(Heading === "h1" ? "text-h1" : "text-h2", eyebrow ? "mt-6" : null, titleClassName)}>
+      {eyebrow ? <p className="kicker mb-2.5">{eyebrow}</p> : null}
+      <Heading id={id} className={cn(Heading === "h1" ? "text-h1" : "text-h2", titleClassName)}>
         {typeof title === "string" ? hyphenate(title) : title}
       </Heading>
     </>
   );
-  const body = text ? <div className="text-lead text-body in-[.on-dark]:text-cream/75">{text}</div> : null;
+  const body = text ? <div className="text-lead text-body">{text}</div> : null;
 
   if (layout === "split") {
     return (
-      <div className={cn("grid gap-6 lg:grid-cols-12 lg:gap-10", className)}>
-        <div className="lg:col-span-6">{heading}</div>
+      <div className={cn("grid gap-5 lg:grid-cols-12 lg:gap-10", className)}>
+        <div className="min-w-0 lg:col-span-6">{heading}</div>
         {body ? <div className="max-w-xl lg:col-span-5 lg:col-start-8 lg:self-end">{body}</div> : null}
       </div>
     );
   }
 
   return (
-    <div className={cn("max-w-3xl", centered && "mx-auto text-center", className)}>
+    <div className={cn("max-w-3xl", centered && "mx-auto max-w-[45rem] text-center", className)}>
       {heading}
-      {body ? <div className={cn("mt-6", centered && "mx-auto max-w-2xl")}>{body}</div> : null}
+      {body ? <div className={cn("mt-4", centered && "mx-auto max-w-2xl")}>{body}</div> : null}
     </div>
   );
 }

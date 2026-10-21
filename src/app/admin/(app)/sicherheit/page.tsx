@@ -56,7 +56,7 @@ export default async function SecurityPage() {
                 const DeviceIcon = mobile ? Smartphone : Monitor;
                 return (
                   <li key={s.id} className="flex items-start gap-3 py-3">
-                    <span aria-hidden className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-mist text-forest">
+                    <span aria-hidden className="mt-0.5 flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
                       <DeviceIcon className="size-4" />
                     </span>
                     <div className="min-w-0 flex-1">
@@ -106,7 +106,7 @@ export default async function SecurityPage() {
             <ul className="space-y-3 text-sm leading-relaxed text-muted">
               {protections.map((text) => (
                 <li key={text} className="flex gap-3">
-                  <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-copper" />
+                  <span aria-hidden className="mt-2 h-px w-3 shrink-0 bg-accent" />
                   {text}
                 </li>
               ))}

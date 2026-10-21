@@ -1,12 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import { Facet } from "@/components/brand/motifs";
+import { Check, ChevronRight } from "lucide-react";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
 import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
-import { Container } from "@/components/ui/container";
 import { Faq } from "@/components/ui/faq";
 import { Icon } from "@/components/ui/icon";
 import { Section, SectionHeader } from "@/components/ui/section";
@@ -40,6 +38,15 @@ export function serviceMetadata(slug: Service["slug"]): Metadata {
   return pageMetadata({ title: service.metaTitle, description: service.metaDescription, path: serviceHref(slug) });
 }
 
+/** Small round check mark in front of a list item. */
+function CheckMark() {
+  return (
+    <span aria-hidden className="mt-0.5 flex size-[1.375rem] shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+      <Check className="size-3.5" strokeWidth={2.5} />
+    </span>
+  );
+}
+
 export function ServicePage({ slug }: { slug: Service["slug"] }) {
   const service = getService(slug);
   const path = serviceHref(slug);
@@ -50,7 +57,10 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
     { name: "Leistungen", path: "/leistungen" },
     { name: service.short, path },
   ];
-  const others = services.filter((s) => s.slug !== slug);
+  const others = [
+    ...services.filter((s) => s.slug !== slug).map((s) => ({ href: serviceHref(s.slug), name: s.short, tagline: s.tagline, icon: s.icon })),
+    { href: "/immobilien", name: "Immobilien", tagline: "Verwaltung, Verkauf und Sanierung.", icon: "key" as const },
+  ];
 
   return (
     <>
@@ -60,15 +70,15 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
         lead={service.summary}
         breadcrumbs={crumbs}
         aside={
-          <div className="rounded-[1.75rem] border border-cream/12 bg-forest-deep/60 p-7 backdrop-blur-md">
-            <p className="text-[0.6875rem] font-medium uppercase tracking-[0.24em] text-copper">Ihr Vorteil</p>
-            <ul className="mt-5 space-y-5">
+          <div className="rounded-card bg-mist p-6 sm:p-7">
+            <p className="kicker">Ihr Vorteil</p>
+            <ul className="mt-4 grid gap-4">
               {service.promise.map((p) => (
-                <li key={p.title} className="flex gap-3.5">
-                  <Check aria-hidden className="mt-1 size-4 shrink-0 text-copper" strokeWidth={2} />
+                <li key={p.title} className="flex gap-3">
+                  <CheckMark />
                   <span className="min-w-0">
-                    <span className="block font-medium text-cream">{p.title}</span>
-                    <span className="mt-0.5 block text-[0.9375rem] leading-relaxed text-cream/70">{p.text}</span>
+                    <span className="block font-semibold text-ink">{p.title}</span>
+                    <span className="mt-0.5 block text-[0.9375rem] text-body">{p.text}</span>
                   </span>
                 </li>
               ))}
@@ -76,32 +86,32 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
           </div>
         }
       >
-        <ButtonLink href={contactHref} variant="copper" size="lg" arrow>
+        <ButtonLink href={contactHref} size="lg">
           Gratis Erstgespräch
         </ButtonLink>
         {calc ? (
-          <ButtonLink href={calculatorHref(calc.slug)} variant="outline-light" size="lg">
+          <ButtonLink href={calculatorHref(calc.slug)} variant="secondary" size="lg">
             Preis berechnen
           </ButtonLink>
         ) : null}
       </PageHero>
 
       {/* The promise in one line, the approach and who it is for. */}
-      <Section tone="white" labelledBy="ueberblick-title">
-        <div className="grid gap-12 lg:grid-cols-12 lg:gap-10">
-          <div className="lg:col-span-5">
-            <p className="eyebrow">Überblick</p>
-            <h2 id="ueberblick-title" className="mt-7 text-h2">
+      <Section tone="mist" labelledBy="ueberblick-title">
+        <div className="grid gap-10 lg:grid-cols-2 lg:gap-[4.5rem]">
+          <div className="min-w-0">
+            <p className="kicker">Überblick</p>
+            <h2 id="ueberblick-title" className="mt-2.5 text-h2">
               {hyphenate(service.tagline)}
             </h2>
           </div>
-          <div className="lg:col-span-6 lg:col-start-7">
+          <div className="min-w-0">
             <p className="text-lead text-body">{service.intro}</p>
-            <h3 className="mt-12 text-xs font-medium uppercase tracking-[0.22em] text-bronze">Für wen</h3>
-            <ul className="mt-5 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            <h3 className="mt-8 text-[1.0625rem] font-semibold">Für wen</h3>
+            <ul className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
               {service.audience.map((a) => (
                 <li key={a} className="flex items-start gap-3 text-body">
-                  <span aria-hidden className="mt-[0.8em] h-px w-4 shrink-0 bg-copper" />
+                  <CheckMark />
                   {a}
                 </li>
               ))}
@@ -110,82 +120,71 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
         </div>
       </Section>
 
-      {/* What exactly we do. */}
-      <Section tone="cream" labelledBy="leistungen-title">
+      {/* What exactly we do, and the matching calculator. */}
+      <Section tone="white" labelledBy="leistungen-title">
         <SectionHeader id="leistungen-title" eyebrow="Das übernehmen wir" title="Im Detail." />
-        <ol className="mt-14 grid gap-x-12 border-t border-sand md:mt-16 md:grid-cols-2">
+        <ol className="mt-10 grid gap-5 md:mt-12 md:grid-cols-2">
           {service.items.map((item, i) => (
-            <li key={item.title} className="flex gap-5 border-b border-sand py-8 md:gap-6">
-              <span aria-hidden className="pt-1 font-serif text-lg text-bronze tabular">
-                {String(i + 1).padStart(2, "0")}
+            <li key={item.title} className="flex gap-4 rounded-card bg-mist p-6 sm:p-7">
+              <span aria-hidden className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-[0.9375rem] font-semibold text-accent tabular">
+                {i + 1}
               </span>
               <div className="min-w-0">
-                <h3 className="font-serif text-h3 text-ink">{hyphenate(item.title, SMALL_HEADING)}</h3>
-                <p className="mt-2.5 leading-relaxed text-body">{item.text}</p>
+                <h3 className="text-[1.0625rem] font-semibold leading-snug">{hyphenate(item.title, SMALL_HEADING)}</h3>
+                <p className="mt-1.5 text-[0.9375rem] text-body">{item.text}</p>
               </div>
             </li>
           ))}
         </ol>
+
+        {calc ? (
+          <div className="mt-16 flex flex-col gap-8 rounded-panel border border-line p-8 sm:p-10 md:flex-row md:items-center md:justify-between md:gap-10 md:px-12">
+            <div className="min-w-0">
+              <p className="kicker">{hyphenate(calc.name)}</p>
+              <h2 id="preis-title" className="mt-2 text-[clamp(1.75rem,1.45rem+1vw,2.25rem)] leading-tight">
+                {hyphenate(calc.title)}
+              </h2>
+              <p className="mt-3 max-w-xl text-body">{calc.description}</p>
+            </div>
+            <div className="flex shrink-0 flex-col items-start gap-2 md:items-end">
+              <ButtonLink href={calculatorHref(calc.slug)} size="lg">
+                Richtpreis berechnen
+              </ButtonLink>
+              <p className="text-sm text-muted">Unverbindlich, ohne Anmeldung.</p>
+            </div>
+          </div>
+        ) : null}
       </Section>
 
-      {/* Price: link to the matching calculator. */}
-      {calc ? (
-        <section aria-labelledby="preis-title" className="bg-cream pb-20 md:pb-28">
-          <Container>
-            <div className="on-dark grain relative isolate overflow-hidden rounded-[2rem] bg-forest px-6 py-12 text-cream sm:px-12 md:py-16">
-              <Facet start={1300} id="preis-facet" className="-z-10 hidden opacity-80 md:block" animate={false} />
-              <div className="grid gap-10 md:grid-cols-12 md:items-center">
-                <div className="min-w-0 md:col-span-7">
-                  <p className="eyebrow">{hyphenate(calc.name)}</p>
-                  <h2 id="preis-title" className="mt-6 font-serif text-[clamp(1.875rem,1.4rem+1.6vw,2.75rem)] leading-tight">
-                    {hyphenate(calc.title)}
-                  </h2>
-                  <p className="mt-5 max-w-xl text-lead text-cream/75">{calc.description}</p>
-                </div>
-                <div className="flex flex-col gap-4 md:col-span-5 md:items-end">
-                  <ButtonLink href={calculatorHref(calc.slug)} variant="copper" size="lg" arrow>
-                    Richtpreis berechnen
-                  </ButtonLink>
-                  <p className="text-sm text-cream/60">Unverbindlich, ohne Anmeldung.</p>
-                </div>
-              </div>
-            </div>
-          </Container>
-        </section>
-      ) : null}
-
-      <Section tone="white" labelledBy="faq-title">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." className="lg:col-span-4" />
-          <div className="lg:col-span-8">
+      <Section tone="mist" labelledBy="faq-title">
+        <div className="mx-auto max-w-[47.5rem]">
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <div className="mt-10 md:mt-12">
             <Faq items={service.faq} />
           </div>
         </div>
       </Section>
 
       {/* The other services. */}
-      <Section tone="cream" space="tight" labelledBy="weitere-title">
+      <Section tone="white" labelledBy="weitere-title">
         <SectionHeader id="weitere-title" eyebrow="Weitere Leistungen" title="Alles aus einer Hand." />
-        <ul className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {[...others.map((s) => ({ href: serviceHref(s.slug), name: s.short, tagline: s.tagline, icon: s.icon })), { href: "/immobilien", name: "Immobilien", tagline: "Verwaltung, Verkauf und Sanierung.", icon: "key" as const }].map(
-            (s) => (
-              <li key={s.href}>
-                <Link
-                  href={s.href}
-                  className="group flex h-full flex-col rounded-2xl border border-sand/80 bg-white p-6 transition-[border-color,box-shadow,transform] duration-500 ease-out-soft hover:-translate-y-0.5 hover:border-copper/50 hover:shadow-lift"
-                >
-                  <Icon name={s.icon} className="size-5 text-bronze" />
-                  <span className="mt-5 font-serif text-[1.375rem] leading-tight text-ink">{s.name}</span>
-                  <span className="mt-1.5 flex-1 text-sm leading-snug text-muted">{s.tagline}</span>
-                  <ArrowRight aria-hidden className="mt-5 size-4 text-forest transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
-                </Link>
-              </li>
-            ),
-          )}
+        <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+          {others.map((s) => (
+            <li key={s.href}>
+              <Link href={s.href} className="group flex h-full flex-col rounded-card bg-mist p-5 transition-[background-color,box-shadow] duration-200 hover:bg-white hover:shadow-card">
+                <span aria-hidden className="flex size-10 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                  <Icon name={s.icon} className="size-5" />
+                </span>
+                <span className="mt-4 font-semibold leading-snug text-ink">{s.name}</span>
+                <span className="mt-1 flex-1 text-sm text-body">{s.tagline}</span>
+                <ChevronRight aria-hidden className="mt-4 size-4 text-accent transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
+              </Link>
+            </li>
+          ))}
         </ul>
       </Section>
 
-      <CtaBand />
+      <CtaBand divider />
       <JsonLd data={[breadcrumbJsonLd(crumbs), serviceJsonLd(service, path), faqJsonLd(service.faq)]} />
     </>
   );

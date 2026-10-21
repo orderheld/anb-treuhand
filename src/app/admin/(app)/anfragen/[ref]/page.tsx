@@ -93,8 +93,8 @@ export default async function RequestPage({ params }: PageProps<"/admin/anfragen
               rows={[
                 { label: "Name", value: r.name },
                 ...(r.company ? [{ label: "Firma", value: r.company }] : []),
-                { label: "E-Mail", value: <a href={`mailto:${r.email}?subject=${replySubject}`} className="text-forest underline decoration-copper underline-offset-4">{r.email}</a> },
-                ...(r.phone ? [{ label: "Telefon", value: <a href={phoneHref(r.phone)} className="text-forest underline decoration-copper underline-offset-4">{r.phone}</a> }] : []),
+                { label: "E-Mail", value: <a href={`mailto:${r.email}?subject=${replySubject}`} className="text-accent underline decoration-accent-line underline-offset-4 hover:decoration-current">{r.email}</a> },
+                ...(r.phone ? [{ label: "Telefon", value: <a href={phoneHref(r.phone)} className="text-accent underline decoration-accent-line underline-offset-4 hover:decoration-current">{r.phone}</a> }] : []),
                 ...(r.timing ? [{ label: "Gewünschter Start", value: labelOf(timings, r.timing) }] : []),
               ]}
             />
@@ -125,7 +125,7 @@ export default async function RequestPage({ params }: PageProps<"/admin/anfragen
                   </li>
                 ))}
               </ul>
-              <DetailList className="mt-4 border-t border-forest/20 pt-2" rows={totalRows(r.calculator, estimate).map((row) => ({ label: row.label, value: <strong className="font-medium">{row.value}</strong> }))} />
+              <DetailList className="mt-4 border-t border-line-strong pt-2" rows={totalRows(r.calculator, estimate).map((row) => ({ label: row.label, value: <strong className="font-medium">{row.value}</strong> }))} />
             </Card>
           ) : null}
         </div>
@@ -142,11 +142,11 @@ export default async function RequestPage({ params }: PageProps<"/admin/anfragen
                   aria-pressed={r.status === s.value}
                   className={cn(
                     "flex w-full items-center justify-between rounded-xl border px-4 py-2.5 text-left text-[0.9375rem] transition-colors",
-                    r.status === s.value ? "border-forest bg-forest text-cream" : "border-line bg-white text-ink hover:border-forest/40",
+                    r.status === s.value ? "border-accent bg-accent-soft font-semibold text-accent" : "border-line bg-white text-ink hover:border-line-strong",
                   )}
                 >
                   {s.label}
-                  {r.status === s.value ? <span className="text-xs text-cream/70">aktuell</span> : null}
+                  {r.status === s.value ? <span className="text-xs font-normal text-accent">aktuell</span> : null}
                 </button>
               ))}
             </form>

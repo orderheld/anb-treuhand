@@ -27,6 +27,7 @@ import {
   type RequestValues,
 } from "@/lib/requests/state";
 import { cn } from "@/lib/utils";
+import { StepHeader, stepCardClass } from "./controls";
 
 /** In the order of the form, so the error summary lists the fields as they appear. */
 const FIELD_LABELS: Partial<Record<RequestField, string>> = {
@@ -119,18 +120,13 @@ export function OfferForm({
   }, [state]);
 
   const shell = (children: React.ReactNode) => (
-    <section id="offerte" aria-labelledby="offerte-title" tabIndex={-1} className="scroll-mt-28 rounded-[1.75rem] border border-sand/80 bg-white p-6 shadow-card focus:outline-none sm:p-8">
-      <header className="flex items-start gap-4">
-        <span aria-hidden className="mt-1 font-serif text-2xl leading-none text-copper">
-          {String(number).padStart(2, "0")}
-        </span>
-        <div>
-          <h2 id="offerte-title" className="font-serif text-[1.625rem] leading-tight text-ink">
-            Offerte anfordern
-          </h2>
-          <p className="mt-1.5 text-[0.9375rem] text-muted">Kostenlos und unverbindlich. Wir melden uns persönlich bei Ihnen{responseClause}.</p>
-        </div>
-      </header>
+    <section id="offerte" aria-labelledby="offerte-title" tabIndex={-1} className={cn(stepCardClass, "scroll-mt-28 focus:outline-none")}>
+      <StepHeader
+        number={number}
+        title="Offerte anfordern"
+        titleId="offerte-title"
+        text={<>Kostenlos und unverbindlich. Wir melden uns persönlich bei Ihnen{responseClause}.</>}
+      />
       <div className="mt-8">{children}</div>
     </section>
   );
@@ -151,10 +147,10 @@ export function OfferForm({
             </>
           }
         >
-          <Link href="/" className={buttonClasses({ variant: "outline-light" })}>
+          <Link href="/" className={buttonClasses({ variant: "secondary" })}>
             Zur Startseite
           </Link>
-          <Link href="/leistungen" className={buttonClasses({ variant: "text-light" })}>
+          <Link href="/leistungen" className={buttonClasses({ variant: "text" })}>
             Unsere Leistungen
           </Link>
         </SuccessPanel>
@@ -195,7 +191,7 @@ export function OfferForm({
         {errorEntries.length > 0 ? <ErrorSummary ref={summaryRef} errors={errorEntries} /> : null}
         {state.status === "error" ? <SubmitError ref={summaryRef} message={state.message} reference={state.reference} fallbackEmail={fallbackEmail} /> : null}
         <p id="offerte-hinweis" className="text-sm text-muted">
-          Pflichtfelder sind mit <span aria-hidden className="text-bronze">*</span>
+          Pflichtfelder sind mit <span aria-hidden className="text-accent">*</span>
           <span className="sr-only">Stern</span> markiert.
         </p>
       </div>

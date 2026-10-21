@@ -39,23 +39,23 @@ export default function RechnerPage() {
         compact
       />
 
-      <Section tone="cream" labelledBy="rechner-title">
+      <Section tone="mist" labelledBy="rechner-title">
         <h2 id="rechner-title" className="sr-only">
           Unsere Rechner
         </h2>
-        <CalculatorCards headingLevel="h3" />
-        <p className="mt-10 flex max-w-3xl items-start gap-3 text-[0.9375rem] leading-relaxed text-muted">
-          <Info aria-hidden className="mt-1 size-4 shrink-0 text-bronze" strokeWidth={1.75} />
+        <CalculatorCards headingLevel="h3" tone="mist" />
+        <p className="mt-8 flex max-w-3xl items-start gap-2.5 text-[0.9375rem] text-muted">
+          <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={1.75} />
           Die Rechner zeigen unverbindliche Richtpreise auf Basis unserer aktuellen Tarife. Die verbindliche Offerte erhalten Sie nach dem Erstgespräch. {vatNote()}
         </p>
       </Section>
 
       <Section tone="white" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="So funktioniert es" title="In drei Schritten zur Offerte." />
-        <ProcessSteps steps={steps} className="mt-14" />
+        <SectionHeader id="ablauf-title" eyebrow="So funktioniert es" title="In drei Schritten zur Offerte." align="center" />
+        <ProcessSteps steps={steps} className="mt-12" />
       </Section>
 
-      <CtaBand title="Lieber persönlich?" text="Rufen Sie uns an oder vereinbaren Sie ein Erstgespräch. Wir berechnen Ihren Preis gerne gemeinsam mit Ihnen." />
+      <CtaBand divider title="Lieber persönlich?" text="Rufen Sie uns an oder vereinbaren Sie ein Erstgespräch. Wir berechnen Ihren Preis gerne gemeinsam mit Ihnen." />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );

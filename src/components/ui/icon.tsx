@@ -42,8 +42,8 @@ const icons = {
   message: MessageSquare,
 } satisfies Record<IconName, React.ComponentType<LucideProps>>;
 
-/** Line icon by name, in the thin stroke that matches Jost Light. Decorative by default. */
-export function Icon({ name, strokeWidth = 1.5, ...props }: { name: IconName } & LucideProps) {
+/** Line icon by name. Decorative by default. */
+export function Icon({ name, strokeWidth = 1.75, ...props }: { name: IconName } & LucideProps) {
   const Component = icons[name];
   return <Component aria-hidden strokeWidth={strokeWidth} {...props} />;
 }

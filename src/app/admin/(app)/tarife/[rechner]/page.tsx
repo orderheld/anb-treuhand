@@ -39,7 +39,7 @@ export default async function TariffPage({ params, searchParams }: PageProps<"/a
             aria-current={slug === rechner ? "page" : undefined}
             className={cn(
               "rounded-full border px-4 py-1.5 text-sm transition-colors",
-              slug === rechner ? "border-forest bg-forest text-cream" : "border-line bg-white text-ink hover:border-forest/40",
+              slug === rechner ? "border-accent bg-accent-soft font-semibold text-accent" : "border-line bg-white text-ink hover:border-line-strong",
             )}
           >
             {tariffRegistry[slug].title}

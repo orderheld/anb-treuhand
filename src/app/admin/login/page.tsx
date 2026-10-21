@@ -18,11 +18,11 @@ export default async function LoginPage({ searchParams }: PageProps<"/admin/logi
   if (await getAdminSession()) redirect(next ?? "/admin");
 
   return (
-    <main className="flex flex-1 items-center justify-center bg-forest px-4 py-16">
+    <main className="flex flex-1 items-center justify-center px-4 py-16">
       <div className="w-full max-w-sm">
-        <Logo variant="stacked" tone="light" className="mx-auto w-36" />
-        <div className="mt-10 rounded-2xl bg-white p-6 shadow-float sm:p-8">
-          <h1 className="font-serif text-[1.75rem] leading-tight text-ink">Admin-Bereich</h1>
+        <Logo variant="stacked" className="mx-auto" />
+        <div className="mt-10 rounded-panel bg-white p-6 shadow-card sm:p-8">
+          <h1 className="font-serif text-[1.75rem] font-medium leading-tight text-ink">Admin-Bereich</h1>
           <p className="mb-6 mt-2 text-sm leading-relaxed text-muted">Zugang mit Passwort und Code aus der Authenticator-App. Jede Anmeldung wird protokolliert.</p>
           <LoginForm next={next} />
         </div>

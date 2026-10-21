@@ -30,6 +30,8 @@ const features = [
   { icon: MessageSquareLock, title: "Sicher kommunizieren", text: "Fragen und Dokumente geschützt austauschen, statt vertrauliche Unterlagen per E-Mail zu senden." },
 ];
 
+const cardIcon = "flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent";
+
 export default function KundenportalPage() {
   return (
     <>
@@ -40,68 +42,84 @@ export default function KundenportalPage() {
         breadcrumbs={crumbs}
         aside={<PhoneMockup className="hidden lg:block" />}
       >
-        <p className="inline-flex items-center gap-2 rounded-full border border-copper/40 px-4 py-1.5 text-sm text-copper">
-          <span aria-hidden className="size-1.5 rounded-full bg-copper" />
+        <p className="inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-3 py-1 text-sm font-semibold text-accent">
+          <span aria-hidden className="size-1.5 rounded-full bg-current" />
           In Vorbereitung
         </p>
       </PageHero>
 
-      <Section tone="white" labelledBy="funktionen-title">
+      <Section tone="mist" labelledBy="funktionen-title">
         <SectionHeader
           id="funktionen-title"
           eyebrow="Geplante Funktionen"
           title="Weniger Papier, mehr Überblick."
           text="Das Portal ergänzt die persönliche Betreuung. Sie entscheiden, ob Sie digital, auf Papier oder gemischt mit uns arbeiten."
-          layout="split"
+          align="center"
         />
-        <ul className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f) => (
-            <li key={f.title} className="rounded-[1.75rem] border border-sand/80 bg-cream/40 p-7">
-              <span aria-hidden className="flex size-12 items-center justify-center rounded-full bg-forest text-copper">
-                <f.icon className="size-5" strokeWidth={1.5} />
+            <li key={f.title} className="rounded-card bg-white p-6 sm:p-7">
+              <span aria-hidden className={cardIcon}>
+                <f.icon className="size-5" strokeWidth={1.75} />
               </span>
-              <h3 className="mt-6 font-serif text-h3 text-ink">{hyphenate(f.title, SMALL_HEADING)}</h3>
-              <p className="mt-3 leading-relaxed text-body">{f.text}</p>
+              <h3 className="mt-4 text-[1.0625rem] font-semibold leading-snug">{hyphenate(f.title, SMALL_HEADING)}</h3>
+              <p className="mt-1.5 text-[0.9375rem] text-body">{f.text}</p>
             </li>
           ))}
-          <li className="flex flex-col justify-center rounded-[1.75rem] border border-dashed border-copper/50 p-7">
-            <p className="font-serif text-h3 text-ink">Ihre Wünsche zählen.</p>
-            <p className="mt-3 leading-relaxed text-body">Was würde Ihnen die Zusammenarbeit erleichtern? Sagen Sie es uns, wir bauen das Portal für unsere Kundschaft.</p>
+          <li className="flex flex-col justify-center rounded-card border-[1.5px] border-dashed border-line-strong p-6 sm:p-7">
+            <p className="text-[1.0625rem] font-semibold text-ink">Ihre Wünsche zählen.</p>
+            <p className="mt-1.5 text-[0.9375rem] text-body">Was würde Ihnen die Zusammenarbeit erleichtern? Sagen Sie es uns, wir bauen das Portal für unsere Kundschaft.</p>
           </li>
         </ul>
       </Section>
 
-      <Section tone="cream" labelledBy="heute-title">
-        <SectionHeader id="heute-title" eyebrow="Schon heute" title="Digital arbeiten geht bereits." text="Bis das Portal bereit ist, tauschen wir Unterlagen so aus, wie es für Sie am einfachsten ist." />
-        <ul className="mt-14 grid gap-5 md:grid-cols-3">
-          <li className="rounded-[1.75rem] border border-sand/80 bg-white p-7">
-            <Mail aria-hidden className="size-6 text-bronze" strokeWidth={1.5} />
-            <h3 className="mt-5 font-serif text-h3 text-ink">Per E-Mail</h3>
-            <p className="mt-3 leading-relaxed text-body">
-              Fotos und PDF an <a href={`mailto:${site.contact.email.value}`} className="text-forest underline decoration-copper underline-offset-[3px]">{site.contact.email.value}</a>.
+      <Section tone="white" labelledBy="heute-title">
+        <SectionHeader
+          id="heute-title"
+          eyebrow="Schon heute"
+          title="Digital arbeiten geht bereits."
+          text="Bis das Portal bereit ist, tauschen wir Unterlagen so aus, wie es für Sie am einfachsten ist."
+          align="center"
+        />
+        <ul className="mt-12 grid gap-5 md:grid-cols-3">
+          <li className="rounded-card bg-mist p-6 sm:p-7">
+            <span aria-hidden className={cardIcon}>
+              <Mail className="size-5" strokeWidth={1.75} />
+            </span>
+            <h3 className="mt-4 text-[1.0625rem] font-semibold">Per E-Mail</h3>
+            <p className="mt-1.5 text-[0.9375rem] text-body">
+              Fotos und PDF an{" "}
+              <a href={`mailto:${site.contact.email.value}`} className="font-medium text-accent underline decoration-accent-line underline-offset-[3px] hover:decoration-current">
+                {site.contact.email.value}
+              </a>
+              .
             </p>
           </li>
-          <li className="rounded-[1.75rem] border border-sand/80 bg-white p-7">
-            <ScanLine aria-hidden className="size-6 text-bronze" strokeWidth={1.5} />
-            <h3 className="mt-5 font-serif text-h3 text-ink">Digitale Belegablage</h3>
-            <p className="mt-3 leading-relaxed text-body">Für die laufende Buchhaltung richten wir Ihnen eine digitale Belegablage mit Bankanbindung ein.</p>
+          <li className="rounded-card bg-mist p-6 sm:p-7">
+            <span aria-hidden className={cardIcon}>
+              <ScanLine className="size-5" strokeWidth={1.75} />
+            </span>
+            <h3 className="mt-4 text-[1.0625rem] font-semibold">Digitale Belegablage</h3>
+            <p className="mt-1.5 text-[0.9375rem] text-body">Für die laufende Buchhaltung richten wir Ihnen eine digitale Belegablage mit Bankanbindung ein.</p>
           </li>
-          <li className="rounded-[1.75rem] border border-sand/80 bg-white p-7">
-            <MapPin aria-hidden className="size-6 text-bronze" strokeWidth={1.5} />
-            <h3 className="mt-5 font-serif text-h3 text-ink">Persönlich</h3>
-            <p className="mt-3 leading-relaxed text-body">
+          <li className="rounded-card bg-mist p-6 sm:p-7">
+            <span aria-hidden className={cardIcon}>
+              <MapPin className="size-5" strokeWidth={1.75} />
+            </span>
+            <h3 className="mt-4 text-[1.0625rem] font-semibold">Persönlich</h3>
+            <p className="mt-1.5 text-[0.9375rem] text-body">
               Ordner und Unterlagen bringen Sie einfach bei uns an der {site.contact.address.street} in {site.contact.address.city} vorbei.
             </p>
           </li>
         </ul>
-        <div className="mt-12">
-          <ButtonLink href="/kontakt?anliegen=anderes" arrow>
+        <div className="mt-10 text-center">
+          <ButtonLink href="/kontakt?anliegen=anderes" variant="secondary">
             Fragen zum Portal
           </ButtonLink>
         </div>
       </Section>
 
-      <CtaBand />
+      <CtaBand divider />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );

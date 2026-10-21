@@ -1,17 +1,20 @@
+import { absoluteUrl } from "@/config/site";
+
 /**
  * HTML building blocks of the e-mails: tables and inline styles only, so the mails look the same
- * in Outlook, Gmail and Apple Mail. Colours from the corporate design; the header imitates the
- * logo with system fonts (no remote images, which many mail programs block).
+ * in Outlook, Gmail and Apple Mail. Colours as on the website. The header shows the e-mail logo of
+ * the corporate design package (public/email, white ground with 12 px margin, so it stays legible
+ * in dark mode); where a mail program blocks images, its alt text names the sender.
  */
 
 const C = {
   forest: "#1C382A",
-  copper: "#D3A17C",
-  bronze: "#8F5F3B",
-  cream: "#F7EFE3",
-  sand: "#E3D6C2",
-  body: "#3C4A42",
-  muted: "#56655B",
+  accent: "#2D6A4F",
+  ink: "#1D1D1F",
+  body: "#424245",
+  muted: "#6E6E73",
+  mist: "#F5F6F5",
+  line: "#E4E7E4",
   white: "#FFFFFF",
 };
 
@@ -33,7 +36,7 @@ export function escapeMultiline(value: string): string {
 }
 
 export function heading(text: string): string {
-  return `<h2 style="margin:32px 0 12px;font-family:${SERIF};font-size:21px;line-height:1.3;font-weight:normal;color:${C.forest}">${escapeHtml(text)}</h2>`;
+  return `<h2 style="margin:32px 0 12px;font-family:${SERIF};font-size:21px;line-height:1.3;font-weight:normal;color:${C.ink}">${escapeHtml(text)}</h2>`;
 }
 
 export function paragraph(html: string, muted = false): string {
@@ -45,10 +48,10 @@ export function keyValueTable(rows: [string, string][]): string {
   const body = rows
     .map(
       ([label, value]) =>
-        `<tr><td style="padding:9px 16px 9px 0;border-top:1px solid ${C.sand};font-family:${SANS};font-size:14px;color:${C.muted};vertical-align:top;width:42%">${escapeHtml(label)}</td><td style="padding:9px 0;border-top:1px solid ${C.sand};font-family:${SANS};font-size:14px;color:${C.forest};vertical-align:top">${value}</td></tr>`,
+        `<tr><td style="padding:9px 16px 9px 0;border-top:1px solid ${C.line};font-family:${SANS};font-size:14px;color:${C.muted};vertical-align:top;width:42%">${escapeHtml(label)}</td><td style="padding:9px 0;border-top:1px solid ${C.line};font-family:${SANS};font-size:14px;color:${C.ink};vertical-align:top">${value}</td></tr>`,
     )
     .join("");
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-bottom:1px solid ${C.sand}">${body}</table>`;
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse;border-bottom:1px solid ${C.line}">${body}</table>`;
 }
 
 /** Positions of a price estimate with right-aligned amounts. */
@@ -56,25 +59,25 @@ export function linesTable(lines: { label: string; detail?: string; amount: stri
   const body = lines
     .map(
       (l) =>
-        `<tr><td style="padding:10px 16px 10px 0;border-top:1px solid ${C.sand};font-family:${SANS};font-size:14px;color:${C.forest};vertical-align:top">${escapeHtml(l.label)}${l.external ? ` <span style="color:${C.muted}">(extern)</span>` : ""}${l.detail ? `<br><span style="font-size:12px;color:${C.muted}">${escapeHtml(l.detail)}</span>` : ""}</td><td style="padding:10px 0;border-top:1px solid ${C.sand};font-family:${SANS};font-size:14px;color:${C.forest};text-align:right;white-space:nowrap;vertical-align:top">${escapeHtml(l.amount)}</td></tr>`,
+        `<tr><td style="padding:10px 16px 10px 0;border-top:1px solid ${C.line};font-family:${SANS};font-size:14px;color:${C.ink};vertical-align:top">${escapeHtml(l.label)}${l.external ? ` <span style="color:${C.muted}">(extern)</span>` : ""}${l.detail ? `<br><span style="font-size:12px;color:${C.muted}">${escapeHtml(l.detail)}</span>` : ""}</td><td style="padding:10px 0;border-top:1px solid ${C.line};font-family:${SANS};font-size:14px;color:${C.ink};text-align:right;white-space:nowrap;vertical-align:top">${escapeHtml(l.amount)}</td></tr>`,
     )
     .join("");
   return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="border-collapse:collapse">${body}</table>`;
 }
 
-/** Highlighted totals block (green with copper labels). */
+/** Highlighted totals block (light grey, the first value large). */
 export function totalsBlock(rows: [string, string][]): string {
   const body = rows
     .map(
       ([label, value], i) =>
-        `<tr><td style="padding:${i === 0 ? "0" : "8px"} 16px 0 0;font-family:${SANS};font-size:13px;letter-spacing:0.5px;color:${C.copper}">${escapeHtml(label)}</td><td style="padding:${i === 0 ? "0" : "8px"} 0 0;font-family:${i === 0 ? SERIF : SANS};font-size:${i === 0 ? "24px" : "15px"};color:${C.white};text-align:right;white-space:nowrap">${escapeHtml(value)}</td></tr>`,
+        `<tr><td style="padding:${i === 0 ? "0" : "8px"} 16px 0 0;font-family:${SANS};font-size:13px;color:${C.muted}">${escapeHtml(label)}</td><td style="padding:${i === 0 ? "0" : "8px"} 0 0;font-family:${SANS};font-size:${i === 0 ? "22px" : "15px"};font-weight:${i === 0 ? "bold" : "normal"};color:${C.ink};text-align:right;white-space:nowrap">${escapeHtml(value)}</td></tr>`,
     )
     .join("");
-  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${C.forest};border-radius:12px"><tr><td style="padding:20px 22px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${body}</table></td></tr></table>`;
+  return `<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:16px;background:${C.mist};border-radius:12px"><tr><td style="padding:20px 22px"><table role="presentation" width="100%" cellpadding="0" cellspacing="0">${body}</table></td></tr></table>`;
 }
 
 export function referenceLine(reference: string): string {
-  return `<p style="margin:24px 0 0;font-family:${SANS};font-size:13px;color:${C.muted}">Referenz: <strong style="color:${C.forest};letter-spacing:0.5px">${escapeHtml(reference)}</strong></p>`;
+  return `<p style="margin:24px 0 0;font-family:${SANS};font-size:13px;color:${C.muted}">Referenz: <strong style="color:${C.ink};letter-spacing:0.5px">${escapeHtml(reference)}</strong></p>`;
 }
 
 /** The whole mail. `preheader` is the preview line in the inbox. */
@@ -87,24 +90,19 @@ export function layout({ title, preheader, content, footer }: { title: string; p
 <meta name="color-scheme" content="light">
 <title>${escapeHtml(title)}</title>
 </head>
-<body style="margin:0;padding:0;background:${C.cream}">
+<body style="margin:0;padding:0;background:${C.mist}">
 <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent">${escapeHtml(preheader)}</div>
-<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.cream}">
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${C.mist}">
 <tr><td align="center" style="padding:32px 12px">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:600px;background:${C.white};border-radius:16px;overflow:hidden">
-<tr><td style="background:${C.forest};padding:30px 36px 26px">
-<div style="font-family:${SERIF};font-size:30px;line-height:1;letter-spacing:3px;color:${C.white}">ANB</div>
-<table role="presentation" cellpadding="0" cellspacing="0" style="margin-top:10px"><tr>
-<td style="width:22px;border-top:1px solid ${C.copper};font-size:0;line-height:0">&nbsp;</td>
-<td style="padding:0 10px;font-family:${SANS};font-size:10px;letter-spacing:4px;color:${C.white}">TREUHAND</td>
-<td style="width:22px;border-top:1px solid ${C.copper};font-size:0;line-height:0">&nbsp;</td>
-</tr></table>
+<tr><td style="padding:16px 24px 12px;border-bottom:1px solid ${C.line}">
+<img src="${escapeHtml(absoluteUrl("/email/E-Mail-Signatur_Logo@2x.png"))}" width="253" height="64" alt="ANB Treuhand" style="display:block;width:253px;height:64px;border:0;outline:none;text-decoration:none;font-family:${SERIF};font-size:22px;color:${C.forest}">
 </td></tr>
 <tr><td style="padding:34px 36px 30px">
-<h1 style="margin:0 0 18px;font-family:${SERIF};font-size:27px;line-height:1.2;font-weight:normal;color:${C.forest}">${escapeHtml(title)}</h1>
+<h1 style="margin:0 0 18px;font-family:${SERIF};font-size:27px;line-height:1.2;font-weight:normal;color:${C.ink}">${escapeHtml(title)}</h1>
 ${content}
 </td></tr>
-<tr><td style="padding:22px 36px;background:${C.cream};border-top:1px solid ${C.sand};font-family:${SANS};font-size:12px;line-height:1.6;color:${C.muted}">${footer}</td></tr>
+<tr><td style="padding:22px 36px;background:${C.mist};border-top:1px solid ${C.line};font-family:${SANS};font-size:12px;line-height:1.6;color:${C.muted}">${footer}</td></tr>
 </table>
 </td></tr>
 </table>

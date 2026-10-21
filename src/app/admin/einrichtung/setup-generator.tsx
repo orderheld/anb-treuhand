@@ -102,7 +102,7 @@ function Step({ icon: Icon, title, children }: { icon: typeof KeyRound; title: s
   return (
     <section className="rounded-2xl border border-line bg-white p-5 sm:p-6">
       <h2 className="flex items-center gap-2 text-[1.0625rem] font-medium text-ink">
-        <Icon aria-hidden className="size-4 text-bronze" />
+        <Icon aria-hidden className="size-4 text-accent" />
         {title}
       </h2>
       <div className="mt-2 text-sm leading-relaxed text-muted">{children}</div>

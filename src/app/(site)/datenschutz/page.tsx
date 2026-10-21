@@ -37,8 +37,8 @@ export default function DatenschutzPage() {
         ]}
         compact
       />
-      <Section tone="white">
-        <div className="prose-anb">
+      <Section tone="white" flushTop>
+        <div className="prose-anb border-t border-line pt-8">
           <p>
             Diese Datenschutzerklärung gilt für die Website {site.url.value.replace(/^https?:\/\//, "")} und richtet sich nach dem Schweizer Bundesgesetz über den Datenschutz (DSG).
             Stand: {LAST_UPDATED}.

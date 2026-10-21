@@ -12,11 +12,12 @@ export default async function AdminAppLayout({ children }: LayoutProps<"/admin">
   const counts = await requestCounts();
   return (
     <>
-      <header className="bg-forest text-cream">
-        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3 sm:gap-x-6 sm:px-6">
-          <Link href="/admin" className="flex items-center gap-3" aria-label="Admin ANB Treuhand, Übersicht">
-            <Logo variant="horizontal" tone="light" decorative className="h-6 w-auto sm:h-7" />
-            <span className="hidden text-xs uppercase tracking-[0.22em] text-copper sm:inline">Admin</span>
+      <header className="border-b border-line bg-white">
+        <div className="mx-auto flex w-full max-w-6xl flex-wrap items-center gap-x-4 gap-y-3 px-4 py-3 sm:gap-x-6 sm:px-6 sm:py-[1.125rem]">
+          <Link href="/admin" className="flex items-center gap-5" aria-label="Admin ANB Treuhand, Übersicht">
+            <Logo variant="signet" decorative className="sm:hidden" />
+            <Logo variant="horizontal" decorative className="hidden sm:block" />
+            <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[0.8125rem] font-semibold text-accent">Admin</span>
           </Link>
           <nav aria-label="Admin" className="order-last w-full sm:order-none sm:w-auto sm:flex-1">
             <AdminNavLinks newRequests={counts.neu} />
@@ -26,7 +27,7 @@ export default async function AdminAppLayout({ children }: LayoutProps<"/admin">
               href="/"
               target="_blank"
               rel="noopener"
-              className="hidden min-h-10 items-center gap-2 rounded-full px-3 text-sm text-cream/80 transition-colors hover:bg-white/10 hover:text-cream min-[360px]:inline-flex"
+              className="hidden min-h-10 items-center gap-2 rounded-full px-3 text-sm text-body transition-colors hover:bg-mist hover:text-ink min-[360px]:inline-flex"
             >
               <ExternalLink aria-hidden className="size-4" />
               <span className="hidden md:inline">Website</span>
@@ -35,7 +36,7 @@ export default async function AdminAppLayout({ children }: LayoutProps<"/admin">
             <form action={logout}>
               <button
                 type="submit"
-                className="inline-flex min-h-10 items-center gap-2 rounded-full px-3 text-sm text-cream/80 transition-colors hover:bg-white/10 hover:text-cream"
+                className="inline-flex min-h-10 items-center gap-2 rounded-full px-3 text-sm text-body transition-colors hover:bg-mist hover:text-ink"
               >
                 <LogOut aria-hidden className="size-4" />
                 Abmelden

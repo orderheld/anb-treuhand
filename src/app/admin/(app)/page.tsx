@@ -75,18 +75,18 @@ export default async function AdminHome() {
               href={t.href}
               className={cn(
                 "group flex h-full flex-col justify-between gap-4 rounded-2xl border p-3.5 transition-colors sm:gap-6 sm:p-6",
-                t.highlight ? "border-forest bg-forest text-cream hover:bg-forest-deep" : "border-line bg-white text-ink hover:border-forest/40",
+                t.highlight ? "border-accent-line bg-accent-soft text-ink hover:border-accent" : "border-line bg-white text-ink hover:border-line-strong",
               )}
             >
-              <span className={cn("text-xs leading-snug sm:text-sm", t.highlight ? "text-cream/80" : "text-muted")}>
+              <span className={cn("text-xs leading-snug sm:text-sm", t.highlight ? "text-accent" : "text-muted")}>
                 <span className="sm:hidden">{t.short}</span>
                 <span className="hidden sm:inline">{t.label}</span>
               </span>
               <span className="flex items-end justify-between gap-3">
-                <span className={cn("font-serif text-[2rem] leading-none tabular sm:text-[2.75rem]", t.highlight && "text-copper")}>{t.value}</span>
+                <span className={cn("text-[2rem] font-[650] leading-none tabular sm:text-[2.5rem]", t.highlight && "text-accent")}>{t.value}</span>
                 <ArrowRight
                   aria-hidden
-                  className={cn("mb-1 hidden size-5 transition-transform group-hover:translate-x-1 sm:block", t.highlight ? "text-copper" : "text-muted")}
+                  className={cn("mb-1 hidden size-5 transition-transform group-hover:translate-x-1 sm:block", t.highlight ? "text-accent" : "text-muted")}
                 />
               </span>
             </Link>
@@ -100,7 +100,7 @@ export default async function AdminHome() {
           title="Neueste Anfragen"
           actions={
             counts.total > 0 ? (
-              <Link href="/admin/anfragen" className="inline-flex items-center gap-1 text-sm font-medium text-forest hover:text-forest-deep">
+              <Link href="/admin/anfragen" className="inline-flex items-center gap-1 text-sm font-semibold text-accent hover:text-accent-hover">
                 Alle {counts.total}
                 <ChevronRight aria-hidden className="size-4" />
               </Link>
@@ -109,7 +109,7 @@ export default async function AdminHome() {
         >
           {latest.length === 0 ? (
             <div className="flex flex-col items-center rounded-xl border border-dashed border-line px-6 py-12 text-center">
-              <Inbox aria-hidden className="size-7 text-bronze" strokeWidth={1.5} />
+              <Inbox aria-hidden className="size-7 text-accent" strokeWidth={1.5} />
               <p className="mt-3 font-medium text-ink">Noch keine Anfragen.</p>
               <p className="mt-1 max-w-sm text-sm text-muted">
                 {storage
@@ -150,7 +150,7 @@ export default async function AdminHome() {
                 return (
                   <li key={c.slug}>
                     <Link href={`/admin/tarife/${c.slug}`} className="group flex items-center gap-3 rounded-xl px-2 py-3 transition-colors hover:bg-mist">
-                      <span aria-hidden className="flex size-9 shrink-0 items-center justify-center rounded-full bg-forest text-copper">
+                      <span aria-hidden className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
                         <Icon name={c.icon} className="size-4" />
                       </span>
                       <span className="min-w-0 flex-1">
@@ -185,7 +185,7 @@ export default async function AdminHome() {
                 value={logins.failed === 0 ? "keine" : String(logins.failed)}
                 hint={
                   logins.failed > 0 ? (
-                    <Link href="/admin/sicherheit" className="text-forest underline decoration-copper underline-offset-4">
+                    <Link href="/admin/sicherheit" className="text-accent underline decoration-accent-line underline-offset-4 hover:decoration-current">
                       Protokoll ansehen
                     </Link>
                   ) : undefined

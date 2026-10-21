@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
-import { CornerFacet, Facet } from "@/components/brand/motifs";
+import { ChevronRight } from "lucide-react";
 import { SiteChrome } from "@/components/layout/site-chrome";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -21,35 +20,29 @@ const links = [
 export default function NotFound() {
   return (
     <SiteChrome>
-      <section className="on-dark grain relative isolate overflow-hidden bg-forest text-cream">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(110%_90%_at_85%_-10%,#2a4d3c_0%,#1c382a_48%,#142a1f_100%)]" />
-        <CornerFacet id="nf-facet-sm" className="-z-10 lg:hidden" />
-        <Facet start={1180} id="nf-facet" className="-z-10 hidden lg:block" />
-        <Container className="relative pb-20 pt-32 md:pb-28 md:pt-44">
-          <p className="eyebrow">Fehler 404</p>
-          <h1 className="mt-6 text-h1">
-            Diese Seite <span className="foil">gibt es nicht.</span>
+      <section className="bg-white">
+        <Container className="pb-14 pt-16 md:pb-20 md:pt-24">
+          <p className="kicker">Fehler 404</p>
+          <h1 className="mt-3 text-h1">
+            Diese Seite <span className="text-accent">gibt es nicht.</span>
           </h1>
-          <p className="mt-7 max-w-xl text-lead text-cream/75">Vielleicht hat sich die Adresse geändert oder es hat sich ein Tippfehler eingeschlichen. Hier geht es weiter:</p>
-          <div className="mt-10">
-            <ButtonLink href="/" variant="copper" size="lg" arrow>
+          <p className="mt-5 max-w-xl text-lead text-body">Vielleicht hat sich die Adresse geändert oder es hat sich ein Tippfehler eingeschlichen. Hier geht es weiter:</p>
+          <div className="mt-8">
+            <ButtonLink href="/" size="lg">
               Zur Startseite
             </ButtonLink>
           </div>
         </Container>
       </section>
-      <section aria-label="Beliebte Seiten" className="bg-white py-16 md:py-24">
+      <section aria-label="Beliebte Seiten" className="bg-mist py-14 md:py-20">
         <Container>
           <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {links.map((l) => (
               <li key={l.href}>
-                <Link
-                  href={l.href}
-                  className="group flex h-full flex-col rounded-2xl border border-sand/80 bg-cream/40 p-6 transition-[border-color,box-shadow] duration-500 hover:border-copper/50 hover:shadow-lift"
-                >
-                  <span className="font-serif text-[1.5rem] leading-tight text-ink">{l.label}</span>
-                  <span className="mt-2 flex-1 text-[0.9375rem] leading-snug text-muted">{l.text}</span>
-                  <ArrowRight aria-hidden className="mt-5 size-4 text-forest transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
+                <Link href={l.href} className="group flex h-full flex-col rounded-card bg-white p-6 transition-shadow duration-200 hover:shadow-card">
+                  <span className="text-[1.0625rem] font-semibold text-ink">{l.label}</span>
+                  <span className="mt-1.5 flex-1 text-[0.9375rem] text-body">{l.text}</span>
+                  <ChevronRight aria-hidden className="mt-4 size-4 text-accent transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
                 </Link>
               </li>
             ))}

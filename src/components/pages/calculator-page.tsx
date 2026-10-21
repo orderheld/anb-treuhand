@@ -86,42 +86,42 @@ export function CalculatorPage({ slug: rechner }: { slug: CalculatorSlug }) {
   return (
     <>
       <PageHero eyebrow={calc.name} title={calc.title} lead={calc.description} breadcrumbs={crumbs} compact>
-        <ul className="flex flex-wrap gap-x-7 gap-y-3 text-[0.9375rem] text-cream/80">
+        <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem] text-muted">
           {highlights.map((h) => (
-            <li key={h} className="flex items-center gap-2.5">
-              <Check aria-hidden className="size-4 text-copper" strokeWidth={2} />
+            <li key={h} className="flex items-center gap-2">
+              <Check aria-hidden className="size-4 text-accent" strokeWidth={2.25} />
               {h}
             </li>
           ))}
         </ul>
       </PageHero>
 
-      <section aria-label={calc.name} className="bg-cream py-10 md:py-16">
+      <section aria-label={calc.name} className="bg-mist py-10 md:py-14">
         <Container>
           <Calculator slug={rechner} settings={settings} />
         </Container>
       </section>
 
       <Section tone="white" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="So geht es weiter" title="Vom Richtpreis zur Offerte." />
-        <ProcessSteps steps={steps} className="mt-14" />
+        <SectionHeader id="ablauf-title" eyebrow="So geht es weiter" title="Vom Richtpreis zur Offerte." align="center" />
+        <ProcessSteps steps={steps} className="mt-12 md:mt-14" />
       </Section>
 
-      <Section tone="cream" labelledBy="faq-title">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." className="lg:col-span-4" />
-          <div className="lg:col-span-8">
+      <Section tone="mist" labelledBy="faq-title">
+        <div className="mx-auto max-w-[47.5rem]">
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <div className="mt-10 md:mt-12">
             <Faq items={calc.faq} />
           </div>
         </div>
       </Section>
 
-      <Section tone="white" space="tight" labelledBy="weitere-rechner-title">
-        <SectionHeader id="weitere-rechner-title" eyebrow="Weitere Rechner" title="Noch etwas berechnen?" />
-        <CalculatorCards exclude={rechner} className="mt-12" />
+      <Section tone="white" labelledBy="weitere-rechner-title">
+        <SectionHeader id="weitere-rechner-title" eyebrow="Weitere Rechner" title="Noch etwas berechnen?" align="center" />
+        <CalculatorCards exclude={rechner} tone="white" className="mx-auto mt-12 max-w-[52rem] md:mt-14" />
       </Section>
 
-      <CtaBand />
+      <CtaBand divider />
       <JsonLd data={[breadcrumbJsonLd(crumbs), faqJsonLd(calc.faq)]} />
     </>
   );

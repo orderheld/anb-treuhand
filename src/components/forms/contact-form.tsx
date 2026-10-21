@@ -89,10 +89,10 @@ export function ContactForm({ fallbackEmail, testMode, confirmation, responseCla
           </>
         }
       >
-        <Link href="/rechner" className={buttonClasses({ variant: "outline-light" })}>
+        <Link href="/rechner" className={buttonClasses({ variant: "secondary" })}>
           Preise berechnen
         </Link>
-        <Link href="/" className={buttonClasses({ variant: "text-light" })}>
+        <Link href="/" className={buttonClasses({ variant: "text" })}>
           Zur Startseite
         </Link>
       </SuccessPanel>
@@ -120,7 +120,7 @@ export function ContactForm({ fallbackEmail, testMode, confirmation, responseCla
         {errorEntries.length > 0 ? <ErrorSummary ref={summaryRef} errors={errorEntries} /> : null}
         {state.status === "error" ? <SubmitError ref={summaryRef} message={state.message} reference={state.reference} fallbackEmail={fallbackEmail} /> : null}
         <p id="kontakt-hinweis" className="text-sm text-muted">
-          Pflichtfelder sind mit <span aria-hidden className="text-bronze">*</span>
+          Pflichtfelder sind mit <span aria-hidden className="text-accent">*</span>
           <span className="sr-only">Stern</span> markiert.
         </p>
       </div>

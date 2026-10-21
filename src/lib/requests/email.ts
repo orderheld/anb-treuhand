@@ -76,17 +76,17 @@ function contactRows(c: { name: string; company?: string; email: string; phone?:
   return [
     ["Name", escapeHtml(c.name)],
     ["Firma", escapeHtml(c.company ?? "–")],
-    ["E-Mail", `<a href="mailto:${escapeHtml(c.email)}" style="color:${emailColors.forest}">${escapeHtml(c.email)}</a>`],
-    ["Telefon", c.phone ? `<a href="tel:${escapeHtml(c.phone.replace(/[^+\d]/g, ""))}" style="color:${emailColors.forest}">${escapeHtml(c.phone)}</a>` : "–"],
+    ["E-Mail", `<a href="mailto:${escapeHtml(c.email)}" style="color:${emailColors.accent}">${escapeHtml(c.email)}</a>`],
+    ["Telefon", c.phone ? `<a href="tel:${escapeHtml(c.phone.replace(/[^+\d]/g, ""))}" style="color:${emailColors.accent}">${escapeHtml(c.phone)}</a>` : "–"],
   ];
 }
 
 function signatureHtml(): string {
   const phone = site.contact.phone.value;
   return paragraph(
-    `Freundliche Grüsse<br><strong style="color:${emailColors.forest}">${escapeHtml(site.brand)}</strong><br>${escapeHtml(addressLine())}${
+    `Freundliche Grüsse<br><strong style="color:${emailColors.ink}">${escapeHtml(site.brand)}</strong><br>${escapeHtml(addressLine())}${
       phone ? `<br>${escapeHtml(phone)}` : ""
-    }<br><a href="mailto:${escapeHtml(site.contact.email.value)}" style="color:${emailColors.forest}">${escapeHtml(site.contact.email.value)}</a> · <a href="${escapeHtml(absoluteUrl("/"))}" style="color:${emailColors.forest}">${escapeHtml(hostLabel())}</a>`,
+    }<br><a href="mailto:${escapeHtml(site.contact.email.value)}" style="color:${emailColors.accent}">${escapeHtml(site.contact.email.value)}</a> · <a href="${escapeHtml(absoluteUrl("/"))}" style="color:${emailColors.accent}">${escapeHtml(hostLabel())}</a>`,
   );
 }
 
@@ -150,7 +150,7 @@ export function renderOfferInternal(m: OfferMail): { subject: string; text: stri
   ].join("\n");
 
   const content = [
-    paragraph(`Über den <strong style="color:${emailColors.forest}">${escapeHtml(calc.name)}</strong> ist eine neue Anfrage eingegangen.`),
+    paragraph(`Über den <strong style="color:${emailColors.ink}">${escapeHtml(calc.name)}</strong> ist eine neue Anfrage eingegangen.`),
     keyValueTable([...contactRows(m.contact), ["Gewünschter Start", escapeHtml(timing)], ["Referenz", escapeHtml(m.reference)]]),
     m.contact.message ? heading("Nachricht") + paragraph(escapeMultiline(m.contact.message)) : "",
     heading("Angaben im Rechner"),
@@ -164,7 +164,7 @@ export function renderOfferInternal(m: OfferMail): { subject: string; text: stri
   ].join("\n");
 
   const footer = `Eingang: ${escapeHtml(received())}. Mit «Antworten» schreiben Sie direkt an ${escapeHtml(m.contact.email)}.${
-    m.adminLink ? `<br><a href="${escapeHtml(m.adminLink)}" style="color:${emailColors.forest}">Anfrage im Admin-Bereich öffnen</a>` : ""
+    m.adminLink ? `<br><a href="${escapeHtml(m.adminLink)}" style="color:${emailColors.accent}">Anfrage im Admin-Bereich öffnen</a>` : ""
   }`;
   return { subject, text, html: layout({ title: "Neue Offertanfrage", preheader: `${calc.name}: ${m.contact.name}`, content, footer }) };
 }
@@ -254,7 +254,7 @@ export function renderContactInternal(m: ContactMail): { subject: string; text: 
     paragraph(escapeMultiline(m.input.message)),
   ].join("\n");
   const footer = `Eingang: ${escapeHtml(received())}. Mit «Antworten» schreiben Sie direkt an ${escapeHtml(m.input.email)}.${
-    m.adminLink ? `<br><a href="${escapeHtml(m.adminLink)}" style="color:${emailColors.forest}">Anfrage im Admin-Bereich öffnen</a>` : ""
+    m.adminLink ? `<br><a href="${escapeHtml(m.adminLink)}" style="color:${emailColors.accent}">Anfrage im Admin-Bereich öffnen</a>` : ""
   }`;
   return { subject, text, html: layout({ title: `Kontaktanfrage: ${topic}`, preheader: `${topic}: ${m.input.name}`, content, footer }) };
 }

@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, Check } from "lucide-react";
-import { CornerFacet, Facet, MonogramOutline } from "@/components/brand/motifs";
+import { Check, ChevronRight } from "lucide-react";
 import { PhoneMockup } from "@/components/home/phone-mockup";
 import { QuickCalculator } from "@/components/home/quick-calculator";
 import { CalculatorCards } from "@/components/sections/calculator-cards";
@@ -46,147 +45,120 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Hero: the front of the business card, with the quick calculator beside the promise. */}
-      <section className="on-dark grain relative isolate overflow-hidden bg-forest text-cream">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(90%_80%_at_80%_0%,#2a4d3c_0%,#1c382a_45%,#142a1f_100%)]" />
-        <Facet start={1160} id="hero-facet" className="-z-10 hidden lg:block" />
-        <CornerFacet id="hero-facet-sm" className="-z-10 lg:hidden" />
-
-        <Container className="relative pb-16 pt-28 sm:pt-32 md:pb-24 lg:flex lg:min-h-[min(100svh,62rem)] lg:items-center lg:pb-28 lg:pt-36">
-          <div className="grid w-full gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-            <div className="lg:col-span-7">
-              <p className="eyebrow anb-rise">{hero.eyebrow}</p>
-              <h1 className="anb-rise mt-7 text-display" style={{ "--anb-delay": "0.06s" } as React.CSSProperties}>
-                {first}
-                <br />
-                <span className="foil anb-foil" style={{ "--anb-delay": "0.7s" } as React.CSSProperties}>
-                  {second}
-                </span>
-              </h1>
-              <p className="anb-rise mt-8 max-w-xl text-lead text-cream/75" style={{ "--anb-delay": "0.14s" } as React.CSSProperties}>
-                {hero.lead}
-              </p>
-              <div className="anb-rise mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap" style={{ "--anb-delay": "0.2s" } as React.CSSProperties}>
-                <ButtonLink href={primaryCta.href} variant="copper" size="lg" arrow>
-                  {primaryCta.label}
-                </ButtonLink>
-                <ButtonLink href="/leistungen" variant="outline-light" size="lg">
-                  Unsere Leistungen
-                </ButtonLink>
-              </div>
-              <ul className="anb-rise mt-12 flex flex-wrap gap-x-8 gap-y-3 text-[0.9375rem] text-cream/75" style={{ "--anb-delay": "0.26s" } as React.CSSProperties}>
-                {hero.highlights.map((h) => (
-                  <li key={h.label} className="flex items-center gap-2.5">
-                    <Icon name={h.icon} className="size-4 text-copper" />
-                    {h.label}
-                  </li>
-                ))}
-              </ul>
+      {/* Hero: the promise on the left, the quick calculator on the right. */}
+      <section className="bg-white pb-[clamp(3.5rem,8vw,6.5rem)] pt-[clamp(3rem,7vw,6rem)]">
+        <Container className="grid items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-14">
+          <div className="min-w-0">
+            <p className="kicker">{hero.eyebrow}</p>
+            <h1 className="mt-2.5 text-display">
+              {first} <span className="block text-accent">{second}</span>
+            </h1>
+            <p className="mt-6 max-w-[35rem] text-lead text-body">{hero.lead}</p>
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <ButtonLink href={primaryCta.href} size="lg">
+                {primaryCta.label}
+              </ButtonLink>
+              <ButtonLink href="/leistungen" variant="text" size="lg" arrow>
+                Unsere Leistungen
+              </ButtonLink>
             </div>
-            <div className="anb-rise lg:col-span-5" style={{ "--anb-delay": "0.3s" } as React.CSSProperties}>
-              <QuickCalculator tariffs={tariffs} />
-            </div>
+            <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem] text-muted">
+              {hero.highlights.map((h) => (
+                <li key={h.label} className="flex items-center gap-2">
+                  <Check aria-hidden className="size-4 text-accent" strokeWidth={2.25} />
+                  {h.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="min-w-0">
+            <QuickCalculator tariffs={tariffs} />
           </div>
         </Container>
       </section>
 
-      {/* Who we are, in one sentence, and the four values. */}
-      <Section tone="white" space="loose" labelledBy="intro-title">
-        <div className="grid gap-10 lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-7">
-            <p className="eyebrow">Über ANB Treuhand</p>
-            <h2 id="intro-title" className="mt-7 font-serif text-statement text-ink">
-              {intro.statement}
-            </h2>
-          </div>
-          <div className="lg:col-span-4 lg:col-start-9 lg:self-end">
-            <p className="text-lead text-body">{intro.text}</p>
-            <Link href="/ueber-uns" className="group mt-7 inline-flex items-center gap-2 font-medium text-forest underline decoration-copper underline-offset-[6px] hover:decoration-2">
-              Mehr über uns
-              <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
-            </Link>
-          </div>
-        </div>
-        <ul className="mt-16 grid gap-x-8 gap-y-12 border-t border-line pt-14 sm:grid-cols-2 lg:mt-24 lg:grid-cols-4">
-          {values.map((v) => (
-            <li key={v.title} className="anb-reveal">
-              <span aria-hidden className="flex size-12 items-center justify-center rounded-full border border-copper/50 bg-cream text-forest">
-                <Icon name={v.icon} className="size-5" />
-              </span>
-              <h3 className="mt-6 font-serif text-h3 text-ink">{hyphenate(v.title, SMALL_HEADING)}</h3>
-              <p className="mt-3 leading-relaxed text-body">{v.text}</p>
-            </li>
-          ))}
-        </ul>
-      </Section>
-
-      {/* Services as an index. */}
-      <Section tone="cream" labelledBy="leistungen-title">
+      {/* Services. */}
+      <Section tone="mist" labelledBy="leistungen-title">
         <SectionHeader
           id="leistungen-title"
           eyebrow="Leistungen"
           title="Alles aus einer Hand."
           text="Von der ersten Buchung bis zur Steuererklärung, von der Gründung bis zur eigenen Liegenschaft: Sie haben eine Ansprechperson für alles."
-          layout="split"
+          align="center"
         />
-        <ServiceIndex items={serviceItems} className="mt-14 md:mt-20" />
+        <ServiceIndex items={serviceItems} className="mt-12 md:mt-14" />
       </Section>
 
-      {/* Calculators on green. */}
-      <section aria-labelledby="rechner-title" className="on-dark grain relative isolate overflow-hidden bg-forest py-20 text-cream md:py-28">
-        <Facet start={1250} id="rechner-facet" className="-z-10 hidden opacity-70 lg:block" animate={false} />
-        <Container className="relative">
-          <SectionHeader
-            id="rechner-title"
-            eyebrow="Preisrechner"
-            title={
-              <>
-                Preise, die Sie <span className="foil">vorher</span> kennen.
-              </>
-            }
-            text="Drei Rechner, ein Prinzip: Sie wählen, was Sie brauchen, und sehen sofort den Richtpreis. Die Offerte fordern Sie mit einem Klick an."
-            layout="split"
-          />
-          <CalculatorCards tone="dark" className="mt-14 md:mt-16" />
-        </Container>
-      </section>
+      {/* Who we are and the four values. */}
+      <Section tone="white" labelledBy="intro-title">
+        <div className="grid gap-12 lg:grid-cols-2 lg:gap-[4.5rem]">
+          <div className="min-w-0">
+            <p className="kicker">Über ANB Treuhand</p>
+            <h2 id="intro-title" className="mt-2.5 text-h2">
+              {intro.statement}
+            </h2>
+            <p className="mt-5 text-lead text-body">{intro.text}</p>
+            <ButtonLink href="/ueber-uns" variant="text" className="mt-4 -ml-1" arrow>
+              Mehr über uns
+            </ButtonLink>
+          </div>
+          <ul className="grid content-center gap-x-8 gap-y-10 sm:grid-cols-2">
+            {values.map((v) => (
+              <li key={v.title}>
+                <span aria-hidden className="flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
+                  <Icon name={v.icon} className="size-5" />
+                </span>
+                <h3 className="mt-4 text-[1.0625rem] font-semibold">{hyphenate(v.title, SMALL_HEADING)}</h3>
+                <p className="mt-1.5 text-[0.9375rem] text-body">{v.text}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </Section>
 
-      {/* Real estate teaser. */}
+      {/* Calculators. */}
+      <Section tone="mist" labelledBy="rechner-title">
+        <SectionHeader
+          id="rechner-title"
+          eyebrow="Preisrechner"
+          title="Preise, die Sie vorher kennen."
+          text="Drei Rechner, ein Prinzip: Sie wählen, was Sie brauchen, und sehen sofort den Richtpreis. Die Offerte fordern Sie mit einem Klick an."
+          align="center"
+        />
+        <CalculatorCards tone="mist" className="mt-12 md:mt-14" />
+      </Section>
+
+      {/* Real estate. */}
       <Section tone="white" labelledBy="immobilien-title">
-        <div className="grid gap-14 lg:grid-cols-12 lg:items-center lg:gap-10">
-          <div className="lg:col-span-5">
-            <p className="eyebrow">Immobilien</p>
-            <h2 id="immobilien-title" className="mt-7 text-h2">
+        <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-[4.5rem]">
+          <div className="min-w-0">
+            <p className="kicker">Immobilien</p>
+            <h2 id="immobilien-title" className="mt-2.5 text-h2">
               Ihre Liegenschaft in guten Händen.
             </h2>
-            <p className="mt-6 text-lead text-body">
+            <p className="mt-5 text-lead text-body">
               Ob vermietete Wohnung, Mehrfamilienhaus oder Stockwerkeigentum: Wir kümmern uns um Mieterschaft, Abrechnungen und Unterhalt. Und wenn es Zeit für einen Verkauf oder
               eine Sanierung ist, begleiten wir Sie Schritt für Schritt.
             </p>
-            <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:flex-wrap">
-              <ButtonLink href="/immobilien" arrow>
-                Immobilien-Leistungen
-              </ButtonLink>
-              <ButtonLink href="/rechner/immobilien" variant="outline">
+            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+              <ButtonLink href="/immobilien">Immobilien-Leistungen</ButtonLink>
+              <ButtonLink href="/rechner/immobilien" variant="secondary">
                 Richtpreis berechnen
               </ButtonLink>
             </div>
           </div>
-          <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-6 lg:col-start-7">
-            {propertyGroups.map((g, i) => (
-              <li key={g.id} className={i % 2 === 1 ? "sm:translate-y-8" : undefined}>
-                <Link
-                  href={`/immobilien#${g.id}`}
-                  className="group flex h-full flex-col rounded-[1.75rem] border border-sand/80 bg-cream/50 p-7 transition-[border-color,background-color,box-shadow] duration-500 ease-out-soft hover:border-copper/50 hover:bg-white hover:shadow-lift"
-                >
-                  <span aria-hidden className="flex size-11 items-center justify-center rounded-full bg-forest text-copper">
+          <ul className="grid gap-4 sm:grid-cols-2">
+            {propertyGroups.map((g) => (
+              <li key={g.id}>
+                <Link href={`/immobilien#${g.id}`} className="group flex h-full flex-col rounded-card bg-mist p-6 transition-[background-color,box-shadow] duration-200 hover:bg-white hover:shadow-card">
+                  <span aria-hidden className="flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
                     <Icon name={g.icon} className="size-5" />
                   </span>
-                  <h3 className="mt-6 font-serif text-h3 text-ink">{hyphenate(g.title, SMALL_HEADING)}</h3>
-                  <p className="mt-2.5 flex-1 text-[0.9375rem] leading-relaxed text-body">{g.lead}</p>
-                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-forest">
+                  <h3 className="mt-4 text-[1.0625rem] font-semibold">{hyphenate(g.title, SMALL_HEADING)}</h3>
+                  <p className="mt-1.5 flex-1 text-[0.9375rem] text-body">{g.lead}</p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-[0.9375rem] font-medium text-accent">
                     Mehr erfahren
-                    <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
+                    <ChevronRight aria-hidden className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
                   </span>
                 </Link>
               </li>
@@ -196,51 +168,47 @@ export default async function HomePage() {
       </Section>
 
       {/* How we work together. */}
-      <Section tone="cream" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So einfach starten wir." />
-        <ProcessSteps steps={process} className="mt-14 md:mt-16" />
+      <Section tone="mist" labelledBy="ablauf-title">
+        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So einfach starten wir." align="center" />
+        <ProcessSteps steps={process} className="mt-12 md:mt-14" />
       </Section>
 
       {/* Customer portal, phase 2. */}
-      <section aria-labelledby="portal-title" className="on-dark grain relative isolate overflow-hidden bg-forest-deep py-20 text-cream md:py-28">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(70%_80%_at_85%_50%,#234536_0%,transparent_70%)]" />
-        <Container className="relative">
-          <div className="grid items-center gap-16 lg:grid-cols-12 lg:gap-10">
-            <div className="lg:col-span-6">
-              <p className="eyebrow">{portal.eyebrow}</p>
-              <h2 id="portal-title" className="mt-7 text-h2">
-                {portal.title}
-              </h2>
-              <p className="mt-5 inline-flex items-center gap-2 rounded-full border border-copper/40 px-3.5 py-1 text-sm text-copper">
-                <span aria-hidden className="size-1.5 rounded-full bg-copper" />
-                In Vorbereitung
-              </p>
-              <p className="mt-6 max-w-xl text-lead text-cream/75">{portal.text}</p>
-              <ul className="mt-8 space-y-3">
-                {portal.features.map((f) => (
-                  <li key={f} className="flex items-start gap-3 text-cream/85">
-                    <Check aria-hidden className="mt-1 size-4 shrink-0 text-copper" strokeWidth={2} />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-              <ButtonLink href="/kundenportal" variant="text-light" className="mt-10" arrow>
-                Mehr zum Kundenportal
-              </ButtonLink>
-            </div>
-            <div className="relative lg:col-span-5 lg:col-start-8">
-              <MonogramOutline className="absolute left-1/2 top-1/2 -z-10 w-[150%] -translate-x-1/2 -translate-y-1/2" opacity={0.12} animate={false} />
-              <PhoneMockup className="anb-reveal" />
-            </div>
+      <Section tone="white" labelledBy="portal-title">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-[4.5rem]">
+          <div className="min-w-0">
+            <p className="kicker">{portal.eyebrow}</p>
+            <h2 id="portal-title" className="mt-2.5 text-h2">
+              {portal.title}
+            </h2>
+            <p className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-accent-soft px-2.5 py-0.5 text-[0.8125rem] font-semibold text-accent">
+              <span aria-hidden className="size-1.5 rounded-full bg-current" />
+              In Vorbereitung
+            </p>
+            <p className="mt-5 text-lead text-body">{portal.text}</p>
+            <ul className="mt-7 grid gap-3.5">
+              {portal.features.map((f) => (
+                <li key={f} className="flex items-start gap-3 text-body">
+                  <span aria-hidden className="mt-0.5 flex size-[1.375rem] shrink-0 items-center justify-center rounded-full bg-accent-soft text-accent">
+                    <Check className="size-3.5" strokeWidth={2.5} />
+                  </span>
+                  {f}
+                </li>
+              ))}
+            </ul>
+            <ButtonLink href="/kundenportal" variant="text" className="mt-5 -ml-1" arrow>
+              Mehr zum Kundenportal
+            </ButtonLink>
           </div>
-        </Container>
-      </section>
+          <PhoneMockup />
+        </div>
+      </Section>
 
       {/* Questions. */}
-      <Section tone="white" labelledBy="faq-title">
-        <div className="grid gap-12 lg:grid-cols-12">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." className="lg:col-span-4" />
-          <div className="lg:col-span-8">
+      <Section tone="mist" labelledBy="faq-title">
+        <div className="mx-auto max-w-[47.5rem]">
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <div className="mt-10 md:mt-12">
             <Faq items={homeFaq} />
           </div>
         </div>

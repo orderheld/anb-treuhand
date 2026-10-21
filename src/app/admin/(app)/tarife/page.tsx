@@ -28,15 +28,15 @@ export default async function TariffsPage() {
             <li key={c.slug}>
               <Link
                 href={`/admin/tarife/${c.slug}`}
-                className="group flex h-full flex-col rounded-2xl border border-line bg-white p-6 transition-colors hover:border-forest/40"
+                className="group flex h-full flex-col rounded-card border border-line bg-white p-6 transition-[border-color,box-shadow] hover:border-line-strong hover:shadow-card"
               >
-                <span aria-hidden className="flex size-11 items-center justify-center rounded-full bg-forest text-copper">
+                <span aria-hidden className="flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
                   <Icon name={c.icon} className="size-5" />
                 </span>
-                <span className="mt-5 font-serif text-[1.375rem] leading-tight text-ink">{hyphenate(tariffRegistry[c.slug].title)}</span>
+                <span className="mt-5 font-serif text-[1.375rem] font-medium leading-tight text-ink">{hyphenate(tariffRegistry[c.slug].title)}</span>
                 <span className="mt-1 text-sm text-muted">{tariffRegistry[c.slug].fields.length} Werte</span>
                 <span className="mt-4 text-sm text-ink">{at ? `Angepasst am ${formatDay(at)}` : "Standardwerte"}</span>
-                <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-medium text-forest">
+                <span className="mt-auto flex items-center gap-2 pt-6 text-sm font-semibold text-accent">
                   Tarife bearbeiten
                   <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>

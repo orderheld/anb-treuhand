@@ -5,6 +5,8 @@ import type { CalculatorSlug } from "@/content/types";
 import type { CalculatorRequest } from "@/lib/calculators/index";
 import type { Estimate } from "@/lib/calculators/shared";
 import { estimateLineRows, inputRows, totalRows } from "@/lib/requests/summary";
+import { cn } from "@/lib/utils";
+import { StepHeader, stepCardClass } from "./controls";
 import { OfferForm } from "./offer-form";
 import type { OfferSettings } from "./types";
 
@@ -65,25 +67,18 @@ export function OfferStep({
   const href = `mailto:${settings.fallbackEmail}?subject=${encodeURIComponent(`Offertanfrage ${title}`)}&body=${encodeURIComponent(body)}`;
 
   return (
-    <section id="offerte" aria-labelledby="offerte-title" tabIndex={-1} className="scroll-mt-28 rounded-[1.75rem] border border-sand/80 bg-white p-6 shadow-card focus:outline-none sm:p-8">
-      <header className="flex items-start gap-4">
-        <span aria-hidden className="mt-1 font-serif text-2xl leading-none text-copper">
-          {String(number).padStart(2, "0")}
-        </span>
-        <div>
-          <h2 id="offerte-title" className="font-serif text-[1.625rem] leading-tight text-ink">
-            Offerte anfordern
-          </h2>
-          <p className="mt-1.5 text-[0.9375rem] text-muted">
-            Senden Sie uns Ihre Berechnung per E-Mail. Ihre Angaben sind im Entwurf schon eingetragen.
-          </p>
-        </div>
-      </header>
+    <section id="offerte" aria-labelledby="offerte-title" tabIndex={-1} className={cn(stepCardClass, "scroll-mt-28 focus:outline-none")}>
+      <StepHeader
+        number={number}
+        title="Offerte anfordern"
+        titleId="offerte-title"
+        text="Senden Sie uns Ihre Berechnung per E-Mail. Ihre Angaben sind im Entwurf schon eingetragen."
+      />
       <a
         href={href}
-        className="mt-8 inline-flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-forest px-8 py-3 font-medium text-cream transition-colors duration-300 hover:bg-forest-deep"
+        className="mt-8 inline-flex min-h-[3.125rem] items-center justify-center gap-2 rounded-full bg-forest px-[1.625rem] py-2.5 text-[1.0625rem] font-semibold text-white transition-colors duration-150 hover:bg-forest-deep"
       >
-        <Mail aria-hidden className="size-4" strokeWidth={1.75} />
+        <Mail aria-hidden className="size-4" strokeWidth={2} />
         Offerte per E-Mail anfordern
       </a>
       <p className="mt-4 text-sm text-muted">
@@ -92,7 +87,7 @@ export function OfferStep({
           <>
             {" "}
             oder{" "}
-            <a href={settings.phone.href} className="text-forest underline decoration-copper underline-offset-[3px]">
+            <a href={settings.phone.href} className="text-accent underline decoration-accent-line underline-offset-[3px] hover:decoration-current">
               {settings.phone.label}
             </a>
           </>

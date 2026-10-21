@@ -1,88 +1,60 @@
-import { cn } from "@/lib/utils";
-import { ANB_PATH, RULES_PATH, SIGNET_PATH, TREUHAND_PATH } from "./logo-paths";
+import Image from "next/image";
 
 /**
- * The ANB Treuhand logo as inline SVG, built from the original outlines (logo-paths.ts).
+ * The ANB Treuhand logo from the official files of the corporate design package (public/logo,
+ * from 01_Logo/…/Digital_RGB). The logo is never rebuilt from type and always one colour: green on
+ * white, white on Tannengrün.
  *
- * - `stacked`: the official lockup, ANB above TREUHAND between two rules (hero, footer, print).
- * - `horizontal`: the same outlines side by side, ANB | TREUHAND, for the slim header. TREUHAND is
- *   scaled to the width of ANB, so both halves balance.
- * - `signet`: ANB alone in its small-size drawing (favicon, tight spots).
- *
- * `tone="light"` is for green surfaces (letters in cream, as decided by the client for the card
- * front on 20.10.2026), `tone="dark"` for light surfaces (letters in Tannengrün). The rules stay
- * copper in both tones.
+ * - `horizontal` (Querformat): header, footer. CI sizes 234 × 44 or 351 × 66 px; always a whole
+ *   pixel pair, otherwise Chromium blurs the hairlines.
+ * - `stacked` (Hauptlogo): large spots, at least 160 px wide.
+ * - `signet` (Signet klein): ANB alone where space is short, 27 to 160 px wide.
  */
 
-type Tone = "light" | "dark";
+type Tone = "dark" | "light";
 
-const letterFill: Record<Tone, string> = { light: "#FFFFFF", dark: "#1C382A" };
-const RULE_FILL = "#D3A17C";
+const files = {
+  horizontal: { dark: "/logo/ANB_Treuhand_Logo_Quer_Gruen.svg", light: "/logo/ANB_Treuhand_Logo_Quer_Weiss.svg" },
+  stacked: { dark: "/logo/ANB_Treuhand_Logo_Gruen.svg", light: "/logo/ANB_Treuhand_Logo_Weiss.svg" },
+  signet: { dark: "/logo/ANB_Treuhand_Signet_Klein_Gruen.svg", light: "/logo/ANB_Treuhand_Signet_Klein_Weiss.svg" },
+} as const;
 
-/** Horizontal lockup: TREUHAND scale and position (see the component description). */
-const H = {
-  scale: 1.6,
-  /** Vertical centre of ANB (63–213) and of the TREUHAND caps (250.5–273.75). */
-  anbCenter: 138,
-  treuCenter: 262.125,
-  gap: 34,
-  ruleWidth: 2.4,
-  ruleHeight: 92,
-};
-const H_RULE_X = 447.5 + H.gap;
-const H_TREU_X = H_RULE_X + H.ruleWidth + H.gap;
-const H_TREU_WIDTH = (373.95 - 135.56) * H.scale;
-const H_WIDTH = H_TREU_X + H_TREU_WIDTH - 63;
+/** Whole-pixel sizes that keep the edges sharp (see the CI manual, chapter Logo). */
+const sizes = {
+  horizontal: { md: [234, 44], lg: [351, 66] },
+  stacked: { md: [176, 100], lg: [257, 146] },
+  signet: { md: [69, 28], lg: [138, 56] },
+} as const;
 
 export function Logo({
-  variant = "stacked",
+  variant = "horizontal",
   tone = "dark",
+  size = "md",
   className,
   title = "ANB Treuhand",
   decorative = false,
+  priority = false,
 }: {
-  variant?: "stacked" | "horizontal" | "signet";
+  variant?: "horizontal" | "stacked" | "signet";
   tone?: Tone;
+  size?: "md" | "lg";
   className?: string;
   title?: string;
   /** Hide from assistive technology when a visible or aria label already names the brand. */
   decorative?: boolean;
+  priority?: boolean;
 }) {
-  const fill = letterFill[tone];
-  const a11y = decorative ? { "aria-hidden": true as const } : { role: "img" as const, "aria-label": title };
-
-  if (variant === "signet") {
-    return (
-      <svg viewBox="45 45 406.2 150" className={cn("block", className)} {...a11y}>
-        <path fill={fill} d={SIGNET_PATH} />
-      </svg>
-    );
-  }
-
-  if (variant === "horizontal") {
-    const ty = H.anbCenter - H.treuCenter * H.scale;
-    const tx = H_TREU_X - 135.56 * H.scale;
-    return (
-      <svg viewBox={`63 63 ${H_WIDTH.toFixed(1)} 150`} className={cn("block", className)} {...a11y}>
-        <path fill={fill} d={ANB_PATH} />
-        <rect x={H_RULE_X} y={H.anbCenter - H.ruleHeight / 2} width={H.ruleWidth} height={H.ruleHeight} fill={RULE_FILL} />
-        <path fill={fill} d={TREUHAND_PATH} transform={`translate(${tx.toFixed(2)} ${ty.toFixed(2)}) scale(${H.scale})`} />
-      </svg>
-    );
-  }
-
+  const [width, height] = sizes[variant][size];
   return (
-    <svg viewBox="63 63 384.5 212" className={cn("block", className)} {...a11y}>
-      <path fill={fill} d={ANB_PATH} />
-      <path fill={fill} d={TREUHAND_PATH} />
-      <path fill={RULE_FILL} d={RULES_PATH} />
-    </svg>
+    <Image
+      src={files[variant][tone]}
+      width={width}
+      height={height}
+      alt={decorative ? "" : title}
+      priority={priority}
+      unoptimized
+      className={className}
+      style={{ width, height, maxWidth: "none" }}
+    />
   );
 }
-
-/** Aspect ratios (width / height) for layout without measuring. */
-export const logoRatio = {
-  stacked: 384.5 / 212,
-  horizontal: H_WIDTH / 150,
-  signet: 406.2 / 150,
-};

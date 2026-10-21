@@ -2,7 +2,7 @@ export default function Loading() {
   return (
     <div aria-busy="true" className="flex flex-1 items-center justify-center py-24">
       <span className="sr-only">Wird geladen …</span>
-      <span aria-hidden className="size-6 animate-spin rounded-full border-2 border-line border-t-forest" />
+      <span aria-hidden className="size-6 animate-spin rounded-full border-2 border-line border-t-accent" />
     </div>
   );
 }

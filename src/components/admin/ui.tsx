@@ -4,8 +4,8 @@ import { hyphenate } from "@/lib/hyphenate";
 import { cn } from "@/lib/utils";
 
 /**
- * Building blocks of the admin area: calm and functional, in the colours of the website
- * (Tannengrün for actions, Kupfer as the accent, white cards on a light background).
+ * Building blocks of the admin area: calm and functional, in the style of the website (white
+ * cards on light grey, Tannengrün for actions, green accents).
  */
 
 type ButtonVariant = "primary" | "secondary" | "danger" | "ghost";
@@ -13,10 +13,10 @@ type ButtonSize = "md" | "sm";
 
 export function adminButton(variant: ButtonVariant = "primary", size: ButtonSize = "md", className?: string): string {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-medium transition-colors disabled:pointer-events-none disabled:opacity-60",
+    "inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-colors disabled:pointer-events-none disabled:opacity-60",
     size === "md" ? "min-h-11 px-5 text-[0.9375rem]" : "min-h-9 px-4 text-sm",
-    variant === "primary" && "bg-forest text-cream hover:bg-forest-deep",
-    variant === "secondary" && "border border-line bg-white text-ink hover:border-forest/40 hover:bg-mist",
+    variant === "primary" && "bg-forest text-white hover:bg-forest-deep",
+    variant === "secondary" && "border border-line-strong bg-white text-ink hover:bg-mist",
     variant === "danger" && "border border-red-200 bg-white text-red-800 hover:border-red-300 hover:bg-red-50",
     variant === "ghost" && "text-ink hover:bg-mist",
     className,
@@ -47,8 +47,8 @@ export function PageHeader({ eyebrow, title, children, actions }: { eyebrow?: st
   return (
     <header className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        {eyebrow ? <p className="text-xs font-medium uppercase tracking-[0.22em] text-bronze">{eyebrow}</p> : null}
-        <h1 className={cn("font-serif text-[2rem] leading-tight text-ink", eyebrow && "mt-2")}>{hyphenate(title)}</h1>
+        {eyebrow ? <p className="kicker">{eyebrow}</p> : null}
+        <h1 className={cn("font-serif text-[2rem] font-medium leading-tight text-ink", eyebrow && "mt-1.5")}>{hyphenate(title)}</h1>
         {children ? <div className="mt-2 max-w-2xl text-[0.9375rem] leading-relaxed text-muted">{children}</div> : null}
       </div>
       {actions ? <div className="flex shrink-0 flex-wrap gap-2">{actions}</div> : null}
@@ -72,11 +72,11 @@ export function Card({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("rounded-2xl border border-line bg-white p-5 shadow-[0_1px_2px_rgb(20_42_31/0.04)] sm:p-6", className)}>
+    <section id={id} className={cn("rounded-card border border-line bg-white p-5 sm:p-6", className)}>
       {title || actions ? (
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div className="min-w-0">
-            {title ? <h2 className="text-[1.0625rem] font-medium text-ink">{title}</h2> : null}
+            {title ? <h2 className="text-[1.0625rem] font-semibold text-ink">{title}</h2> : null}
             {description ? <p className="mt-1 text-sm leading-relaxed text-muted">{description}</p> : null}
           </div>
           {actions ? <div className="flex flex-wrap gap-2">{actions}</div> : null}
@@ -88,7 +88,7 @@ export function Card({
 }
 
 const noticeTones = {
-  info: { box: "border-forest/15 bg-mist text-ink", icon: Info, iconClass: "text-forest" },
+  info: { box: "border-accent-line bg-accent-soft text-ink", icon: Info, iconClass: "text-accent" },
   success: { box: "border-emerald-200 bg-emerald-50 text-emerald-950", icon: CheckCircle2, iconClass: "text-emerald-700" },
   warning: { box: "border-amber-200 bg-amber-50 text-amber-950", icon: AlertTriangle, iconClass: "text-amber-700" },
   danger: { box: "border-red-200 bg-red-50 text-red-950", icon: XCircle, iconClass: "text-red-700" },
@@ -98,10 +98,10 @@ export function Notice({ tone = "info", title, children, className }: { tone?: k
   const t = noticeTones[tone];
   const Icon = t.icon;
   return (
-    <div className={cn("flex gap-3 rounded-xl border px-4 py-3 text-sm leading-relaxed", t.box, className)}>
+    <div className={cn("flex gap-3 rounded-field border px-4 py-3 text-sm leading-relaxed", t.box, className)}>
       <Icon aria-hidden className={cn("mt-0.5 size-4 shrink-0", t.iconClass)} />
       <div className="min-w-0">
-        {title ? <p className="font-medium">{title}</p> : null}
+        {title ? <p className="font-semibold">{title}</p> : null}
         {children ? <div className={cn(title && "mt-1")}>{children}</div> : null}
       </div>
     </div>
@@ -109,7 +109,7 @@ export function Notice({ tone = "info", title, children, className }: { tone?: k
 }
 
 const pillTones = {
-  neu: "bg-copper/25 text-forest-deep",
+  neu: "bg-accent-soft text-accent",
   in_bearbeitung: "bg-sky-100 text-sky-900",
   erledigt: "bg-emerald-100 text-emerald-900",
   ok: "bg-emerald-100 text-emerald-900",

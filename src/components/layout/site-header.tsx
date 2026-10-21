@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { ButtonLink } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
@@ -9,27 +8,24 @@ import { HeaderShell } from "./header-shell";
 import { MobileNav } from "./mobile-nav";
 import { DesktopNav } from "./nav-links";
 
-/** Every page opens with a green hero, so the header is set in cream on green throughout. */
 export function SiteHeader() {
   const phone = site.contact.phone.value;
   return (
     <HeaderShell>
-      <Container className="flex h-[4.25rem] items-center justify-between gap-6 transition-[height] duration-500 lg:h-20 lg:group-data-[scrolled]/header:h-[4.25rem]">
-        <Link href="/" className="-m-1 shrink-0 rounded p-1" aria-label="ANB Treuhand, zur Startseite">
-          <Logo variant="horizontal" tone="light" decorative className="h-7 w-auto sm:h-8" />
+      <Container className="relative flex h-20 items-center gap-8">
+        <Link href="/" className="shrink-0 rounded" aria-label="ANB Treuhand, zur Startseite">
+          {/* Querformat from 360 px; below, where it does not fit, the small signet as the CI manual asks. */}
+          <Logo variant="signet" decorative className="min-[360px]:hidden" />
+          <Logo variant="horizontal" decorative priority className="hidden min-[360px]:block" />
         </Link>
-        <div className="flex items-center gap-2 lg:gap-4">
-          <DesktopNav />
+        <DesktopNav />
+        <div className="ml-auto flex items-center gap-4">
           {phone ? (
-            <a
-              href={phoneHref(phone)}
-              className="hidden items-center gap-2 whitespace-nowrap px-2 text-[0.9375rem] tabular text-cream/80 transition-colors hover:text-copper 2xl:inline-flex"
-            >
-              <Phone aria-hidden className="size-4 text-copper" strokeWidth={1.5} />
+            <a href={phoneHref(phone)} className="hidden whitespace-nowrap text-[0.9375rem] tabular text-body transition-colors hover:text-ink xl:inline">
               {phone}
             </a>
           ) : null}
-          <ButtonLink href={primaryCta.href} size="sm" variant="copper" className="hidden sm:inline-flex">
+          <ButtonLink href={primaryCta.href} size="sm" className="hidden sm:inline-flex">
             {primaryCta.label}
           </ButtonLink>
           <MobileNav phone={phone} phoneHref={phone ? phoneHref(phone) : null} email={site.contact.email.value} />

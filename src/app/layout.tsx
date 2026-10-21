@@ -4,13 +4,12 @@ import { isIndexable, site } from "@/config/site";
 import "./globals.css";
 
 /**
- * The two typefaces of the logo, self-hosted by next/font at build time (no request to Google
- * from the visitor's browser). Bodoni Moda keeps its optical-size axis, so large headings get the
- * fine hairlines of the display cut and small text stays sturdy.
+ * The two typefaces of the corporate design, self-hosted by next/font at build time (no request to
+ * Google from the visitor's browser): Bodoni Moda for titles, Jost for everything else. Bodoni Moda
+ * keeps its optical-size axis, so large titles get the fine hairlines of the display cut.
  */
 const bodoni = Bodoni_Moda({
   subsets: ["latin", "latin-ext"],
-  style: ["normal", "italic"],
   axes: ["opsz"],
   variable: "--font-bodoni",
   display: "swap",

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ArrowRight, Info, Phone } from "lucide-react";
+import { ChevronRight, Info, Phone } from "lucide-react";
 import { cn, formatNumber } from "@/lib/utils";
 import { AnimatedNumber } from "./animated-number";
 
@@ -33,8 +33,8 @@ function useDebounced<T>(value: T, delay: number): T {
 }
 
 /**
- * The live result of a calculator: a green card like the front of the business card, with the
- * main figure in Bodoni, the positions and totals below and the call to request an offer.
+ * The live result of a calculator: a white card with the main figure, the call to request an
+ * offer and the positions and totals below.
  */
 export function ResultPanel({
   id = "rechner-resultat",
@@ -69,107 +69,89 @@ export function ResultPanel({
   const announcement = useDebounced(spoken, 900);
   return (
     <section id={id} aria-labelledby={`${id}-title`} tabIndex={-1} className="scroll-mt-28 focus:outline-none">
-      <div className="on-dark grain relative isolate overflow-hidden rounded-[1.75rem] bg-forest text-cream shadow-lift lg:shadow-none">
-        <div aria-hidden className="absolute inset-0 -z-10 bg-[radial-gradient(120%_70%_at_100%_0%,#2a4d3c_0%,transparent_60%)]" />
-        <svg aria-hidden viewBox="0 0 400 600" preserveAspectRatio="xMaxYMin slice" className="pointer-events-none absolute inset-0 -z-10 h-full w-full">
-          <defs>
-            <linearGradient id={`${id}-line`} x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#d3a17c" stopOpacity="0.55" />
-              <stop offset="1" stopColor="#d3a17c" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          {/* Parallel to the thick stroke of the logo's A, like the facet on the business card. */}
-          <line x1="338" y1="0" x2="400" y2="179" stroke={`url(#${id}-line)`} strokeWidth="1" vectorEffect="non-scaling-stroke" />
-        </svg>
+      <div className="rounded-panel bg-white p-6 sm:p-8">
+        <h2 id={`${id}-title`} className="kicker font-sans">
+          {eyebrow}
+        </h2>
+        <p className="mt-2 flex items-baseline gap-2">
+          <span className="text-xl font-semibold text-muted">CHF</span>
+          <AnimatedNumber value={amount} className="text-figure font-[650] text-ink tabular" />
+          <span className="sr-only">{`CHF ${formatNumber(amount)} ${suffix}`}</span>
+        </p>
+        <p className="mt-1 text-body">{suffix}</p>
+        {range ? <p className="mt-3 inline-flex items-center rounded-full bg-mist px-3 py-1 text-sm text-body tabular">Bandbreite {range}</p> : null}
+        <p aria-live="polite" className="sr-only">
+          {announcement}
+        </p>
 
-        <div className="p-7 sm:p-8">
-          <h2 id={`${id}-title`} className="eyebrow">
-            {eyebrow}
-          </h2>
-          <p className="mt-6 flex items-baseline gap-3">
-            <span className="text-sm font-medium tracking-[0.18em] text-copper">CHF</span>
-            <AnimatedNumber value={amount} className="font-serif text-numeral text-cream" />
-            <span className="sr-only">{`CHF ${formatNumber(amount)} ${suffix}`}</span>
-          </p>
-          <p className="mt-2 text-cream/70">{suffix}</p>
-          {range ? (
-            <p className="mt-4 inline-flex items-center rounded-full border border-copper/35 px-3.5 py-1 text-sm text-cream/80 tabular">Bandbreite {range}</p>
-          ) : null}
-          <p aria-live="polite" className="sr-only">
-            {announcement}
-          </p>
+        <a
+          href="#offerte"
+          className="group mt-6 flex min-h-[3.125rem] items-center justify-center gap-1.5 rounded-full bg-forest px-6 py-2.5 text-[1.0625rem] font-semibold text-white transition-colors duration-150 hover:bg-forest-deep"
+        >
+          Offerte anfordern
+          <ChevronRight aria-hidden className="size-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
+        </a>
 
-          <a
-            href="#offerte"
-            className="group mt-7 flex min-h-14 items-center justify-center gap-2.5 rounded-full bg-copper px-7 py-3 font-medium text-forest-deep shadow-[inset_0_1px_0_rgb(255_255_255/0.35),0_12px_30px_-14px_rgb(211_161_124/0.75)] transition-colors duration-300 hover:bg-copper-light"
-          >
-            Offerte anfordern
-            <ArrowRight aria-hidden className="size-4 transition-transform duration-300 group-hover:translate-x-1" strokeWidth={1.75} />
-          </a>
-
-          <div aria-hidden className="mt-7 h-px bg-gradient-to-r from-copper/70 via-copper/25 to-transparent" />
-
-          {empty ? (
-            <p className="mt-6 text-cream/70">{empty}</p>
-          ) : (
-            <div className="mt-2 space-y-5">
-              {groups.map((group, gi) =>
-                group.lines.length === 0 ? null : (
-                  <div key={group.title ?? gi}>
-                    {group.title ? (
-                      <div className="mt-5 flex items-baseline justify-between gap-4 border-b border-cream/10 pb-2">
-                        <h3 className="min-w-0 text-xs font-medium uppercase leading-relaxed tracking-[0.2em] text-copper">{group.title}</h3>
-                        {group.subtotal ? <span className="shrink-0 whitespace-nowrap text-sm text-cream/85 tabular">{group.subtotal}</span> : null}
-                      </div>
-                    ) : null}
-                    <ul className="divide-y divide-cream/10">
-                      {group.lines.map((line) => (
-                        <li key={line.key} className="flex items-start justify-between gap-4 py-2.5">
-                          <span className="min-w-0">
-                            <span className={cn("block leading-snug", line.muted ? "text-cream/60" : "text-cream")}>{line.label}</span>
-                            {line.detail ? <span className="mt-0.5 block text-[0.8125rem] leading-snug text-cream/55">{line.detail}</span> : null}
-                          </span>
-                          <span className={cn("shrink-0 whitespace-nowrap text-right tabular", line.muted ? "text-sm text-copper/90" : "text-cream")}>{line.amount}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ),
-              )}
-            </div>
-          )}
-
-          {totals.length > 0 ? (
-            <dl className="mt-4 space-y-2 rounded-2xl bg-forest-deep/60 px-5 py-4">
-              {totals.map((t) => (
-                <div key={t.label} className="flex items-baseline justify-between gap-4">
-                  <dt className="text-sm text-cream/70">{t.label}</dt>
-                  <dd className="font-medium text-cream tabular">{t.value}</dd>
+        {empty ? (
+          <p className="mt-6 border-t border-line pt-6 text-body">{empty}</p>
+        ) : (
+          <div className="mt-6 border-t border-line">
+            {groups.map((group, gi) =>
+              group.lines.length === 0 ? null : (
+                <div key={group.title ?? gi}>
+                  {group.title ? (
+                    <div className="mt-5 flex items-baseline justify-between gap-4">
+                      <h3 className="min-w-0 font-sans text-sm font-semibold text-accent">{group.title}</h3>
+                      {group.subtotal ? <span className="shrink-0 whitespace-nowrap text-sm font-medium text-body tabular">{group.subtotal}</span> : null}
+                    </div>
+                  ) : null}
+                  <ul className="divide-y divide-line">
+                    {group.lines.map((line) => (
+                      <li key={line.key} className="flex items-start justify-between gap-4 py-2.5">
+                        <span className="min-w-0">
+                          <span className={cn("block leading-snug", line.muted ? "text-muted" : "text-ink")}>{line.label}</span>
+                          {line.detail ? <span className="mt-0.5 block text-[0.8125rem] leading-snug text-muted">{line.detail}</span> : null}
+                        </span>
+                        <span className={cn("shrink-0 whitespace-nowrap text-right tabular", line.muted ? "text-sm text-muted" : "font-medium text-ink")}>{line.amount}</span>
+                      </li>
+                    ))}
+                  </ul>
                 </div>
-              ))}
-            </dl>
-          ) : null}
+              ),
+            )}
+          </div>
+        )}
 
-          {warnings.length > 0 ? (
-            <ul className="mt-5 space-y-2">
-              {warnings.map((w) => (
-                <li key={w} className="flex gap-2.5 rounded-xl border border-copper/30 bg-copper/[0.08] px-4 py-3 text-sm leading-snug text-cream/85">
-                  <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-copper" strokeWidth={1.75} />
-                  {w}
-                </li>
-              ))}
-            </ul>
-          ) : null}
+        {totals.length > 0 ? (
+          <dl className="mt-4 space-y-2 rounded-card bg-mist px-5 py-4">
+            {totals.map((t) => (
+              <div key={t.label} className="flex items-baseline justify-between gap-4">
+                <dt className="text-sm text-body">{t.label}</dt>
+                <dd className="font-semibold text-ink tabular">{t.value}</dd>
+              </div>
+            ))}
+          </dl>
+        ) : null}
 
-          <p className="mt-5 text-[0.8125rem] leading-relaxed text-cream/60">{note}</p>
+        {warnings.length > 0 ? (
+          <ul className="mt-5 space-y-2">
+            {warnings.map((w) => (
+              <li key={w} className="flex gap-2.5 rounded-field border border-warn-line bg-warn-soft px-4 py-3 text-sm leading-snug text-body">
+                <Info aria-hidden className="mt-0.5 size-4 shrink-0 text-warn" strokeWidth={2} />
+                {w}
+              </li>
+            ))}
+          </ul>
+        ) : null}
 
-          {phone ? (
-            <a href={phone.href} className="mt-5 inline-flex items-center gap-2 text-sm text-cream/75 transition-colors hover:text-copper">
-              <Phone aria-hidden className="size-3.5" strokeWidth={1.75} />
-              Lieber persönlich? <span className="tabular">{phone.label}</span>
-            </a>
-          ) : null}
-        </div>
+        <p className="mt-5 text-[0.8125rem] leading-relaxed text-muted">{note}</p>
+
+        {phone ? (
+          <a href={phone.href} className="mt-4 inline-flex items-center gap-2 text-sm text-body transition-colors hover:text-accent">
+            <Phone aria-hidden className="size-3.5 text-accent" strokeWidth={2} />
+            Lieber persönlich? <span className="font-medium tabular">{phone.label}</span>
+          </a>
+        ) : null}
       </div>
     </section>
   );
@@ -211,22 +193,22 @@ export function MobileResultBar({ label, amount, suffix }: { label: string; amou
         shown ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-full opacity-0",
       )}
     >
-      <div className="on-dark flex items-center justify-between gap-4 rounded-2xl border border-cream/10 bg-forest-deep/95 py-3 pl-5 pr-3 text-cream shadow-float backdrop-blur-md">
+      <div className="flex items-center justify-between gap-4 rounded-card border border-line bg-white/95 py-3 pl-5 pr-3 shadow-lift backdrop-blur-md">
         <p className="min-w-0 leading-tight">
-          <span className="block text-[0.6875rem] font-medium uppercase tracking-[0.2em] text-copper">{label}</span>
-          <span className="mt-1 flex items-baseline gap-1.5">
-            <span className="text-xs text-cream/70">CHF</span>
-            <AnimatedNumber value={amount} className="font-serif text-2xl" />
+          <span className="block text-[0.8125rem] font-medium text-muted">{label}</span>
+          <span className="mt-0.5 flex items-baseline gap-1.5">
+            <span className="text-sm font-semibold text-muted">CHF</span>
+            <AnimatedNumber value={amount} className="text-2xl font-[650] text-ink tabular" />
             <span className="sr-only">{`CHF ${formatNumber(amount)}`}</span>
-            <span className="truncate text-xs text-cream/70">{suffix}</span>
+            <span className="truncate text-[0.8125rem] text-muted">{suffix}</span>
           </span>
         </p>
         <a
           href="#rechner-resultat"
-          className="inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-copper px-5 text-sm font-medium text-forest-deep transition-colors hover:bg-copper-light"
+          className="inline-flex min-h-11 shrink-0 items-center gap-1 rounded-full bg-forest pl-5 pr-4 text-sm font-semibold text-white transition-colors hover:bg-forest-deep"
         >
           Details
-          <ArrowRight aria-hidden className="size-4" strokeWidth={1.75} />
+          <ChevronRight aria-hidden className="size-4" strokeWidth={2} />
         </a>
       </div>
     </div>
@@ -242,7 +224,7 @@ export function CalculatorLayout({ steps, result, form, bar }: { steps: React.Re
           {steps}
         </div>
         <div className="min-w-0 lg:col-span-5 lg:col-start-8 lg:row-span-2 lg:row-start-1">
-          <div className="lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:overflow-y-auto lg:overscroll-contain lg:rounded-[1.75rem] lg:[scrollbar-width:thin]">
+          <div className="lg:sticky lg:top-28 lg:max-h-[calc(100dvh-8rem)] lg:overflow-y-auto lg:overscroll-contain lg:rounded-panel lg:[scrollbar-width:thin]">
             {result}
           </div>
         </div>

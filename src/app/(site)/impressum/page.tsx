@@ -43,8 +43,8 @@ export default function ImpressumPage() {
   return (
     <>
       <PageHero eyebrow="Rechtliches" title="Impressum" breadcrumbs={[{ name: "Start", path: "/" }, { name: "Impressum", path: "/impressum" }]} compact />
-      <Section tone="white">
-        <div className="prose-anb">
+      <Section tone="white" flushTop>
+        <div className="prose-anb border-t border-line pt-8">
           <h2>Verantwortlich für diese Website</h2>
           <dl className="grid gap-x-8 gap-y-3 sm:grid-cols-[10rem_1fr]">
             {rows.map((row) => (

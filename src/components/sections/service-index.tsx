@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { ArrowUpRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { Icon } from "@/components/ui/icon";
 import type { IconName } from "@/content/types";
 import { cn } from "@/lib/utils";
-import { hyphenate } from "@/lib/hyphenate";
+import { SMALL_HEADING, hyphenate } from "@/lib/hyphenate";
 
 export interface ServiceIndexItem {
   href: string;
@@ -14,43 +14,41 @@ export interface ServiceIndexItem {
 }
 
 /**
- * The services as an index with fine rules, like the table of contents of an annual report:
- * number, name in Bodoni, a short promise and the summary. The whole row is the link. On phones
- * the number sits above the name, so long names like "Personaladministration" get the full width.
+ * The services as cards: icon in a green well, name, short summary and a link. White cards on
+ * grey sections (`tone="mist"`), grey cards on white ones. The whole card is the link.
  */
-export function ServiceIndex({ items, className, headingLevel: Heading = "h3" }: { items: ServiceIndexItem[]; className?: string; headingLevel?: "h2" | "h3" }) {
+export function ServiceIndex({
+  items,
+  className,
+  headingLevel: Heading = "h3",
+  tone = "mist",
+}: {
+  items: ServiceIndexItem[];
+  className?: string;
+  headingLevel?: "h2" | "h3";
+  /** Background of the surrounding section. */
+  tone?: "white" | "mist";
+}) {
   return (
-    <ul className={cn("border-t border-sand", className)}>
-      {items.map((item, i) => (
-        <li key={item.href} className="border-b border-sand">
+    <ul className={cn("grid gap-5 sm:grid-cols-2 lg:grid-cols-3", className)}>
+      {items.map((item) => (
+        <li key={item.href}>
           <Link
             href={item.href}
-            className="group relative isolate grid grid-cols-[1fr_auto] items-center gap-x-4 gap-y-3 py-8 md:grid-cols-12 md:gap-x-8 md:py-10"
+            className={cn(
+              "group flex h-full flex-col rounded-card p-6 transition-shadow duration-200 hover:shadow-card sm:p-7",
+              tone === "mist" ? "bg-white" : "bg-mist hover:bg-white",
+            )}
           >
-            {/* Hover surface reaches slightly beyond the text, so the row reads as one target. */}
-            <span
-              aria-hidden
-              className="absolute -inset-x-4 inset-y-0 -z-10 rounded-2xl bg-white opacity-0 shadow-card transition-opacity duration-500 ease-out-soft group-hover:opacity-100 md:-inset-x-6"
-            />
-            <span aria-hidden className="font-serif text-lg text-bronze tabular md:col-span-1">
-              {String(i + 1).padStart(2, "0")}
+            <span aria-hidden className="flex size-11 items-center justify-center rounded-xl bg-accent-soft text-accent">
+              <Icon name={item.icon} className="size-5" />
             </span>
-            <span
-              aria-hidden
-              className="flex size-10 items-center justify-center justify-self-end rounded-full border border-forest/20 text-forest transition-all duration-500 ease-out-soft group-hover:border-forest group-hover:bg-forest group-hover:text-copper md:order-last md:col-span-1 md:size-12"
-            >
-              <ArrowUpRight className="size-5 transition-transform duration-500 ease-out-soft group-hover:rotate-45" strokeWidth={1.5} />
+            <Heading className="mt-5 text-[1.0625rem] font-semibold leading-snug">{hyphenate(item.name, SMALL_HEADING)}</Heading>
+            <p className="mt-1.5 flex-1 text-[0.9375rem] text-body">{item.summary}</p>
+            <span className="mt-4 inline-flex items-center gap-1 text-[0.9375rem] font-medium text-accent">
+              Mehr erfahren
+              <ChevronRight aria-hidden className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" strokeWidth={2} />
             </span>
-            <div className="col-span-2 min-w-0 md:col-span-5">
-              <Heading className="font-serif text-[1.75rem] leading-[1.15] text-ink transition-colors duration-300 group-hover:text-forest md:text-[2.125rem]">
-                {hyphenate(item.name)}
-              </Heading>
-              <p className="mt-2 flex items-center gap-2 text-sm text-bronze">
-                <Icon name={item.icon} className="size-4 shrink-0" />
-                {item.tagline}
-              </p>
-            </div>
-            <p className="col-span-2 leading-relaxed text-body md:col-span-5">{item.summary}</p>
           </Link>
         </li>
       ))}

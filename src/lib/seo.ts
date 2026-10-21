@@ -13,11 +13,12 @@ interface PageMetaInput {
 }
 
 /**
- * Default share image (app/opengraph-image.jpg). Listed explicitly because a page's own
- * openGraph object replaces the file-based image of the root segment.
+ * Default share image (app/opengraph-image.png from the corporate design package). Listed
+ * explicitly because a page's own openGraph object replaces the file-based image of the root
+ * segment.
  */
 const shareImage = {
-  url: "/opengraph-image.jpg",
+  url: "/opengraph-image.png",
   width: 1200,
   height: 630,
   alt: "ANB Treuhand, Langenthal: Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien.",
@@ -60,7 +61,7 @@ export function organizationJsonLd() {
     description: site.description,
     url: absoluteUrl("/"),
     logo: absoluteUrl("/brand/anb-treuhand-logo.png"),
-    image: absoluteUrl("/opengraph-image.jpg"),
+    image: absoluteUrl("/opengraph-image.png"),
     email: email.value,
     ...(phone.value ? { telephone: phone.value } : {}),
     address: {

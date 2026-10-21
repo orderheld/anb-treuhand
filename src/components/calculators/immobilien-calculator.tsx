@@ -160,11 +160,11 @@ export function ImmobilienCalculator({ tariffs, initial, settings }: { tariffs: 
 
           <StepCard number={2} title="Leistungen" text="Laufende Betreuung, Verkauf oder ein Sanierungsprojekt: Wählen Sie, was Sie brauchen.">
             <div>
-              <h3 className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-bronze">Laufend</h3>
+              <h3 className="mb-3 text-sm font-semibold text-accent">Laufend</h3>
               <div className="space-y-3">{services.filter((s) => s.group === "laufend").map(renderService)}</div>
             </div>
             <div>
-              <h3 className="mb-3 text-xs font-medium uppercase tracking-[0.2em] text-bronze">Einmalig</h3>
+              <h3 className="mb-3 text-sm font-semibold text-accent">Einmalig</h3>
               <div className="space-y-3">{services.filter((s) => s.group === "einmalig").map(renderService)}</div>
             </div>
           </StepCard>

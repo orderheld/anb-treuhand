@@ -124,7 +124,7 @@ function ActionFormInner({
 }
 
 export const inputClass =
-  "block w-full rounded-xl border border-field bg-white px-3.5 py-2.5 text-[0.9375rem] text-ink transition-[border-color,box-shadow] placeholder:text-hint hover:border-forest/60 focus:border-forest focus:outline-none focus:ring-4 focus:ring-forest/10 aria-invalid:border-red-600";
+  "block w-full rounded-field border border-field bg-white px-3.5 py-2.5 text-[0.9375rem] text-ink transition-[border-color,box-shadow] placeholder:text-hint hover:border-muted focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/20 aria-invalid:border-danger";
 
 export function TextField({
   name,

@@ -14,11 +14,11 @@ export function RichText({ text }: { text: string }) {
     const [, label, href] = match;
     parts.push(
       href.startsWith("/") ? (
-        <Link key={match.index} href={href} className="font-medium text-forest underline decoration-copper underline-offset-4 hover:decoration-2">
+        <Link key={match.index} href={href} className="font-medium text-accent underline decoration-accent-line underline-offset-[0.18em] hover:decoration-current">
           {label}
         </Link>
       ) : (
-        <a key={match.index} href={href} className="font-medium text-forest underline decoration-copper underline-offset-4 hover:decoration-2">
+        <a key={match.index} href={href} className="font-medium text-accent underline decoration-accent-line underline-offset-[0.18em] hover:decoration-current">
           {label}
         </a>
       ),

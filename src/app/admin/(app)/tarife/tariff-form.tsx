@@ -67,7 +67,7 @@ function NumberInput({ field, value }: { field: TariffField; value: Value }) {
         </p>
       ) : null}
       {changed ? (
-        <p id={`${id}-default`} className="mt-1 text-[0.8125rem] text-bronze">
+        <p id={`${id}-default`} className="mt-1 text-[0.8125rem] text-warn">
           Standard: {shown(field, field.default)}
         </p>
       ) : null}
@@ -85,7 +85,7 @@ function BooleanInput({ field, value }: { field: TariffField; value: Value }) {
   return (
     <div className="sm:col-span-2">
       <label htmlFor={id} className="flex cursor-pointer items-start gap-3">
-        <input id={id} name={field.key} type="checkbox" defaultChecked={Boolean(value)} className="mt-1 size-4 shrink-0 accent-forest" />
+        <input id={id} name={field.key} type="checkbox" defaultChecked={Boolean(value)} className="mt-1 size-4 shrink-0 accent-accent" />
         <span>
           <span className="block text-sm font-medium text-ink">{field.label}</span>
           {field.help ? <span className="mt-0.5 block text-[0.8125rem] leading-relaxed text-muted">{field.help}</span> : null}
@@ -151,7 +151,7 @@ export function TariffForm({
         <ActionForm action={action} submitLabel="Tarife speichern" stickySubmit className="space-y-10">
           {groups.map((g) => (
             <fieldset key={g.group} id={groupId(g.group)} className="scroll-mt-24">
-              <legend className="font-serif text-[1.375rem] leading-tight text-ink">{g.group}</legend>
+              <legend className="font-serif text-[1.375rem] font-medium leading-tight text-ink">{g.group}</legend>
               <div className="mt-5 grid gap-x-8 gap-y-6 sm:grid-cols-2">
                 {g.fields.map((field) => {
                   const value = values[field.key] ?? field.default;
