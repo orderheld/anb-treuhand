@@ -25,7 +25,7 @@ export function HeaderShell({ children }: { children: React.ReactNode }) {
         // The blur sits on a pseudo-element: backdrop-filter on the header itself would become
         // the containing block of the fixed mobile menu panel.
         "border-b border-transparent before:absolute before:inset-0 before:-z-10 before:opacity-0 before:transition-opacity before:duration-500",
-        "before:bg-forest-deep/85 before:backdrop-blur-xl data-[scrolled]:border-cream/[0.08] data-[scrolled]:before:opacity-100",
+        "before:bg-forest-deep/95 before:backdrop-blur-xl data-[scrolled]:border-cream/[0.08] data-[scrolled]:before:opacity-100",
       )}
     >
       {children}
