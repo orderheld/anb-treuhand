@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Phone } from "lucide-react";
+import { Clock, MapPin } from "lucide-react";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
 import { ProcessSteps } from "@/components/sections/process-steps";
@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { phoneHref, site } from "@/config/site";
+import { site } from "@/config/site";
 import { intro, process, values } from "@/content/home";
 import { primaryCta } from "@/content/navigation";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -25,18 +25,8 @@ const crumbs = [
   { name: "Über uns", path: "/ueber-uns" },
 ];
 
-/** "Ali Aliji" → "AA", for the monogram in place of a portrait. */
-function initials(name: string): string {
-  return name
-    .split(/\s+/)
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2)
-    .toUpperCase();
-}
-
 export default function UeberUnsPage() {
-  const { person, title, phone, email, openingHours } = site.contact;
+  const { openingHours } = site.contact;
   return (
     <>
       <PageHero eyebrow="Über uns" title="Jung, engagiert und mit Erfahrung" lead={intro.text} breadcrumbs={crumbs}>
@@ -81,50 +71,8 @@ export default function UeberUnsPage() {
         </ul>
       </Section>
 
-      {/* The contact person, with initials instead of a portrait. */}
-      <Section tone="mist" labelledBy="person-title">
-        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-[4.5rem]">
-          <div className="min-w-0">
-            <p className="kicker">Ihre Ansprechperson</p>
-            <h2 id="person-title" className="mt-2.5 text-h2">
-              Eine Person, die Ihr Mandat kennt
-            </h2>
-            <p className="mt-5 text-lead text-body">
-              Bei uns haben Sie eine feste Ansprechperson, vom Erstgespräch bis zum Jahresabschluss. Sie erreichen uns direkt, per Telefon, E-Mail oder persönlich in Langenthal.
-            </p>
-          </div>
-          <div className="min-w-0 rounded-panel bg-white p-7 shadow-card sm:p-9">
-            <div className="flex items-center gap-5">
-              <span aria-hidden className="flex size-16 shrink-0 items-center justify-center rounded-full bg-accent-soft text-xl font-semibold text-accent">
-                {initials(person)}
-              </span>
-              <div className="min-w-0">
-                <p className="text-[1.75rem] font-semibold leading-tight tracking-[-0.018em] text-ink">{person}</p>
-                <p className="mt-0.5 text-[0.9375rem] text-muted">{title}</p>
-              </div>
-            </div>
-            <ul className="mt-7 grid gap-3 border-t border-line pt-6 text-body">
-              {phone.value ? (
-                <li>
-                  <a href={phoneHref(phone.value)} className="inline-flex items-center gap-3 transition-colors hover:text-accent">
-                    <Phone aria-hidden className="size-4 text-accent" strokeWidth={1.75} />
-                    <span className="tabular">{phone.value}</span>
-                  </a>
-                </li>
-              ) : null}
-              <li>
-                <a href={`mailto:${email.value}`} className="inline-flex items-center gap-3 transition-colors hover:text-accent">
-                  <Mail aria-hidden className="size-4 text-accent" strokeWidth={1.75} />
-                  {email.value}
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </Section>
-
       {/* Where we are. */}
-      <Section tone="white" labelledBy="standort-title">
+      <Section tone="mist" labelledBy="standort-title">
         <div className="grid gap-10 lg:grid-cols-2 lg:gap-[4.5rem]">
           <div className="min-w-0">
             <p className="kicker">Standort</p>
@@ -136,7 +84,7 @@ export default function UeberUnsPage() {
             </p>
           </div>
           <dl className="grid content-end gap-5 sm:grid-cols-2">
-            <div className="rounded-card bg-mist p-6">
+            <div className="rounded-card bg-white p-6">
               <dt className="flex items-center gap-2 font-semibold text-ink">
                 <MapPin aria-hidden className="size-4 text-accent" strokeWidth={1.75} />
                 Adresse
@@ -150,7 +98,7 @@ export default function UeberUnsPage() {
               </dd>
             </div>
             {openingHours.confirmed ? (
-              <div className="rounded-card bg-mist p-6">
+              <div className="rounded-card bg-white p-6">
                 <dt className="flex items-center gap-2 font-semibold text-ink">
                   <Clock aria-hidden className="size-4 text-accent" strokeWidth={1.75} />
                   Bürozeiten
@@ -168,12 +116,12 @@ export default function UeberUnsPage() {
         </div>
       </Section>
 
-      <Section tone="mist" labelledBy="ablauf-title">
+      <Section tone="white" labelledBy="ablauf-title">
         <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So arbeiten wir zusammen" align="center" />
         <ProcessSteps steps={process} className="mt-12 md:mt-14" />
       </Section>
 
-      <CtaBand />
+      <CtaBand divider />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );

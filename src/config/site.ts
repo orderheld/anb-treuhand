@@ -73,11 +73,11 @@ export const site = {
     commercialRegister: { value: null, confirmed: false, note: "Eintrag im Handelsregister? Falls nein: confirmed auf true setzen." } as Confirmable<string | null>,
   },
 
+  /** The site names no contact person (Ferhat, 21.10.2026). */
   contact: {
-    person: "Ali Aliji",
-    title: "Mandatsleiter",
     email: { value: "info@anb-treuhand.ch", confirmed: true, note: "Von der Visitenkarte." } satisfies Confirmable<string>,
-    phone: { value: "+41 78 335 02 02", confirmed: true, note: "Von der Visitenkarte." } as Confirmable<string | null>,
+    /** Every phone link on the site, in the e-mails and in the structured data stays hidden while this is null. */
+    phone: { value: null, confirmed: true, note: "Keine Telefonnummer auf der Website (Ferhat, 21.10.2026)." } as Confirmable<string | null>,
     address: {
       street: "Porzellanstrasse 5",
       postalCode: "4900",
@@ -157,7 +157,7 @@ export function addressLine(): string {
   return `${a.street}, ${a.postalCode} ${a.city}`;
 }
 
-/** tel: link target without spaces, e.g. "+41783350202". */
+/** tel: link target without spaces, e.g. "+41321234567". */
 export function phoneHref(phone: string): string {
   return `tel:${phone.replace(/[^+\d]/g, "")}`;
 }
