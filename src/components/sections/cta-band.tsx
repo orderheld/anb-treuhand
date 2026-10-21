@@ -58,8 +58,9 @@ export function CtaBand({
             </li>
             {openingHours.confirmed
               ? openingHours.value.map((o) => (
-                  <li key={o.days} className="inline-flex items-center gap-1.5">
-                    <Clock aria-hidden className="size-4" strokeWidth={1.75} />
+                  <li key={o.days}>
+                    {/* Icon inline with the text, so days and hours wrap like a sentence on phones. */}
+                    <Clock aria-hidden className="mr-1.5 inline size-4" strokeWidth={1.75} />
                     {o.days} <Hours text={o.hours} />
                   </li>
                 ))
