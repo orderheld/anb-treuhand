@@ -33,7 +33,7 @@ export default function RechnerPage() {
     <>
       <PageHero
         eyebrow="Preisrechner"
-        title="Preise, die Sie vorher kennen."
+        title="Preise, die Sie vorher kennen"
         lead="Drei Rechner, ein Prinzip: Sie wählen, was Sie brauchen, und sehen sofort den Richtpreis. Die Offerte fordern Sie mit einem Klick an."
         breadcrumbs={crumbs}
         compact
@@ -51,7 +51,7 @@ export default function RechnerPage() {
       </Section>
 
       <Section tone="white" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="So funktioniert es" title="In drei Schritten zur Offerte." align="center" />
+        <SectionHeader id="ablauf-title" eyebrow="So funktioniert es" title="In drei Schritten zur Offerte" align="center" />
         <ProcessSteps steps={steps} className="mt-12" />
       </Section>
 

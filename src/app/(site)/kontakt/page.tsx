@@ -35,7 +35,7 @@ export default function KontaktPage() {
     <>
       <PageHero
         eyebrow="Kontakt"
-        title="Wir freuen uns auf Sie."
+        title="Wir freuen uns auf Sie"
         lead={`Schreiben Sie uns, rufen Sie an oder kommen Sie vorbei. ${firstCallSentence()}`}
         breadcrumbs={crumbs}
         compact

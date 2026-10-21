@@ -39,7 +39,7 @@ export default function UeberUnsPage() {
   const { person, title, phone, email, openingHours } = site.contact;
   return (
     <>
-      <PageHero eyebrow="Über uns" title="Jung, engagiert und mit Erfahrung." lead={intro.text} breadcrumbs={crumbs}>
+      <PageHero eyebrow="Über uns" title="Jung, engagiert und mit Erfahrung" lead={intro.text} breadcrumbs={crumbs}>
         <ButtonLink href={primaryCta.href} size="lg">
           {primaryCta.label}
         </ButtonLink>
@@ -50,7 +50,7 @@ export default function UeberUnsPage() {
           <div className="min-w-0">
             <p className="kicker">Unsere Haltung</p>
             <h2 id="haltung-title" className="mt-2.5 text-h2">
-              Treuhand heisst Vertrauen. Darum arbeiten wir persönlich, transparent und verlässlich.
+              Treuhand heisst Vertrauen, darum arbeiten wir persönlich, transparent und verlässlich
             </h2>
           </div>
           <div className="min-w-0 space-y-5 text-lead text-body lg:self-end">
@@ -67,7 +67,7 @@ export default function UeberUnsPage() {
       </Section>
 
       <Section tone="white" labelledBy="werte-title">
-        <SectionHeader id="werte-title" eyebrow="Was uns ausmacht" title="Vier Versprechen." align="center" />
+        <SectionHeader id="werte-title" eyebrow="Was uns ausmacht" title="Vier Versprechen" align="center" />
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {values.map((v) => (
             <li key={v.title} className="flex flex-col rounded-card bg-mist p-6">
@@ -87,7 +87,7 @@ export default function UeberUnsPage() {
           <div className="min-w-0">
             <p className="kicker">Ihre Ansprechperson</p>
             <h2 id="person-title" className="mt-2.5 text-h2">
-              Eine Person, die Ihr Mandat kennt.
+              Eine Person, die Ihr Mandat kennt
             </h2>
             <p className="mt-5 text-lead text-body">
               Bei uns haben Sie eine feste Ansprechperson, vom Erstgespräch bis zum Jahresabschluss. Sie erreichen uns direkt, per Telefon, E-Mail oder persönlich in Langenthal.
@@ -129,7 +129,7 @@ export default function UeberUnsPage() {
           <div className="min-w-0">
             <p className="kicker">Standort</p>
             <h2 id="standort-title" className="mt-2.5 text-h2">
-              Persönlich vor Ort, digital von überall.
+              Persönlich vor Ort, digital von überall
             </h2>
             <p className="mt-5 text-lead text-body">
               Unser Büro ist in Langenthal. Wir treffen Sie dort, bei Ihnen oder per Video. Dank digitaler Zusammenarbeit spielt es keine Rolle, wo Sie zu Hause sind.
@@ -169,7 +169,7 @@ export default function UeberUnsPage() {
       </Section>
 
       <Section tone="mist" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So arbeiten wir zusammen." align="center" />
+        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So arbeiten wir zusammen" align="center" />
         <ProcessSteps steps={process} className="mt-12 md:mt-14" />
       </Section>
 

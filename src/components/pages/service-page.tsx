@@ -59,7 +59,7 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
   ];
   const others = [
     ...services.filter((s) => s.slug !== slug).map((s) => ({ href: serviceHref(s.slug), name: s.short, tagline: s.tagline, icon: s.icon })),
-    { href: "/immobilien", name: "Immobilien", tagline: "Verwaltung, Verkauf und Sanierung.", icon: "key" as const },
+    { href: "/immobilien", name: "Immobilien", tagline: "Verwaltung, Verkauf und Sanierung", icon: "key" as const },
   ];
 
   return (
@@ -122,7 +122,7 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
 
       {/* What exactly we do, and the matching calculator. */}
       <Section tone="white" labelledBy="leistungen-title">
-        <SectionHeader id="leistungen-title" eyebrow="Das übernehmen wir" title="Im Detail." />
+        <SectionHeader id="leistungen-title" eyebrow="Das übernehmen wir" title="Im Detail" />
         <ol className="mt-10 grid gap-5 md:mt-12 md:grid-cols-2">
           {service.items.map((item, i) => (
             <li key={item.title} className="flex gap-4 rounded-card bg-mist p-6 sm:p-7">
@@ -158,7 +158,7 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
 
       <Section tone="mist" labelledBy="faq-title">
         <div className="mx-auto max-w-[47.5rem]">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen" align="center" />
           <div className="mt-10 md:mt-12">
             <Faq items={service.faq} />
           </div>
@@ -167,7 +167,7 @@ export function ServicePage({ slug }: { slug: Service["slug"] }) {
 
       {/* The other services. */}
       <Section tone="white" labelledBy="weitere-title">
-        <SectionHeader id="weitere-title" eyebrow="Weitere Leistungen" title="Alles aus einer Hand." />
+        <SectionHeader id="weitere-title" eyebrow="Weitere Leistungen" title="Alles aus einer Hand" />
         <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {others.map((s) => (
             <li key={s.href}>

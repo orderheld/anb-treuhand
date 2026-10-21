@@ -52,7 +52,7 @@ export default function KundenportalPage() {
         <SectionHeader
           id="funktionen-title"
           eyebrow="Geplante Funktionen"
-          title="Weniger Papier, mehr Überblick."
+          title="Weniger Papier, mehr Überblick"
           text="Das Portal ergänzt die persönliche Betreuung. Sie entscheiden, ob Sie digital, auf Papier oder gemischt mit uns arbeiten."
           align="center"
         />
@@ -77,7 +77,7 @@ export default function KundenportalPage() {
         <SectionHeader
           id="heute-title"
           eyebrow="Schon heute"
-          title="Digital arbeiten geht bereits."
+          title="Digital arbeiten geht bereits"
           text="Bis das Portal bereit ist, tauschen wir Unterlagen so aus, wie es für Sie am einfachsten ist."
           align="center"
         />

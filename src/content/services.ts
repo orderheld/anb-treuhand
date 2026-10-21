@@ -11,7 +11,7 @@ export const services: Service[] = [
     name: "Buchhaltung & Rechnungswesen",
     short: "Buchhaltung",
     icon: "book",
-    tagline: "Saubere Zahlen, jeden Monat.",
+    tagline: "Saubere Zahlen, jeden Monat",
     summary: "Wir führen Ihre Buchhaltung laufend, sauber und nachvollziehbar. Sie wissen jederzeit, wo Ihr Unternehmen steht.",
     metaTitle: "Buchhaltung und Rechnungswesen für KMU",
     metaDescription:
@@ -58,7 +58,7 @@ export const services: Service[] = [
     name: "Steuern",
     short: "Steuern",
     icon: "receipt",
-    tagline: "Keine Abzüge verschenken.",
+    tagline: "Keine Abzüge verschenken",
     summary: "Steuererklärungen für Privatpersonen und Unternehmen, korrekt und fristgerecht. Dazu Beratung, die Ihnen langfristig Steuern spart.",
     metaTitle: "Steuererklärung und Steuerberatung",
     metaDescription:
@@ -100,7 +100,7 @@ export const services: Service[] = [
     name: "Firmengründungen",
     short: "Firmengründung",
     icon: "building",
-    tagline: "Vom Geistesblitz zum Handelsregister.",
+    tagline: "Vom Geistesblitz zum Handelsregister",
     summary: "Wir begleiten Sie von der Wahl der Rechtsform bis zum Eintrag im Handelsregister. Schnell, rechtssicher und zu einem klaren Preis.",
     metaTitle: "Firmengründung: GmbH, AG und Einzelfirma",
     metaDescription:
@@ -148,7 +148,7 @@ export const services: Service[] = [
     name: "Lohnbuchhaltung & Personaladministration",
     short: "Lohnbuchhaltung",
     icon: "users",
-    tagline: "Löhne pünktlich, Meldungen korrekt.",
+    tagline: "Löhne pünktlich, Meldungen korrekt",
     summary: "Monatliche Lohnabrechnungen, Lohnausweise und alle Meldungen an die Sozialversicherungen. Korrekt, pünktlich und vertraulich.",
     metaTitle: "Lohnbuchhaltung und Personaladministration",
     metaDescription:
@@ -189,7 +189,7 @@ export const services: Service[] = [
     name: "Unternehmensberatung",
     short: "Beratung",
     icon: "compass",
-    tagline: "Entscheiden mit klarem Blick.",
+    tagline: "Entscheiden mit klarem Blick",
     summary: "Betriebswirtschaftliche Beratung, Finanz- und Liquiditätsplanung und administrative Unterstützung für Selbstständige und KMU.",
     metaTitle: "Unternehmensberatung für KMU",
     metaDescription:

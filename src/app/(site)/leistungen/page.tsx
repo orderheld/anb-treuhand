@@ -31,7 +31,7 @@ const items: ServiceIndexItem[] = [
   {
     href: "/immobilien",
     name: "Immobilien",
-    tagline: "Verwaltung, Verkauf und Sanierung.",
+    tagline: "Verwaltung, Verkauf und Sanierung",
     summary: "Wir verwalten Mietliegenschaften und Stockwerkeigentum, begleiten Verkäufe und koordinieren Sanierungen von der Offerte bis zur Abnahme.",
     icon: "key",
   },
@@ -82,7 +82,7 @@ export default function LeistungenPage() {
     <>
       <PageHero
         eyebrow="Leistungen"
-        title="Alles, was Ihre Zahlen brauchen."
+        title="Alles, was Ihre Zahlen brauchen"
         lead="Buchhaltung, Steuern, Löhne, Gründung, Beratung und Immobilien: Sie wählen, was Sie brauchen. Wir kümmern uns darum, persönlich und zuverlässig."
         breadcrumbs={crumbs}
       >
@@ -105,7 +105,7 @@ export default function LeistungenPage() {
         <SectionHeader
           id="fuer-wen-title"
           eyebrow="Für wen"
-          title="Für Unternehmen und Menschen mit Plänen."
+          title="Für Unternehmen und Menschen mit Plänen"
           text="Ob Sie ein Unternehmen führen, gerade gründen oder eine Liegenschaft besitzen: Wir stellen die Leistungen so zusammen, wie Sie sie brauchen."
           align="center"
         />

@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 /** Closing invitation to the free first meeting, centred, with the direct contacts below. */
 export function CtaBand({
-  title = "Lernen wir uns kennen.",
+  title = "Lernen wir uns kennen",
   text,
   divider = false,
 }: {

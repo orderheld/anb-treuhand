@@ -24,7 +24,7 @@ export default function NotFound() {
         <Container className="pb-14 pt-16 md:pb-20 md:pt-24">
           <p className="kicker">Fehler 404</p>
           <h1 className="mt-3 text-h1">
-            Diese Seite <span className="text-accent">gibt es nicht.</span>
+            Diese Seite <span className="text-accent">gibt es nicht</span>
           </h1>
           <p className="mt-5 max-w-xl text-lead text-body">Vielleicht hat sich die Adresse geändert oder es hat sich ein Tippfehler eingeschlichen. Hier geht es weiter:</p>
           <div className="mt-8">

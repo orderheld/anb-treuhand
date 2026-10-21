@@ -103,13 +103,13 @@ export function CalculatorPage({ slug: rechner }: { slug: CalculatorSlug }) {
       </section>
 
       <Section tone="white" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="So geht es weiter" title="Vom Richtpreis zur Offerte." align="center" />
+        <SectionHeader id="ablauf-title" eyebrow="So geht es weiter" title="Vom Richtpreis zur Offerte" align="center" />
         <ProcessSteps steps={steps} className="mt-12 md:mt-14" />
       </Section>
 
       <Section tone="mist" labelledBy="faq-title">
         <div className="mx-auto max-w-[47.5rem]">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen" align="center" />
           <div className="mt-10 md:mt-12">
             <Faq items={calc.faq} />
           </div>

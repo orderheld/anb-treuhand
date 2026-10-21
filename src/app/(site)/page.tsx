@@ -33,7 +33,7 @@ const serviceItems: ServiceIndexItem[] = [
   {
     href: "/immobilien",
     name: "Immobilien",
-    tagline: "Verwaltung, Verkauf und Sanierung.",
+    tagline: "Verwaltung, Verkauf und Sanierung",
     summary: "Wir verwalten Mietliegenschaften und Stockwerkeigentum, begleiten Verkäufe und koordinieren Sanierungen von der Offerte bis zur Abnahme.",
     icon: "key",
   },
@@ -82,7 +82,7 @@ export default async function HomePage() {
         <SectionHeader
           id="leistungen-title"
           eyebrow="Leistungen"
-          title="Alles aus einer Hand."
+          title="Alles aus einer Hand"
           text="Von der ersten Buchung bis zur Steuererklärung, von der Gründung bis zur eigenen Liegenschaft: Sie haben eine Ansprechperson für alles."
           align="center"
         />
@@ -121,7 +121,7 @@ export default async function HomePage() {
         <SectionHeader
           id="rechner-title"
           eyebrow="Preisrechner"
-          title="Preise, die Sie vorher kennen."
+          title="Preise, die Sie vorher kennen"
           text="Drei Rechner, ein Prinzip: Sie wählen, was Sie brauchen, und sehen sofort den Richtpreis. Die Offerte fordern Sie mit einem Klick an."
           align="center"
         />
@@ -134,7 +134,7 @@ export default async function HomePage() {
           <div className="min-w-0">
             <p className="kicker">Immobilien</p>
             <h2 id="immobilien-title" className="mt-2.5 text-h2">
-              Ihre Liegenschaft in guten Händen.
+              Ihre Liegenschaft in guten Händen
             </h2>
             <p className="mt-5 text-lead text-body">
               Ob vermietete Wohnung, Mehrfamilienhaus oder Stockwerkeigentum: Wir kümmern uns um Mieterschaft, Abrechnungen und Unterhalt. Und wenn es Zeit für einen Verkauf oder
@@ -169,7 +169,7 @@ export default async function HomePage() {
 
       {/* How we work together. */}
       <Section tone="mist" labelledBy="ablauf-title">
-        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So einfach starten wir." align="center" />
+        <SectionHeader id="ablauf-title" eyebrow="Zusammenarbeit" title="So einfach starten wir" align="center" />
         <ProcessSteps steps={process} className="mt-12 md:mt-14" />
       </Section>
 
@@ -207,7 +207,7 @@ export default async function HomePage() {
       {/* Questions. */}
       <Section tone="mist" labelledBy="faq-title">
         <div className="mx-auto max-w-[47.5rem]">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen" align="center" />
           <div className="mt-10 md:mt-12">
             <Faq items={homeFaq} />
           </div>

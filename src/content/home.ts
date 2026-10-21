@@ -5,7 +5,7 @@ import type { FaqItem, IconName } from "./types";
 export const hero = {
   eyebrow: "Treuhand für KMU und Privatpersonen",
   /** The second part is set in copper foil. */
-  title: ["Klarheit für", "Ihre Zahlen."],
+  title: ["Klarheit für", "Ihre Zahlen"],
   lead: "Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien: persönlich betreut, digital organisiert und zu Preisen, die Sie schon vorher kennen.",
   highlights: [
     { icon: "calculator", label: "Richtpreise online" },
@@ -15,7 +15,7 @@ export const hero = {
 };
 
 export const intro = {
-  statement: "Wir kümmern uns um Ihre Zahlen, damit Sie sich um Ihr Unternehmen kümmern können.",
+  statement: "Wir kümmern uns um Ihre Zahlen, damit Sie sich um Ihr Unternehmen kümmern können",
   text: "ANB Treuhand ist ein junges, aufgestelltes Team mit professioneller Erfahrung in Buchhaltung, Steuern und Immobilien. Wir verbinden das Handwerk einer klassischen Treuhand mit modernen, digitalen Abläufen. Für KMU, Selbstständige und Privatpersonen, persönlich vor Ort oder digital.",
 };
 
@@ -51,7 +51,7 @@ export const process: { title: string; text: string }[] = [
 
 export const portal = {
   eyebrow: "Digitales Kundenportal",
-  title: "Ihr Treuhandbüro in der Hosentasche.",
+  title: "Ihr Treuhandbüro in der Hosentasche",
   text: "Wir bauen ein geschütztes Kundenportal für Sie auf: Belege per Smartphone hochladen, Steuerunterlagen digital einreichen, Dokumente von uns abholen und jederzeit sehen, was noch fehlt.",
   features: [
     "Rechnungen und Belege per Foto hochladen",

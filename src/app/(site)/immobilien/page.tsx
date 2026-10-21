@@ -33,7 +33,7 @@ export default function ImmobilienPage() {
     <>
       <PageHero
         eyebrow="Immobilien"
-        title="Ihre Liegenschaft in guten Händen."
+        title="Ihre Liegenschaft in guten Händen"
         lead="Wir verwalten Mietliegenschaften und Stockwerkeigentum, erstellen die Abrechnungen, begleiten Verkäufe und koordinieren Sanierungen. Zuverlässig, erreichbar und mit klaren Abläufen."
         breadcrumbs={crumbs}
         aside={
@@ -124,7 +124,7 @@ export default function ImmobilienPage() {
 
       <Section tone="white" labelledBy="faq-title">
         <div className="mx-auto max-w-[47.5rem]">
-          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen." align="center" />
+          <SectionHeader id="faq-title" eyebrow="Fragen" title="Gut zu wissen" align="center" />
           <div className="mt-10 md:mt-12">
             <Faq items={propertyFaq} />
           </div>
@@ -133,7 +133,7 @@ export default function ImmobilienPage() {
 
       <CtaBand
         divider
-        title="Sprechen wir über Ihre Liegenschaft."
+        title="Sprechen wir über Ihre Liegenschaft"
         text="Wir schauen uns Ihre Situation an und zeigen Ihnen, wie wir Sie entlasten können. Unverbindlich, vor Ort oder bei uns in Langenthal."
       />
       <JsonLd
