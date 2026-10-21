@@ -17,7 +17,7 @@ import { SMALL_HEADING, hyphenate } from "@/lib/hyphenate";
 export const metadata = pageMetadata({
   title: "Leistungen: Buchhaltung, Steuern, Löhne, Gründung und Immobilien",
   description:
-    "Alle Leistungen von ANB Treuhand in Langenthal: Buchhaltung, Steuern, Lohnbuchhaltung, Firmengründungen, Unternehmensberatung und Immobilien. Persönlich betreut, mit Online-Preisrechner.",
+    "Alle Leistungen von ANB Treuhand: Buchhaltung, Steuern, Lohnbuchhaltung, Firmengründungen, Unternehmensberatung und Immobilien. Persönlich betreut, mit Online-Preisrechner.",
   path: "/leistungen",
 });
 

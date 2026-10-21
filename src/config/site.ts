@@ -32,9 +32,9 @@ export const site = {
   brand: "ANB Treuhand",
   /** Short name for tight spots (browser tab of the admin area, e-mail sender). */
   shortBrand: "ANB",
-  tagline: "Treuhand in Langenthal",
+  tagline: "Buchhaltung, Steuern und Immobilien",
   description:
-    "ANB Treuhand in Langenthal: Buchhaltung, Steuern, Lohnbuchhaltung, Firmengründungen, Unternehmensberatung und Immobilien für KMU, Selbstständige und Privatpersonen. Mit Online-Preisrechner und kostenlosem Erstgespräch.",
+    "ANB Treuhand: Buchhaltung, Steuern, Lohnbuchhaltung, Firmengründungen, Unternehmensberatung und Immobilien für KMU, Selbstständige und Privatpersonen. Mit Online-Preisrechner und kostenlosem Erstgespräch.",
   locale: "de-CH",
 
   /**
@@ -160,11 +160,6 @@ export function addressLine(): string {
 /** tel: link target without spaces, e.g. "+41783350202". */
 export function phoneHref(phone: string): string {
   return `tel:${phone.replace(/[^+\d]/g, "")}`;
-}
-
-/** Route planner link (opens the visitor's map app); no map is embedded on the site. */
-export function mapsHref(): string {
-  return `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${site.brand}, ${addressLine()}`)}`;
 }
 
 /** All values that still need confirmation, for the launch check. */

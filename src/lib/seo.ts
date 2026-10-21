@@ -21,7 +21,7 @@ const shareImage = {
   url: "/opengraph-image.png",
   width: 1200,
   height: 630,
-  alt: "ANB Treuhand, Langenthal: Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien.",
+  alt: "ANB Treuhand: Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien.",
 };
 
 /** Metadata for a page: canonical URL, Open Graph and Twitter. */

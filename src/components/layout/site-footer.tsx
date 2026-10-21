@@ -3,7 +3,7 @@ import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui/container";
 import { Hours } from "@/components/ui/hours";
-import { addressLine, mapsHref, phoneHref, site } from "@/config/site";
+import { addressLine, phoneHref, site } from "@/config/site";
 import { calculatorHref, calculators } from "@/content/calculators";
 import { legalNav } from "@/content/navigation";
 import { serviceHref, services } from "@/content/services";
@@ -37,12 +37,12 @@ export function SiteFooter() {
             <Link href="/" aria-label="ANB Treuhand, zur Startseite" className="inline-block">
               <Logo variant="horizontal" decorative />
             </Link>
-            <p className="mt-5 max-w-72">Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien. Persönlich betreut aus Langenthal.</p>
+            <p className="mt-5 max-w-72">Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien. Persönlich betreut, digital organisiert.</p>
             <address className="mt-5 grid gap-2.5 not-italic">
-              <a href={mapsHref()} className="flex gap-2.5 transition-colors hover:text-ink" target="_blank" rel="noopener noreferrer">
+              <span className="flex gap-2.5">
                 <MapPin aria-hidden className={iconClass} strokeWidth={1.75} />
                 {addressLine()}
-              </a>
+              </span>
               {phone.value ? (
                 <a href={phoneHref(phone.value)} className="flex gap-2.5 tabular transition-colors hover:text-ink">
                   <Phone aria-hidden className={iconClass} strokeWidth={1.75} />

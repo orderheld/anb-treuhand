@@ -13,9 +13,9 @@ export const services: Service[] = [
     icon: "book",
     tagline: "Saubere Zahlen, jeden Monat.",
     summary: "Wir führen Ihre Buchhaltung laufend, sauber und nachvollziehbar. Sie wissen jederzeit, wo Ihr Unternehmen steht.",
-    metaTitle: "Buchhaltung in Langenthal",
+    metaTitle: "Buchhaltung und Rechnungswesen für KMU",
     metaDescription:
-      "Buchhaltung und Rechnungswesen für KMU und Selbstständige: Finanzbuchhaltung, Debitoren und Kreditoren, Abschlüsse, MWST und digitale Belegablage. ANB Treuhand, Langenthal.",
+      "Buchhaltung und Rechnungswesen für KMU und Selbstständige: Finanzbuchhaltung, Debitoren und Kreditoren, Abschlüsse, MWST und digitale Belegablage. Kostenloses Erstgespräch.",
     intro:
       "Eine gute Buchhaltung ist mehr als eine Pflicht. Sie zeigt Ihnen, ob Ihre Preise stimmen, wann Liquidität knapp wird und wo Potenzial liegt. Wir übernehmen die Buchführung vollständig oder ergänzen Ihr Team dort, wo es Unterstützung braucht – digital, termintreu und mit einer festen Ansprechperson.",
     items: [
@@ -60,9 +60,9 @@ export const services: Service[] = [
     icon: "receipt",
     tagline: "Keine Abzüge verschenken.",
     summary: "Steuererklärungen für Privatpersonen und Unternehmen, korrekt und fristgerecht. Dazu Beratung, die Ihnen langfristig Steuern spart.",
-    metaTitle: "Steuererklärung und Steuerberatung in Langenthal",
+    metaTitle: "Steuererklärung und Steuerberatung",
     metaDescription:
-      "Steuererklärung für Privatpersonen und Unternehmen, Steuerberatung und Steueroptimierung im Kanton Bern. ANB Treuhand in Langenthal, kostenloses Erstgespräch.",
+      "Steuererklärung für Privatpersonen und Unternehmen, Steuerberatung und Steueroptimierung im Kanton Bern. Kostenloses Erstgespräch bei ANB Treuhand.",
     intro:
       "Steuern sind komplex, aber Ihre Steuererklärung muss es nicht sein. Wir füllen sie vollständig aus, nutzen alle zulässigen Abzüge und behalten Fristen und Veranlagungen für Sie im Blick. Für Unternehmen planen wir vorausschauend, damit Entscheidungen auch steuerlich aufgehen.",
     items: [
@@ -102,7 +102,7 @@ export const services: Service[] = [
     icon: "building",
     tagline: "Vom Geistesblitz zum Handelsregister.",
     summary: "Wir begleiten Sie von der Wahl der Rechtsform bis zum Eintrag im Handelsregister. Schnell, rechtssicher und zu einem klaren Preis.",
-    metaTitle: "Firmengründung in Langenthal: GmbH, AG und Einzelfirma",
+    metaTitle: "Firmengründung: GmbH, AG und Einzelfirma",
     metaDescription:
       "Firma gründen mit ANB Treuhand: Beratung zur Rechtsform, Firmenzweck, Statuten, Notariat und Handelsregister. Gründungskosten online berechnen.",
     intro:
@@ -150,9 +150,9 @@ export const services: Service[] = [
     icon: "users",
     tagline: "Löhne pünktlich, Meldungen korrekt.",
     summary: "Monatliche Lohnabrechnungen, Lohnausweise und alle Meldungen an die Sozialversicherungen. Korrekt, pünktlich und vertraulich.",
-    metaTitle: "Lohnbuchhaltung und Personaladministration in Langenthal",
+    metaTitle: "Lohnbuchhaltung und Personaladministration",
     metaDescription:
-      "Lohnbuchhaltung für KMU: monatliche Lohnabrechnungen, Lohnausweise, Sozialversicherungen, An- und Abmeldungen und Personaladministration. ANB Treuhand, Langenthal.",
+      "Lohnbuchhaltung für KMU: monatliche Lohnabrechnungen, Lohnausweise, Sozialversicherungen, An- und Abmeldungen und Personaladministration. Persönlich betreut von ANB Treuhand.",
     intro:
       "Ihre Mitarbeitenden verlassen sich auf einen korrekten Lohn, die Sozialversicherungen auf korrekte Meldungen. Wir übernehmen die Lohnbuchhaltung vollständig: von der monatlichen Abrechnung über Quellensteuer und Lohnausweise bis zur Jahresmeldung an AHV, Pensionskasse und Unfallversicherung.",
     items: [
@@ -191,7 +191,7 @@ export const services: Service[] = [
     icon: "compass",
     tagline: "Entscheiden mit klarem Blick.",
     summary: "Betriebswirtschaftliche Beratung, Finanz- und Liquiditätsplanung und administrative Unterstützung für Selbstständige und KMU.",
-    metaTitle: "Unternehmensberatung für KMU in Langenthal",
+    metaTitle: "Unternehmensberatung für KMU",
     metaDescription:
       "Unternehmensberatung für Selbstständige und KMU: Finanz- und Liquiditätsplanung, betriebswirtschaftliche Beratung und administrative Unterstützung. Gratis Erstgespräch.",
     intro:

@@ -1,4 +1,4 @@
-import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { CtaBand } from "@/components/sections/cta-band";
 import { PageHero } from "@/components/sections/page-hero";
 import { ProcessSteps } from "@/components/sections/process-steps";
@@ -6,7 +6,7 @@ import { JsonLd } from "@/components/seo/json-ld";
 import { ButtonLink } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Section, SectionHeader } from "@/components/ui/section";
-import { addressLine, mapsHref, phoneHref, site } from "@/config/site";
+import { phoneHref, site } from "@/config/site";
 import { intro, process, values } from "@/content/home";
 import { primaryCta } from "@/content/navigation";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
@@ -14,9 +14,9 @@ import { Hours } from "@/components/ui/hours";
 import { SMALL_HEADING, hyphenate } from "@/lib/hyphenate";
 
 export const metadata = pageMetadata({
-  title: "Über uns: Ihre Treuhand in Langenthal",
+  title: "Über uns: jung, engagiert und mit Erfahrung",
   description:
-    "ANB Treuhand ist ein junges, aufgestelltes Team mit professioneller Erfahrung in Buchhaltung, Steuern und Immobilien. Persönlich, transparent und digital, mitten in Langenthal.",
+    "ANB Treuhand ist ein junges, aufgestelltes Team mit professioneller Erfahrung in Buchhaltung, Steuern und Immobilien. Persönlich, transparent und digital.",
   path: "/ueber-uns",
 });
 
@@ -129,10 +129,10 @@ export default function UeberUnsPage() {
           <div className="min-w-0">
             <p className="kicker">Standort</p>
             <h2 id="standort-title" className="mt-2.5 text-h2">
-              In Langenthal zu Hause.
+              Persönlich vor Ort, digital von überall.
             </h2>
             <p className="mt-5 text-lead text-body">
-              Unser Büro liegt mitten in Langenthal. Wir arbeiten für Kundschaft im ganzen Oberaargau und im Kanton Bern. Dank digitaler Zusammenarbeit auch gerne darüber hinaus.
+              Unser Büro ist in Langenthal. Wir treffen Sie dort, bei Ihnen oder per Video. Dank digitaler Zusammenarbeit spielt es keine Rolle, wo Sie zu Hause sind.
             </p>
           </div>
           <dl className="grid content-end gap-5 sm:grid-cols-2">
@@ -147,18 +147,6 @@ export default function UeberUnsPage() {
                 {site.contact.address.street}
                 <br />
                 {site.contact.address.postalCode} {site.contact.address.city}
-              </dd>
-              <dd className="mt-4">
-                <a
-                  href={mapsHref()}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-accent hover:text-accent-hover"
-                  aria-label={`Route planen zu ${addressLine()} (öffnet Google Maps)`}
-                >
-                  <Navigation aria-hidden className="size-4" strokeWidth={1.75} />
-                  Route planen
-                </a>
               </dd>
             </div>
             {openingHours.confirmed ? (

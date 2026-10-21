@@ -22,7 +22,7 @@ import { getTariffs } from "@/lib/tariffs/store";
 import { SMALL_HEADING, hyphenate } from "@/lib/hyphenate";
 
 export const metadata = pageMetadata({
-  title: "ANB Treuhand in Langenthal: Buchhaltung, Steuern, Firmengründung und Immobilien",
+  title: "ANB Treuhand: Buchhaltung, Steuern, Firmengründung und Immobilien",
   description: site.description,
   path: "/",
   absoluteTitle: true,

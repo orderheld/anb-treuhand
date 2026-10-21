@@ -107,8 +107,8 @@ export default function DatenschutzPage() {
 
           <h2>6. Links zu anderen Diensten</h2>
           <p>
-            Der Link «Route planen» öffnet Google Maps in einem neuen Fenster. Erst dann werden Daten an Google übermittelt; es gilt die Datenschutzerklärung von Google. Auf unserer
-            Website selbst sind keine Karten, Videos oder Social-Media-Inhalte eingebunden.
+            Auf unserer Website sind keine Karten, Videos oder Social-Media-Inhalte eingebunden. Folgen Sie einem Link auf eine andere Website, gilt dort die Datenschutzerklärung
+            des jeweiligen Anbieters.
           </p>
 
           <h2>7. Bekanntgabe ins Ausland</h2>

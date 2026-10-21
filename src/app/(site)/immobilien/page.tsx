@@ -15,10 +15,10 @@ import { cn } from "@/lib/utils";
 import { SMALL_HEADING, hyphenate } from "@/lib/hyphenate";
 
 const description =
-  "Immobilienverwaltung, Stockwerkeigentum, Nebenkostenabrechnung, Immobilienbuchhaltung, Verkauf, Sanierung und Baubegleitung in Langenthal und im Oberaargau. Richtpreis online berechnen.";
+  "Immobilienverwaltung, Stockwerkeigentum, Nebenkostenabrechnung, Immobilienbuchhaltung, Verkauf, Sanierung und Baubegleitung. Richtpreis online berechnen.";
 
 export const metadata = pageMetadata({
-  title: "Immobilien: Verwaltung, Verkauf und Sanierung in Langenthal",
+  title: "Immobilien: Verwaltung, Verkauf und Sanierung",
   description,
   path: "/immobilien",
 });

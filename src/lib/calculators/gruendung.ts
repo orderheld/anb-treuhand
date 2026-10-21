@@ -130,7 +130,6 @@ export type GruendungInput = z.output<typeof gruendungInputSchema>;
 export const GRUENDUNG_START: GruendungInput = {
   rechtsform: "gmbh",
   kanton: "BE",
-  sitz: "Langenthal",
   gesellschafter: 1,
   kapital: 20_000,
   hrEintrag: true,

@@ -3,7 +3,7 @@ import type { FaqItem, IconName } from "./types";
 /** Texts of the home page. Claims stay within what the client confirmed (20.10.2026). */
 
 export const hero = {
-  eyebrow: "Treuhand in Langenthal",
+  eyebrow: "Treuhand für KMU und Privatpersonen",
   /** The second part is set in copper foil. */
   title: ["Klarheit für", "Ihre Zahlen."],
   lead: "Buchhaltung, Steuern, Löhne, Firmengründungen und Immobilien: persönlich betreut, digital organisiert und zu Preisen, die Sie schon vorher kennen.",
@@ -16,7 +16,7 @@ export const hero = {
 
 export const intro = {
   statement: "Wir kümmern uns um Ihre Zahlen, damit Sie sich um Ihr Unternehmen kümmern können.",
-  text: "ANB Treuhand ist ein junges, aufgestelltes Team mit professioneller Erfahrung in Buchhaltung, Steuern und Immobilien. Wir verbinden das Handwerk einer klassischen Treuhand mit modernen, digitalen Abläufen. Für KMU, Selbstständige und Privatpersonen in Langenthal, im Oberaargau und darüber hinaus.",
+  text: "ANB Treuhand ist ein junges, aufgestelltes Team mit professioneller Erfahrung in Buchhaltung, Steuern und Immobilien. Wir verbinden das Handwerk einer klassischen Treuhand mit modernen, digitalen Abläufen. Für KMU, Selbstständige und Privatpersonen, persönlich vor Ort oder digital.",
 };
 
 export const values: { icon: IconName; title: string; text: string }[] = [
@@ -36,9 +36,9 @@ export const values: { icon: IconName; title: string; text: string }[] = [
     text: "Belege per Foto, Unterlagen per E-Mail, Auswertungen auf Knopfdruck. Und wer lieber Ordner bringt, ist genauso willkommen.",
   },
   {
-    icon: "map-pin",
-    title: "Regional verankert",
-    text: "Mitten in Langenthal, nahe bei unserer Kundschaft. Wir kennen die Gemeinden, Behörden und Gepflogenheiten im Kanton Bern.",
+    icon: "shield",
+    title: "Erfahren",
+    text: "Professionelle Erfahrung in Buchhaltung, Steuern und Immobilien. Wir kennen Fristen und Behörden und behalten alles für Sie im Blick.",
   },
 ];
 
@@ -66,7 +66,7 @@ export const homeFaq: FaqItem[] = [
   {
     question: "Für wen arbeitet ANB Treuhand?",
     answer:
-      "Für KMU, Selbstständige, Gründerinnen und Gründer, Privatpersonen sowie Eigentümerinnen und Eigentümer von Liegenschaften. Zu Hause sind wir in Langenthal und im Oberaargau. Dank digitaler Zusammenarbeit arbeiten wir auch gerne mit Kundschaft aus der ganzen Schweiz.",
+      "Für KMU, Selbstständige, Gründerinnen und Gründer, Privatpersonen sowie Eigentümerinnen und Eigentümer von Liegenschaften. Unser Büro ist in Langenthal. Dank digitaler Zusammenarbeit arbeiten wir gerne mit Kundschaft aus der ganzen Schweiz.",
   },
   {
     question: "Wie verbindlich sind die Preise im Rechner?",

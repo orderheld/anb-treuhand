@@ -1,17 +1,17 @@
 import { Suspense } from "react";
-import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { Clock, Mail, MapPin, Phone } from "lucide-react";
 import { ContactForm, ContactFormFromUrl } from "@/components/forms/contact-form";
 import { PageHero } from "@/components/sections/page-hero";
 import { JsonLd } from "@/components/seo/json-ld";
 import { Container } from "@/components/ui/container";
-import { addressLine, firstCallSentence, mapsHref, phoneHref, responseClause, site } from "@/config/site";
+import { addressLine, firstCallSentence, phoneHref, responseClause, site } from "@/config/site";
 import { formsAvailable, serverEnv } from "@/lib/env";
 import { breadcrumbJsonLd, pageMetadata } from "@/lib/seo";
 import { Hours } from "@/components/ui/hours";
 
 export const metadata = pageMetadata({
   title: "Kontakt und Erstgespräch",
-  description: `Kontaktieren Sie ANB Treuhand in Langenthal: ${addressLine()}. Telefon, E-Mail oder Kontaktformular. ${firstCallSentence()}`,
+  description: `Kontaktieren Sie ANB Treuhand: ${addressLine()}. Telefon, E-Mail oder Kontaktformular. ${firstCallSentence()}`,
   path: "/kontakt",
 });
 
@@ -103,16 +103,6 @@ export default function KontaktPage() {
                         <br />
                         {address.postalCode} {address.city}
                       </p>
-                      <a
-                        href={mapsHref()}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="mt-2 inline-flex items-center gap-1.5 text-[0.9375rem] font-medium text-accent hover:text-accent-hover"
-                        aria-label={`Route planen zu ${addressLine()} (öffnet Google Maps)`}
-                      >
-                        <Navigation aria-hidden className="size-4" strokeWidth={1.75} />
-                        Route planen
-                      </a>
                     </div>
                   </li>
                   {openingHours.confirmed ? (
