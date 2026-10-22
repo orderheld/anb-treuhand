@@ -76,8 +76,8 @@ export const site = {
   contact: {
     /** Contact person on the contact and about pages (Ferhat, 22.10.2026). */
     person: "Enesa Bilalli",
-    /** Job title under the name. None given yet, so the line stays hidden. */
-    title: null as string | null,
+    /** Job title under the name (Ferhat, 22.10.2026); null hides the line. */
+    title: "Mandatsleiterin" as string | null,
     email: { value: "info@anb-treuhand.ch", confirmed: true, note: "Von der Visitenkarte." } satisfies Confirmable<string>,
     phone: { value: "032 310 17 29", confirmed: true, note: "Von Ferhat (22.10.2026)." } as Confirmable<string | null>,
     address: {
