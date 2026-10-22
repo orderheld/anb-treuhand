@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absoluteUrl, site } from "@/config/site";
+import { absoluteUrl, phoneE164, site } from "@/config/site";
 import type { FaqItem, Service } from "@/content/types";
 
 interface PageMetaInput {
@@ -63,7 +63,7 @@ export function organizationJsonLd() {
     logo: absoluteUrl("/brand/anb-treuhand-logo.png"),
     image: absoluteUrl("/opengraph-image.png"),
     email: email.value,
-    ...(phone.value ? { telephone: phone.value } : {}),
+    ...(phone.value ? { telephone: phoneE164(phone.value) } : {}),
     address: {
       "@type": "PostalAddress",
       streetAddress: address.street,

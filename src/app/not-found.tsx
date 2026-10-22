@@ -13,7 +13,7 @@ const links = [
   { href: "/leistungen", label: "Leistungen", text: "Buchhaltung, Steuern, Löhne, Gründung und Beratung" },
   { href: "/rechner", label: "Preisrechner", text: "Richtpreis in einer Minute berechnen" },
   { href: "/immobilien", label: "Immobilien", text: "Verwaltung, Verkauf und Sanierung" },
-  { href: "/kontakt", label: "Kontakt", text: "Schreiben Sie uns oder kommen Sie vorbei" },
+  { href: "/kontakt", label: "Kontakt", text: "Schreiben Sie uns oder rufen Sie an" },
 ];
 
 /** 404 for every unknown address, in the look of the site. */

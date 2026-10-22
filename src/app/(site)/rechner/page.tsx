@@ -55,7 +55,7 @@ export default function RechnerPage() {
         <ProcessSteps steps={steps} className="mt-12" />
       </Section>
 
-      <CtaBand divider title="Lieber persönlich?" text="Vereinbaren Sie ein Erstgespräch. Wir berechnen Ihren Preis gerne gemeinsam mit Ihnen." />
+      <CtaBand divider title="Lieber persönlich?" text="Rufen Sie uns an oder vereinbaren Sie ein Erstgespräch. Wir berechnen Ihren Preis gerne gemeinsam mit Ihnen." />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
     </>
   );

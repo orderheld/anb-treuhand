@@ -11,7 +11,7 @@ import { Hours } from "@/components/ui/hours";
 
 export const metadata = pageMetadata({
   title: "Kontakt und Erstgespräch",
-  description: `Kontaktieren Sie ANB Treuhand: ${addressLine()}. Schreiben Sie uns per E-Mail oder über das Kontaktformular. ${firstCallSentence()}`,
+  description: `Kontaktieren Sie ANB Treuhand: ${addressLine()}. Telefon, E-Mail oder Kontaktformular. ${firstCallSentence()}`,
   path: "/kontakt",
 });
 
@@ -21,7 +21,7 @@ const crumbs = [
 ];
 
 export default function KontaktPage() {
-  const { phone, email, address, openingHours } = site.contact;
+  const { phone, email, address, openingHours, person, title } = site.contact;
   const formProps = {
     fallbackEmail: email.value,
     testMode: serverEnv.dryRun,
@@ -36,7 +36,7 @@ export default function KontaktPage() {
       <PageHero
         eyebrow="Kontakt"
         title="Wir freuen uns auf Sie"
-        lead={`Schreiben Sie uns oder kommen Sie vorbei. ${firstCallSentence()}`}
+        lead={`Schreiben Sie uns, rufen Sie an oder kommen Sie vorbei. ${firstCallSentence()}`}
         breadcrumbs={crumbs}
         compact
       />
@@ -123,6 +123,18 @@ export default function KontaktPage() {
                     </li>
                   ) : null}
                 </ul>
+                <div className="mt-8 flex items-center gap-4 border-t border-line pt-6">
+                  <span aria-hidden className="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent-soft font-semibold text-accent">
+                    {person
+                      .split(/\s+/)
+                      .map((p) => p[0])
+                      .join("")}
+                  </span>
+                  <p className="leading-snug">
+                    <span className="block text-xl font-semibold tracking-[-0.01em] text-ink">{person}</span>
+                    {title ? <span className="text-sm text-muted">{title}</span> : null}
+                  </p>
+                </div>
               </div>
             </aside>
           </div>

@@ -73,11 +73,13 @@ export const site = {
     commercialRegister: { value: null, confirmed: false, note: "Eintrag im Handelsregister? Falls nein: confirmed auf true setzen." } as Confirmable<string | null>,
   },
 
-  /** The site names no contact person (Ferhat, 21.10.2026). */
   contact: {
+    /** Contact person on the contact and about pages (Ferhat, 22.10.2026). */
+    person: "Enesa Bilalli",
+    /** Job title under the name. None given yet, so the line stays hidden. */
+    title: null as string | null,
     email: { value: "info@anb-treuhand.ch", confirmed: true, note: "Von der Visitenkarte." } satisfies Confirmable<string>,
-    /** Every phone link on the site, in the e-mails and in the structured data stays hidden while this is null. */
-    phone: { value: null, confirmed: true, note: "Keine Telefonnummer auf der Website (Ferhat, 21.10.2026)." } as Confirmable<string | null>,
+    phone: { value: "032 310 17 29", confirmed: true, note: "Von Ferhat (22.10.2026)." } as Confirmable<string | null>,
     address: {
       street: "Porzellanstrasse 5",
       postalCode: "4900",
@@ -157,9 +159,20 @@ export function addressLine(): string {
   return `${a.street}, ${a.postalCode} ${a.city}`;
 }
 
-/** tel: link target without spaces, e.g. "+41321234567". */
+/**
+ * Phone number in international format without spaces, e.g. "032 123 45 67" → "+41321234567".
+ * Swiss numbers written with a leading 0 get +41, so links also work from abroad.
+ */
+export function phoneE164(phone: string): string {
+  return phone
+    .replace(/[^+\d]/g, "")
+    .replace(/^00/, "+")
+    .replace(/^0/, "+41");
+}
+
+/** tel: link target, e.g. "tel:+41321234567". */
 export function phoneHref(phone: string): string {
-  return `tel:${phone.replace(/[^+\d]/g, "")}`;
+  return `tel:${phoneE164(phone)}`;
 }
 
 /** All values that still need confirmation, for the launch check. */
