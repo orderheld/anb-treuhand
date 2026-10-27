@@ -23,7 +23,7 @@ export default async function LoginPage({ searchParams }: PageProps<"/admin/logi
         <Logo variant="stacked" className="mx-auto" />
         <div className="mt-10 rounded-panel bg-white p-6 shadow-card sm:p-8">
           <h1 className="text-[1.75rem] font-semibold leading-tight tracking-[-0.018em] text-ink">Admin-Bereich</h1>
-          <p className="mb-6 mt-2 text-sm leading-relaxed text-muted">Zugang mit Passwort und Code aus der Authenticator-App. Jede Anmeldung wird protokolliert.</p>
+          <p className="mb-6 mt-2 text-sm leading-relaxed text-muted">Zugang mit dem gemeinsamen Passwort. Jede Anmeldung wird protokolliert.</p>
           <LoginForm next={next} />
         </div>
       </div>

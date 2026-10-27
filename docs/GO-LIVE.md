@@ -19,7 +19,6 @@ Geheime Werte als **Sensitive** markieren. Beschreibung aller Werte: [`.env.exam
 | `CRON_SECRET` | langer Zufallswert |
 | `NEXT_PUBLIC_SITE_URL` | `https://www.anb-treuhand.ch` |
 | `ADMIN_PASSWORD_HASH` | aus Schritt 3 |
-| `ADMIN_TOTP_SECRET` | aus Schritt 3 |
 
 Zufallswerte erzeugen, zum Beispiel:
 
@@ -39,12 +38,9 @@ selbst an.
 ## 3. Admin-Bereich einrichten
 
 1. `https://<vercel-adresse>/admin/einrichtung` öffnen.
-2. Passwort zweimal eingeben, «Hash erzeugen», den Wert als `ADMIN_PASSWORD_HASH` in Vercel
-   eintragen. Das Passwort selbst verlässt den Browser nicht.
-3. «Code-Schlüssel erzeugen», den QR-Code mit Google Authenticator oder Microsoft Authenticator
-   scannen (auf jedem Handy, das Zugang braucht), den angezeigten Code prüfen und den Schlüssel
-   als `ADMIN_TOTP_SECRET` eintragen.
-4. Redeploy. Danach unter `/admin` anmelden.
+2. Passwort zweimal eingeben (mindestens 12 Zeichen), «Hash erzeugen», den Wert als
+   `ADMIN_PASSWORD_HASH` in Vercel eintragen. Das Passwort selbst verlässt den Browser nicht.
+3. Redeploy. Danach unter `/admin` mit dem Passwort anmelden.
 
 Details: [ADMIN.md](ADMIN.md).
 

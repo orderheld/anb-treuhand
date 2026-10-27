@@ -88,7 +88,7 @@ const login = await get("/admin/login");
 if (!/noindex/.test(login.headers.get("x-robots-tag") ?? "")) bad("Admin-Anmeldung ohne X-Robots-Tag noindex");
 if (!/no-store/.test(login.headers.get("cache-control") ?? "")) bad("Admin-Anmeldung wird zwischengespeichert (Cache-Control)");
 const setup = await (await get("/admin/einrichtung")).text();
-if (setup.includes("Der Admin-Bereich ist eingerichtet.")) ok("Admin-Bereich eingerichtet (Datenbank, Passwort, Zwei-Faktor-Code)");
+if (setup.includes("Der Admin-Bereich ist eingerichtet.")) ok("Admin-Bereich eingerichtet (Datenbank, Passwort)");
 else warn("Admin-Bereich noch nicht eingerichtet: /admin/einrichtung öffnen");
 
 const cron = await get("/api/cron/retention");

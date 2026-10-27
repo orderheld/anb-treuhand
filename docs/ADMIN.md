@@ -8,20 +8,17 @@ kann sich niemand.
 
 ## Anmelden
 
-Sie brauchen zwei Dinge:
-
-1. das Passwort,
-2. den sechsstelligen Code aus der Authenticator-App (Google Authenticator oder Microsoft
-   Authenticator). Der Code wechselt alle 30 Sekunden und gilt nur einmal.
+Sie brauchen nur das gemeinsame Passwort. Seit dem 27.10.2026 fragt die Anmeldung keinen Code
+aus einer Authenticator-App mehr ab (Wunsch von Ferhat). Das Passwort ist damit der einzige
+Schutz: mindestens 12 Zeichen, nirgends sonst verwendet, nur an Personen weitergeben, die den
+Zugang brauchen.
 
 Eine Anmeldung gilt höchstens 12 Stunden und endet nach 4 Stunden ohne Aktivität.
 
 **Gesperrt?** Nach 5 Fehlversuchen ist die Anmeldung von dieser Adresse für 15 Minuten gesperrt.
-Wird mit dem richtigen Passwort 10-mal ein falscher Code eingegeben, ist die Anmeldung für alle
-bis zu einer Stunde gesperrt. Dann hat jemand das Passwort: bitte danach ändern.
-
-**Code stimmt nie?** Meist geht die Uhr des Handys falsch. In den Einstellungen des Handys
-«Datum und Uhrzeit automatisch» einschalten.
+Nach 30 Fehlversuchen innert einer Stunde, egal von wo, ist die Anmeldung für alle bis zu einer
+Stunde gesperrt. Dann versucht vermutlich jemand, das Passwort zu erraten: im Protokoll
+nachsehen und das Passwort ändern, wenn es nicht sehr stark ist.
 
 ## Übersicht
 
@@ -63,36 +60,29 @@ allen Angaben aus dem Rechner und dem berechneten Richtpreis.
 
 - **Angemeldete Geräte:** wo gerade jemand angemeldet ist. **Alle abmelden** beendet jede
   Anmeldung, auch die eigene.
-- **Protokoll:** die letzten 50 Anmeldungen und Änderungen (Tarife, Status, Löschungen). Steht dort
-  «Richtiges Passwort, falscher Code» und Sie waren es nicht, ändern Sie das Passwort.
+- **Protokoll:** die letzten 50 Anmeldungen und Änderungen (Tarife, Status, Löschungen). Stehen
+  dort viele fehlgeschlagene Anmeldungen und Sie waren es nicht, ändern Sie das Passwort.
 
 ## Passwort ändern
 
 1. Anmelden, Sicherheit → «Zur Einrichtung».
-2. «Neuen Passwort-Hash erzeugen», neues Passwort eingeben, Hash kopieren.
+2. «Neuen Passwort-Hash erzeugen», neues Passwort eingeben (mindestens 12 Zeichen, kein Bezug
+   zur Firma), Hash kopieren.
 3. Vercel → Settings → Environment Variables: `ADMIN_PASSWORD_HASH` ersetzen.
 4. Deployments → letztes Deployment → Redeploy.
 
 Danach gilt nur noch das neue Passwort, und alle Geräte sind abgemeldet.
 
-## Weiteres Handy
-
-Kein neuer Schlüssel nötig: Der bestehende QR-Code wird auf dem zusätzlichen Handy gescannt.
-Wer den QR-Code nicht mehr hat, erzeugt einen neuen Schlüssel (siehe nächster Abschnitt) und
-scannt ihn auf allen Handys.
-
-## Handy verloren
+## Gerät verloren oder Passwort weitergegeben
 
 1. Sofort unter Sicherheit **Alle abmelden**.
-2. Einrichtung → «Neuen Code-Schlüssel erzeugen», auf den verbleibenden Handys scannen.
-3. In Vercel `ADMIN_TOTP_SECRET` ersetzen, Redeploy. Der alte Schlüssel gilt dann nicht mehr,
-   alle Geräte sind abgemeldet.
-4. Wenn das Passwort auf dem Handy gespeichert war: auch das Passwort ändern.
+2. Das Passwort ändern (siehe oben). Danach gilt das alte Passwort nicht mehr.
 
 ## Technisch
 
-- Zugangsdaten stehen nur als Umgebungsvariablen in Vercel: ein PBKDF2-Hash des Passworts
-  (600 000 Runden) und der TOTP-Schlüssel. Das Passwort selbst ist nirgends gespeichert.
+- Zugangsdaten stehen nur als Umgebungsvariable in Vercel: ein PBKDF2-Hash des Passworts
+  (600 000 Runden). Das Passwort selbst ist nirgends gespeichert. Eine noch gesetzte Variable
+  `ADMIN_TOTP_SECRET` wird nicht mehr gelesen und kann gelöscht werden.
 - Das Sitzungs-Cookie ist `HttpOnly`, `Secure` und `SameSite=Lax`; in der Datenbank steht nur
   ein Hash davon.
 - Admin-Seiten werden nie zwischengespeichert und nie indexiert.

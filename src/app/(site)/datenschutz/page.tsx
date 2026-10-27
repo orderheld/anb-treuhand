@@ -120,7 +120,7 @@ export default function DatenschutzPage() {
 
           <h2>8. Datensicherheit</h2>
           <p>
-            Die Website ist durchgehend verschlüsselt (HTTPS). Unsere Systeme sind durch Zugangsbeschränkungen, starke Passwörter und eine Zwei-Faktor-Anmeldung geschützt. Zugriff auf
+            Die Website ist durchgehend verschlüsselt (HTTPS). Unsere Systeme sind durch Zugangsbeschränkungen und starke Passwörter geschützt. Zugriff auf
             Anfragen haben nur Personen bei {legal.entityName.value}, die sie für die Bearbeitung brauchen.
           </p>
 

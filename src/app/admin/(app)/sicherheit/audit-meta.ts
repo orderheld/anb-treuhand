@@ -25,6 +25,7 @@ function fieldLabels(calculator: unknown, keys: unknown): string | undefined {
 
 const loginFailures: Record<string, string> = {
   password: "Falsches Passwort",
+  // The two below are from the time before 27.10.2026, when the login also asked for a code.
   code: "Richtiges Passwort, falscher Code",
   locked: "Gesperrt nach zu vielen falschen Codes",
 };

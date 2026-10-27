@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { connection } from "next/server";
-import { CheckCircle2, CircleAlert, KeyRound, Smartphone } from "lucide-react";
+import { CheckCircle2, CircleAlert, KeyRound } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { AdminLinkButton, Notice } from "@/components/admin/ui";
 import { getAdminSession } from "@/lib/admin/auth/session";
@@ -70,26 +70,7 @@ export default async function SetupPage() {
                 Neuen Passwort-Hash erzeugen
               </summary>
               <div className="p-3">
-                <SetupGenerator password totp={false} />
-              </div>
-            </details>
-          </section>
-
-          <section className="mt-6 rounded-card border border-line bg-white p-5 text-sm leading-relaxed text-muted sm:p-6">
-            <h2 className="flex items-center gap-2 text-[1.0625rem] font-semibold text-ink">
-              <Smartphone aria-hidden className="size-4 text-accent" />
-              Neues Handy oder neuer Code-Schlüssel
-            </h2>
-            <p className="mt-2">
-              Ein weiteres Handy braucht keinen neuen Schlüssel: Scannen Sie dort den bisherigen QR-Code. Ist ein Handy verloren, erzeugen Sie einen neuen
-              Code-Schlüssel, scannen ihn auf allen Handys, ersetzen in Vercel <code className={code}>ADMIN_TOTP_SECRET</code> und starten das letzte Deployment neu. Auch das meldet alle Geräte ab.
-            </p>
-            <details className="mt-4 rounded-field border border-line [&[open]>summary]:border-b [&[open]>summary]:border-line">
-              <summary className="cursor-pointer select-none list-none rounded-field px-4 py-2.5 text-sm font-semibold text-accent hover:bg-mist [&::-webkit-details-marker]:hidden">
-                Neuen Code-Schlüssel erzeugen
-              </summary>
-              <div className="p-3">
-                <SetupGenerator password={false} totp />
+                <SetupGenerator />
               </div>
             </details>
           </section>
@@ -102,8 +83,8 @@ export default async function SetupPage() {
         <>
           <h1 className="mt-10 text-[2rem] font-semibold leading-tight tracking-[-0.018em] text-ink">Admin-Bereich einrichten</h1>
           <p className="mt-2 leading-relaxed text-muted">
-            Hier passen Sie die Tarife der Preisrechner an und sehen die Anfragen. Es gibt einen gemeinsamen Zugang mit Passwort und dem Code aus einer
-            Authenticator-App; registrieren kann sich niemand. Die Zugangsdaten stehen nicht im Code, sondern als Umgebungsvariablen bei Vercel.
+            Hier passen Sie die Tarife der Preisrechner an und sehen die Anfragen. Es gibt einen gemeinsamen Zugang mit Passwort; registrieren kann sich
+            niemand. Die Zugangsdaten stehen nicht im Code, sondern als Umgebungsvariablen bei Vercel.
           </p>
           {statusList}
 
@@ -112,19 +93,21 @@ export default async function SetupPage() {
               <li>
                 <code className={code}>DATABASE_URL</code>: der Connection String der Neon-Datenbank (Region Frankfurt), in Vercel für Production eingetragen.
               </li>
-              <li>Unten die fehlenden Werte erzeugen. Den QR-Code scannen Sie mit der Authenticator-App.</li>
+              <li>Unten das Passwort festlegen und den Hash erzeugen.</li>
               <li>
                 In Vercel unter <strong>Settings → Environment Variables</strong> jeden Wert für <em>Production</em> eintragen und als <em>Sensitive</em> markieren.
               </li>
               <li>
-                Unter <strong>Deployments</strong> das letzte Deployment neu starten (Redeploy). Sobald alle drei Werte gesetzt sind, ist die Anmeldung aktiv.
+                Unter <strong>Deployments</strong> das letzte Deployment neu starten (Redeploy). Sobald beide Werte gesetzt sind, ist die Anmeldung aktiv.
               </li>
             </ol>
           </Notice>
 
-          <div className="mt-6">
-            <SetupGenerator password={!set("ADMIN_PASSWORD_HASH")} totp={!set("ADMIN_TOTP_SECRET")} />
-          </div>
+          {set("ADMIN_PASSWORD_HASH") ? null : (
+            <div className="mt-6">
+              <SetupGenerator />
+            </div>
+          )}
         </>
       )}
     </main>

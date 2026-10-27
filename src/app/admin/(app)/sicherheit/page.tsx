@@ -3,7 +3,7 @@ import { KeyRound, LogOut, Monitor, Smartphone } from "lucide-react";
 import { ConfirmButton } from "@/components/admin/confirm-button";
 import { AdminLinkButton, Card, PageHeader, Pill } from "@/components/admin/ui";
 import { recentAudit } from "@/lib/admin/audit";
-import { LOGIN_WINDOW_MINUTES, PER_IP_LIMIT } from "@/lib/admin/auth/rate-limit";
+import { GLOBAL_LIMIT, GLOBAL_LOCK_MINUTES, LOGIN_WINDOW_MINUTES, PER_IP_LIMIT } from "@/lib/admin/auth/rate-limit";
 import { ABSOLUTE_HOURS, IDLE_HOURS, activeAdminSessions, requireAdmin } from "@/lib/admin/auth/session";
 import { describeUserAgent } from "@/lib/admin/device";
 import { formatDateTime } from "@/lib/admin/format";
@@ -17,10 +17,10 @@ export const instant = false;
 const AUDIT_LIMIT = 50;
 
 const protections = [
-  "Anmeldung nur mit Passwort und dem sechsstelligen Code aus der Authenticator-App.",
-  `Jeder Code gilt nur einmal. Nach ${PER_IP_LIMIT} Fehlversuchen ist die Adresse für ${LOGIN_WINDOW_MINUTES} Minuten gesperrt.`,
+  "Anmeldung nur mit dem gemeinsamen Passwort. Registrieren kann sich niemand.",
+  `Nach ${PER_IP_LIMIT} Fehlversuchen ist die Adresse für ${LOGIN_WINDOW_MINUTES} Minuten gesperrt, nach ${GLOBAL_LIMIT} Fehlversuchen insgesamt die ganze Anmeldung für ${GLOBAL_LOCK_MINUTES} Minuten.`,
   `Eine Anmeldung gilt höchstens ${ABSOLUTE_HOURS} Stunden und endet nach ${IDLE_HOURS} Stunden ohne Aktivität.`,
-  "Ein neues Passwort oder ein neuer Code-Schlüssel meldet alle Geräte ab.",
+  "Ein neues Passwort meldet alle Geräte ab.",
 ];
 
 export default async function SecurityPage() {
@@ -42,7 +42,7 @@ export default async function SecurityPage() {
               <ConfirmButton
                 variant="danger"
                 action={logoutAllAction}
-                question="Alle Geräte abmelden, auch dieses? Danach ist eine neue Anmeldung mit Passwort und Code nötig."
+                question="Alle Geräte abmelden, auch dieses? Danach ist eine neue Anmeldung mit dem Passwort nötig."
               >
                 <LogOut aria-hidden className="size-4" />
                 Alle abmelden
@@ -114,8 +114,8 @@ export default async function SecurityPage() {
           </Card>
 
           <Card
-            title="Passwort oder Handy wechseln"
-            description="Steht im Protokoll «Richtiges Passwort, falscher Code» und Sie waren es nicht, ändern Sie bitte das Passwort."
+            title="Passwort ändern"
+            description="Stehen im Protokoll viele fehlgeschlagene Anmeldungen und Sie waren es nicht, ändern Sie bitte das Passwort."
           >
             <AdminLinkButton href="/admin/einrichtung" variant="secondary" size="sm">
               <KeyRound aria-hidden className="size-4" />

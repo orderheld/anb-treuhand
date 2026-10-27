@@ -11,7 +11,7 @@ import { requestIpHash, requestUserAgent } from "../request";
 /**
  * Admin sessions: a random token in an HttpOnly cookie, only its SHA-256 in the database.
  * A session ends after 12 hours, after 4 hours without activity, on logout, or when the password
- * or the TOTP key changes in Vercel.
+ * changes in Vercel.
  */
 
 const SECURE = process.env.NODE_ENV === "production";
@@ -27,9 +27,9 @@ export interface AdminSession {
   expiresAt: Date;
 }
 
-/** Fingerprint of the current credentials. Sessions from before a change no longer match. */
+/** Fingerprint of the current password hash. Sessions from before a change no longer match. */
 function credential(): string {
-  return sha256(`${adminEnv.passwordHash?.trim() ?? ""}\n${adminEnv.totpSecret ?? ""}`).slice(0, 32);
+  return sha256(adminEnv.passwordHash?.trim() ?? "").slice(0, 32);
 }
 
 /** Attributes of the session cookie. Deleting needs the same ones: browsers ignore a `__Host-` cookie without Secure. */
