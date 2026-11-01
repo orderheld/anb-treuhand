@@ -7,14 +7,13 @@ import { formsAvailable, serverEnv } from "@/lib/env";
 import { sendOfferEmails } from "@/lib/requests/email";
 import { clientIp, hashIp, takeToken } from "@/lib/requests/rate-limit";
 import { createReference } from "@/lib/requests/reference";
+import { screenContent, screenSubmission } from "@/lib/requests/guard";
 import { fieldErrors, offerContactSchema } from "@/lib/requests/schema";
 import { REQUEST_TEXT_FIELDS, type RequestField, type RequestState, type RequestValues } from "@/lib/requests/state";
 import { isStorageConfigured, recentRequestCount, storeRequest } from "@/lib/requests/store";
 import { isCalculatorSlug } from "@/lib/tariffs/registry";
 import { getTariffs } from "@/lib/tariffs/store";
 
-/** Minimum time between page load and submit. Faster submissions are almost always bots. */
-const MIN_FILL_MS = 3000;
 const DB_HOURLY_LIMIT = 5;
 
 function readValues(formData: FormData): RequestValues {
@@ -43,20 +42,9 @@ export async function requestOffer(_prev: RequestState, formData: FormData): Pro
     return { status: "error", message: `Das Formular ist zurzeit nicht verfügbar. Bitte schreiben Sie uns an ${fallback}.`, values };
   }
 
-  // 1. Spam protection: honeypot field must stay empty. Bots get a success without anything sent.
-  const honeypot = formData.get("website");
-  if (typeof honeypot === "string" && honeypot.trim() !== "") {
-    log("offer.spam", { reason: "honeypot" });
-    return { status: "success", reference: createReference(), email: "", confirmation: false };
-  }
-
-  // 2. Spam protection: minimum fill time, measured in the browser (only sent with JavaScript).
-  const elapsedRaw = formData.get("elapsedMs");
-  const elapsed = typeof elapsedRaw === "string" && elapsedRaw !== "" ? Number(elapsedRaw) : Number.NaN;
-  if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < MIN_FILL_MS) {
-    log("offer.spam", { reason: "too_fast" });
-    return { status: "error", message: "Die Anfrage wurde sehr schnell gesendet. Bitte prüfen Sie Ihre Angaben und senden Sie sie erneut.", values };
-  }
+  // 1. Spam protection: honeypot and signed form token (src/lib/requests/spam.ts).
+  const screened = screenSubmission(formData, { kind: "offer", fallback, values });
+  if (screened) return screened;
 
   // 3. Validation of the contact details and of the calculator values, reported together.
   const slug = formData.get("calculator");
@@ -70,6 +58,10 @@ export async function requestOffer(_prev: RequestState, formData: FormData): Pro
     if (!calculator.ok) errors.input = calculator.error;
     return { status: "invalid", errors, values };
   }
+
+  // 3b. Spam protection: links, foreign scripts, advertising phrases.
+  const content = screenContent({ name: contact.data.name, company: contact.data.company, message: contact.data.message }, { kind: "offer", fallback, values });
+  if (content) return content;
 
   // 4. Rate limiting per IP (hashed, never stored in plain text).
   const ipHash = hashIp(clientIp(await headers()));

@@ -27,6 +27,7 @@ import {
   type RequestValues,
 } from "@/lib/requests/state";
 import { cn } from "@/lib/utils";
+import { useFormToken } from "@/components/forms/use-form-token";
 import { StepHeader, stepCardClass } from "./controls";
 
 /** In the order of the form, so the error summary lists the fields as they appear. */
@@ -106,13 +107,9 @@ export function OfferForm({
   const [sentState, send, pending] = useActionState(submitSafely, initialRequestState);
   const state = sentState === initialRequestState ? postedState : sentState;
   const [blocked, setBlocked] = useState<string | null>(null);
-  const mountedAt = useRef(0);
+  const attachToken = useFormToken();
   const summaryRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (mountedAt.current === 0) mountedAt.current = performance.now();
-  }, []);
 
   useEffect(() => {
     if (state.status === "invalid" || state.status === "error") summaryRef.current?.focus();
@@ -176,9 +173,7 @@ export function OfferForm({
     }
     setBlocked(null);
     const data = new FormData(event.currentTarget);
-    // Fill time on the visitor's own clock, so a wrong system time cannot block the request.
-    if (mountedAt.current > 0) data.set("elapsedMs", String(Math.round(performance.now() - mountedAt.current)));
-    startTransition(() => send(data));
+    void attachToken(data).then(() => startTransition(() => send(data)));
   }
 
   return shell(
