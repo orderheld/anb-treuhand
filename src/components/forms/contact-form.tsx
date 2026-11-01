@@ -15,6 +15,7 @@ import {
   type RequestValues,
 } from "@/lib/requests/state";
 import { cn } from "@/lib/utils";
+import { useFormToken } from "@/components/forms/use-form-token";
 import { ChoiceChips, Consent, ErrorSummary, Field, Honeypot, SubmitError, SubmitRow, SuccessPanel, TestModeNotice, inputClass } from "./fields";
 
 /** In the order of the form, so the error summary lists the fields as they appear. */
@@ -63,13 +64,9 @@ export function ContactForm({ fallbackEmail, testMode, confirmation, responseCla
   const [postedState, formAction] = useActionState(submitContact, initialRequestState);
   const [sentState, send, pending] = useActionState(submitSafely, initialRequestState);
   const state = sentState === initialRequestState ? postedState : sentState;
-  const mountedAt = useRef(0);
+  const attachToken = useFormToken();
   const summaryRef = useRef<HTMLDivElement>(null);
   const successRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    if (mountedAt.current === 0) mountedAt.current = performance.now();
-  }, []);
 
   useEffect(() => {
     if (state.status === "invalid" || state.status === "error") summaryRef.current?.focus();
@@ -109,8 +106,7 @@ export function ContactForm({ fallbackEmail, testMode, confirmation, responseCla
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (mountedAt.current > 0) data.set("elapsedMs", String(Math.round(performance.now() - mountedAt.current)));
-    startTransition(() => send(data));
+    void attachToken(data).then(() => startTransition(() => send(data)));
   }
 
   return (

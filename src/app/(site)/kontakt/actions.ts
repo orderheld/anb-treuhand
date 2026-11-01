@@ -6,12 +6,11 @@ import { formsAvailable, serverEnv } from "@/lib/env";
 import { sendContactEmails } from "@/lib/requests/email";
 import { clientIp, hashIp, takeToken } from "@/lib/requests/rate-limit";
 import { createReference } from "@/lib/requests/reference";
+import { screenContent, screenSubmission } from "@/lib/requests/guard";
 import { contactSchema, fieldErrors } from "@/lib/requests/schema";
 import { REQUEST_TEXT_FIELDS, type RequestState, type RequestValues } from "@/lib/requests/state";
 import { isStorageConfigured, recentRequestCount, storeRequest } from "@/lib/requests/store";
 
-/** Minimum time between page load and submit. Faster submissions are almost always bots. */
-const MIN_FILL_MS = 3000;
 const DB_HOURLY_LIMIT = 5;
 
 function readValues(formData: FormData): RequestValues {
@@ -36,25 +35,18 @@ export async function submitContact(_prev: RequestState, formData: FormData): Pr
     return { status: "error", message: `Das Formular ist zurzeit nicht verfügbar. Bitte schreiben Sie uns an ${fallback}.`, values };
   }
 
-  // 1. Spam protection: honeypot field must stay empty.
-  const honeypot = formData.get("website");
-  if (typeof honeypot === "string" && honeypot.trim() !== "") {
-    log("contact.spam", { reason: "honeypot" });
-    return { status: "success", reference: createReference(), email: "", confirmation: false };
-  }
-
-  // 2. Spam protection: minimum fill time, measured in the browser (only sent with JavaScript).
-  const elapsedRaw = formData.get("elapsedMs");
-  const elapsed = typeof elapsedRaw === "string" && elapsedRaw !== "" ? Number(elapsedRaw) : Number.NaN;
-  if (Number.isFinite(elapsed) && elapsed >= 0 && elapsed < MIN_FILL_MS) {
-    log("contact.spam", { reason: "too_fast" });
-    return { status: "error", message: "Die Nachricht wurde sehr schnell gesendet. Bitte prüfen Sie Ihre Angaben und senden Sie sie erneut.", values };
-  }
+  // 1. Spam protection: honeypot and signed form token (src/lib/requests/spam.ts).
+  const screened = screenSubmission(formData, { kind: "contact", fallback, values });
+  if (screened) return screened;
 
   // 3. Validation.
   const parsed = contactSchema.safeParse(Object.fromEntries(formData));
   if (!parsed.success) return { status: "invalid", errors: fieldErrors(parsed.error), values };
   const input = parsed.data;
+
+  // 3b. Spam protection: links, foreign scripts, advertising phrases.
+  const content = screenContent({ name: input.name, company: input.company, message: input.message }, { kind: "contact", fallback, values });
+  if (content) return content;
 
   // 4. Rate limiting per IP (hashed, never stored in plain text).
   const ipHash = hashIp(clientIp(await headers()));
